@@ -54,8 +54,28 @@ namespace ProgBD
             } 
         }
 
-        public string FirstName { get => firstName; set => firstName = value; }
-        public string LastName { get => lastName; set => lastName = value; }
+        public string FirstName 
+        { 
+            get => firstName; 
+            set
+            {
+                if (Utilities.ContainsNumbers(value) || Utilities.ContainsSymbols(value)) throw new ArgumentException("Invalid first name");
+
+                firstName = value;
+            }
+        }
+
+        public string LastName
+        {
+            get => lastName;
+            set
+            {
+                if (Utilities.ContainsNumbers(value) || Utilities.ContainsSymbols(value)) throw new ArgumentException("Invalid last name");
+
+                lastName = value;
+            }
+        }
+
         public DateTime Birthday 
         { 
             get => birthday;
@@ -68,7 +88,7 @@ namespace ProgBD
             }
         }
 
-        public string Email 
+        public string Email
         { 
             get => email;
             set

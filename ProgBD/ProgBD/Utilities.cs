@@ -31,5 +31,24 @@ namespace ProgBD
 
             return age;
         }
+
+        public static bool ContainsNumbers(string input)
+        {
+            return Regex.IsMatch(input, @"\d");
+        }
+
+        public static bool ContainsSymbols(string input)
+        {
+            return Regex.IsMatch(input, @"[^\w\s]");
+        }
+
+        public static bool IsValidPhoneNumber(string phoneNumber)
+        {
+            // Valid Phone Number : (555) 123-4567
+            string pattern = @"^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$";
+            Regex regex = new Regex(pattern);
+
+            return regex.IsMatch(phoneNumber);
+        }
     }
 }
