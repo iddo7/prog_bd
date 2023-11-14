@@ -18,6 +18,32 @@ namespace ProgBD
         double hourlyRate;
         Uri profilePicture;
 
+        public Employee()
+        {
+            this.Code = string.Empty;
+            this.FirstName = string.Empty;
+            this.LastName = string.Empty;
+            this.Birthday = new DateTime();
+            this.Email = string.Empty;
+            this.Address = string.Empty;
+            this.HiringDate = new DateTime();
+            this.HourlyRate = 0;
+            this.ProfilePicture = null;
+        }
+
+        public Employee(string code, string firstName, string lastName, DateTime birthday, string email, string address, DateTime hiringDate, double hourlyRate, Uri profilePicture)
+        {
+            this.Code = code;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Birthday = birthday;
+            this.Email = email;
+            this.Address = address;
+            this.HiringDate = hiringDate;
+            this.HourlyRate = hourlyRate;
+            this.ProfilePicture = profilePicture;
+        }
+
         public string Code 
         { 
             get => code; 
