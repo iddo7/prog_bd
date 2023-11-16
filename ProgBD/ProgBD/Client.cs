@@ -63,6 +63,15 @@ namespace ProgBD
                 phoneNumber = value;
             }
         }
-        public string Email { get => email; set => email = value; }
+        public string Email 
+        { 
+            get => email; 
+            set
+            {
+                if (!Utilities.IsValidEmail(value)) throw new ArgumentException("Invalid email address");
+
+                email = value;
+            }
+        }
     }
 }
