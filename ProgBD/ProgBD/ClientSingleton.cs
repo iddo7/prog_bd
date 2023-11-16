@@ -1,44 +1,43 @@
-﻿
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 
 namespace ProgBD
 {
-    internal class EmployeeSingleton
+    internal class ClientSingleton
     {
         MySqlConnection conn;
-        ObservableCollection<Employee> list;
-        static EmployeeSingleton instance = null;
+        ObservableCollection<Client> list;
+        static ClientSingleton instance = null;
 
-        public EmployeeSingleton()
+        public ClientSingleton()
         {
-            list = new ObservableCollection<Employee>();
+            list = new ObservableCollection<Client>();
             conn = new MySqlConnection("Server=cours.cegep3r.info;Database=2236478-isaac-negreiros;Uid=2236478;Pwd=2236478;");
         }
 
-        public static EmployeeSingleton Instance()
+        public static ClientSingleton Instance()
         {
-            if (instance == null) instance = new EmployeeSingleton();
+            if (instance == null) instance = new ClientSingleton();
             return instance;
         }
 
-        public ObservableCollection<Employee> List()
+        public ObservableCollection<Client> List()
         {
             UpdateLocalList();
             return list;
         }
 
-        public Employee Employee(int index)
+        public Client Client(int index)
         {
-            return (Employee)list[index];
+            return (Client)list[index];
         }
 
-        public bool Create(Employee employee)
+        public bool Create(Client Client)
         {
             bool success = true;
 
@@ -48,7 +47,7 @@ namespace ProgBD
             return success;
         }
 
-        public bool Edit(int employeeId,  Employee updatedEmployee)
+        public bool Edit(int clientId, Client updatedClient)
         {
             bool success = true;
 
@@ -58,7 +57,7 @@ namespace ProgBD
             return success;
         }
 
-        public bool Destroy(int employeeId)
+        public bool Destroy(int clientId)
         {
             bool success = true;
 
