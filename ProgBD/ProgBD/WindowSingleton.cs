@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace ProgBD
 {
-    internal class SingletonWindow
+    internal class WindowSingleton
     {
-        static SingletonWindow instance = null;
+        static WindowSingleton instance = null;
         NavigationView navigationView;
         MainWindow mainWindow;
 
-        public static SingletonWindow Instance()
+        public static WindowSingleton Instance()
         {
-            if (instance == null) instance = new SingletonWindow();
+            if (instance == null) instance = new WindowSingleton();
             return instance;
         }
 
