@@ -8,36 +8,36 @@ using System.Threading.Tasks;
 
 namespace ProgBD
 {
-    internal class ClientSingleton
+    internal class ProjectSingleton
     {
         MySqlConnection conn;
-        ObservableCollection<Client> list;
-        static ClientSingleton instance = null;
+        ObservableCollection<Project> list;
+        static ProjectSingleton instance = null;
 
-        public ClientSingleton()
+        public ProjectSingleton()
         {
-            list = new ObservableCollection<Client>();
+            list = new ObservableCollection<Project>();
             conn = new MySqlConnection("Server=cours.cegep3r.info;Database=2236478-isaac-negreiros;Uid=2236478;Pwd=2236478;");
         }
 
-        public static ClientSingleton Instance()
+        public static ProjectSingleton Instance()
         {
-            if (instance == null) instance = new ClientSingleton();
+            if (instance == null) instance = new ProjectSingleton();
             return instance;
         }
 
-        public ObservableCollection<Client> List()
+        public ObservableCollection<Project> List()
         {
             UpdateLocalList();
             return list;
         }
 
-        public Client Client(int index)
+        public Project Project(int index)
         {
-            return (Client)list[index];
+            return (Project)list[index];
         }
 
-        public bool Create(Client client)
+        public bool Create(Project project)
         {
             bool success = true;
 
@@ -47,7 +47,7 @@ namespace ProgBD
             return success;
         }
 
-        public bool Edit(int clientId, Client updatedClient)
+        public bool Edit(int projectId, Project updatedProject)
         {
             bool success = true;
 
@@ -57,7 +57,7 @@ namespace ProgBD
             return success;
         }
 
-        public bool Destroy(int clientId)
+        public bool Destroy(int projectId)
         {
             bool success = true;
 
