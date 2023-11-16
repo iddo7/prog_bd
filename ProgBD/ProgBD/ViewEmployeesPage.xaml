@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="ProgBD.ViewEmployeesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ProgBD"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Employés" Margin="35"  FontSize="40" FontFamily="Terminal" HorizontalAlignment="Left" Grid.Row="0"/>
+        <Button x:Name="btExport" HorizontalAlignment="Right" FontSize="20" Background="LightGray" Margin="35">
+            <TextBlock Foreground="Black">Ajouter</TextBlock>
+        </Button>
+
+        <GridView x:Name="listeMateriel" Grid.Row="2" Padding="20"  HorizontalAlignment="Center">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="35" Background="White" Width="220" CornerRadius="8">
+                        <Grid Margin="15">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image Grid.Row="0" Source="{Binding ImageUrl}" Width="100" Height="100" Margin="0 0 0 10"/>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" >
+                                <TextBlock Text="{Binding FirstName}" FontSize="18" FontFamily="Arial Rounded" Margin="3"/>
+                                <TextBlock Text="{Binding LastName}" FontSize="18" FontFamily="Arial Rounded"  Margin="3"/>
+                            </StackPanel>
+
+                            <TextBlock Grid.Row="2" Text="{Binding Position}" FontStyle="Italic" FontWeight="Light" />
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
+</Page>

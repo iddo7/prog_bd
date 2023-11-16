@@ -36,13 +36,13 @@ namespace ProgBD
             switch (item.Name)
             {
                 case "navClients":
-                    mainFrame.Navigate(typeof(ClientsWindow));
+                    mainFrame.Navigate(typeof(ViewClientsPage));
                     break;
                 case "navProjects":
-                    mainFrame.Navigate(typeof(ProjectsWindow));
+                    mainFrame.Navigate(typeof(ViewProjectsPage));
                     break;
                 case "navEmployees":
-                    mainFrame.Navigate(typeof(EmployeesWindow));
+                    mainFrame.Navigate(typeof(ViewEmployeesPage));
                     break;
                 default:
                     break;
