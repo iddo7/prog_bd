@@ -4,10 +4,18 @@
     BD Export
 */
 
+/*   --- DROPPING ---   */
+drop view if exists v_clients_with_projects;
+drop view if exists v_projects;
+drop view if exists v_unassigned_employees;
 
+drop function if exists f_calculate_salary_for_project;
+drop function if exists f_client_id_exists;
+drop function if exists f_generate_unique_client_id;
+drop function if exists f_has_a_project;
+drop function if exists f_is_assigned;
+drop function if exists f_number_of_projects;
 
-/*   --- DROPPING TABLES ---   */
-drop function if exists calculate_salary_for_project;
 drop table if exists projects_employees cascade;
 drop table if exists employees cascade;
 drop table if exists projects cascade;
@@ -15,7 +23,10 @@ drop table if exists clients cascade;
 
 
 
+
+
 /*   --- CREATING TABLES ---   */
+SET lc_time_names = 'fr_CA';
 
 CREATE TABLE clients (
     id INT PRIMARY KEY,
@@ -85,7 +96,9 @@ VALUES
     ('P007', 'Employee Wellness Program', '2023-07-01', 'Implementing a wellness program for employees', 3000.00, 1, 1000.00, 107, 'En cours'),
     ('P008', 'Mobile App Development', '2023-08-10', 'Developing a mobile application', 12000.00, 4, 4000.00, 108, 'En cours'),
     ('P009', 'Training Videos Production', '2023-09-05', 'Creating training videos for internal use', 5000.00, 2, 2000.00, 109, 'En cours'),
-    ('P010', 'Community Outreach', '2023-10-20', 'Engaging with the local community', 2500.00, 1, 1000.00, 102, 'En cours');
+    ('P010', 'Community Outreach', '2023-10-20', 'Engaging with the local community', 2500.00, 1, 1000.00, 102, 'En cours'),
+    ('P011', 'Community Outreach', '2023-10-20', 'Engaging with the local community', 2500.00, 1, 1000.00, 102, 'En cours'),
+    ('P012', 'Community Outreach', '2023-10-20', 'Engaging with the local community', 2500.00, 1, 1000.00, 102, 'En cours');
 
 INSERT INTO employees (code, firstName, lastName, birthday, email, address, hiringDate, hourlyRate, profilePicture, status)
 VALUES
@@ -111,9 +124,13 @@ VALUES
 
 
 
+
+
 /*   --- CREATING FUNCTIONS ---   */
 
-CREATE FUNCTION f_calculate_salary_for_project (employeeCode VARCHAR(20), projectCode VARCHAR(20))
+
+/* - Returns current salary for an employee for it's assigned project based on hoursWorked & hourlyRate - */
+CREATE FUNCTION f_calculate_salary_for_project (_employeeCode VARCHAR(20), _projectCode VARCHAR(20))
 RETURNS DOUBLE
 BEGIN
     DECLARE salary DOUBLE;
@@ -121,10 +138,118 @@ BEGIN
     SELECT hoursWorked * hourlyRate INTO salary
     FROM projects_employees pe
     INNER JOIN employees e ON pe.employeeCode = e.code
-    WHERE pe.employeeCode = employeeCode AND pe.projectCode = projectCode;
+    WHERE pe.employeeCode = _employeeCode AND pe.projectCode = _projectCode;
 
     RETURN salary;
 END;
 -- Ex: SELECT f_calculate_salary_for_project('E002', 'P001') AS salary
 
+
+/* - Checks if an employee is assigned to a project - */
+CREATE FUNCTION f_is_assigned (_employeeCode VARCHAR(20))
+RETURNS BOOL
+BEGIN
+    DECLARE isAssigned BOOL;
+
+    SELECT COUNT(employeeCode) INTO isAssigned
+    FROM projects_employees
+    WHERE employeeCode = _employeeCode;
+
+    RETURN isAssigned;
+END;
+-- Ex: SELECT f_is_assigned('E006') AS isAssigned
+
+
+/* - Checks if a client has a project - */
+CREATE FUNCTION f_has_a_project (_id INT)
+RETURNS BOOL
+BEGIN
+    DECLARE hasProject BOOL;
+
+    SELECT COUNT(clientId) INTO hasProject
+    FROM projects
+    WHERE clientId = _id;
+
+    RETURN hasProject;
+END;
+-- Ex: SELECT f_has_a_project(101) AS hasAProject
+
+
+/* - Returns how many projects a client has - */
+CREATE FUNCTION f_number_of_projects (_id INT)
+RETURNS INT
+BEGIN
+    DECLARE numberOfProjects INT;
+
+    SELECT COUNT(clientId) INTO numberOfProjects
+    FROM projects
+    WHERE clientId = _id;
+
+    RETURN numberOfProjects;
+END;
+-- Ex: SELECT f_number_of_projects(100) AS numberOfProjects
+
+
+/* - Checks if a given client id already exists - */
+CREATE FUNCTION f_client_id_exists (_id INT)
+RETURNS BOOL
+BEGIN
+    DECLARE idExists BOOL;
+
+    SELECT COUNT(*) INTO idExists
+    FROM clients
+    WHERE id = _id;
+
+    RETURN idExists;
+END;
+-- Ex: SELECT f_client_id_exists(801) AS idExists
+
+
+/* - Generates a unique id between min and max - */
+CREATE FUNCTION f_generate_unique_client_id()
+RETURNS INT
+BEGIN
+    DECLARE uniqueId INT;
+    DECLARE min INT;
+    DECLARE max INT;
+    SET min = 100;
+    SET max = 999;
+
+    REPEAT
+        SET uniqueId = FLOOR(RAND() * (max - min) + min);
+    UNTIL f_client_id_exists(uniqueId) = 0 END REPEAT;
+
+    RETURN uniqueId;
+END;
+-- Ex: SELECT f_generate_unique_client_id() AS uniqueClientId
+
+
+
+
+
+/*   --- CREATING VIEWS ---   */
+
+CREATE VIEW v_unassigned_employees AS
+SELECT *
+FROM employees e
+WHERE !f_is_assigned(code);
+-- Ex: SELECT * FROM v_unassigned_employees
+
+CREATE VIEW v_clients_with_projects AS
+SELECT *
+FROM clients c
+WHERE f_has_a_project(id);
+-- Ex: SELECT * FROM v_clients_with_projects
+
+CREATE VIEW v_projects AS
+SELECT
+    p.code,
+    p.title,
+    c.fullName,
+    DATE_FORMAT(p.startDate, '%d %M %Y') AS startDate,
+    p.budget
+FROM projects p
+INNER JOIN clients c on p.clientId = c.id
+ORDER BY p.startDate;
+-- Ex: SELECT * FROM v_projects
 
