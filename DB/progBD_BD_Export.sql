@@ -65,7 +65,7 @@ CREATE TABLE employees (
 CREATE TABLE projects_employees (
     projectCode VARCHAR(20),
     employeeCode VARCHAR(20),
-    hoursWorked DOUBLE,
+    hoursWorked DOUBLE DEFAULT 0,
     salary DOUBLE,
     FOREIGN KEY (employeeCode) REFERENCES employees(code),
     FOREIGN KEY (projectCode) REFERENCES projects(code)
@@ -252,4 +252,195 @@ FROM projects p
 INNER JOIN clients c on p.clientId = c.id
 ORDER BY p.startDate;
 -- Ex: SELECT * FROM v_projects
+
+/* Procedure to insert data into the 'clients' table */
+DELIMITER //
+CREATE PROCEDURE p_insert_client(
+    IN _fullName VARCHAR(255),
+    IN _address VARCHAR(255),
+    IN _phoneNumber VARCHAR(20),
+    IN _email VARCHAR(255)
+)
+BEGIN
+    INSERT INTO clients (id, fullName, address, phoneNumber, email)
+    VALUES (_fullName, _address, _phoneNumber, _email);
+END //
+DELIMITER ;
+
+/* Procedure to insert data into the 'projects' table */
+DELIMITER //
+CREATE PROCEDURE p_insert_project(
+    IN _title VARCHAR(255),
+    IN _startDate DATE,
+    IN _description TEXT,
+    IN _budget DOUBLE,
+    IN _numberOfEmployees INT,
+    IN _totalSalaries DOUBLE
+)
+BEGIN
+    INSERT INTO projects (code, title, startDate, description, budget, numberOfEmployees, totalSalaries, clientId, status)
+    VALUES (_title, _startDate, _description, _budget, _numberOfEmployees, _totalSalaries);
+END //
+DELIMITER ;
+
+/* Procedure to insert data into the 'employees' table */
+DELIMITER //
+CREATE PROCEDURE p_insert_employee(
+    IN _firstName VARCHAR(255),
+    IN _lastName VARCHAR(255),
+    IN _birthday DATE,
+    IN _email VARCHAR(255),
+    IN _address VARCHAR(255),
+    IN _hiringDate DATE,
+    IN _hourlyRate DOUBLE,
+    IN _profilePicture VARCHAR(255)
+)
+BEGIN
+    INSERT INTO employees (code, firstName, lastName, birthday, email, address, hiringDate, hourlyRate, profilePicture, status)
+    VALUES (_firstName, _lastName, _birthday, _email, _address, _hiringDate, _hourlyRate, _profilePicture);
+END //
+DELIMITER ;
+
+
+/* Procedure to assign employees to projects */
+DELIMITER //
+CREATE PROCEDURE p_assign_employee_to_project(
+    IN project_code VARCHAR(20),
+    IN employee_code VARCHAR(20)
+)
+BEGIN
+    INSERT INTO projects_employees (projectCode, employeeCode, hoursWorked)
+    VALUES (project_code, employee_code);
+END //
+DELIMITER ;
+
+/* Procedure to update data in the 'clients' table */
+DELIMITER //
+CREATE PROCEDURE p_update_client(
+    IN _clientID INT,
+    IN _fullName VARCHAR(255),
+    IN _address VARCHAR(255),
+    IN _phoneNumber VARCHAR(20),
+    IN _email VARCHAR(255)
+)
+BEGIN
+    UPDATE clients
+    SET fullName = _fullName, address = _address, phoneNumber = _phoneNumber, email = _email
+    WHERE id = _clientID;
+END //
+DELIMITER ;
+
+/* Procedure to update data in the 'projects' table */
+DELIMITER //
+CREATE PROCEDURE p_update_project(
+    IN _projectCode VARCHAR(20),
+    IN _title VARCHAR(255),
+    IN _startDate DATE,
+    IN _description TEXT,
+    IN _budget DOUBLE,
+    IN _numberOfEmployees INT,
+    IN _totalSalaries DOUBLE
+)
+BEGIN
+    UPDATE projects
+    SET title = _title, startDate = _startDate, description = _description, budget = _budget,
+        numberOfEmployees = _numberOfEmployees, totalSalaries = _totalSalaries
+    WHERE code = _projectCode;
+END //
+DELIMITER ;
+
+/* Procedure to update data in the 'employees' table */
+DELIMITER //
+CREATE PROCEDURE p_update_employee(
+    IN _employeeCode VARCHAR(20),
+    IN _firstName VARCHAR(255),
+    IN _lastName VARCHAR(255),
+    IN _birthday DATE,
+    IN _email VARCHAR(255),
+    IN _address VARCHAR(255),
+    IN _hiringDate DATE,
+    IN _hourlyRate DOUBLE,
+    IN _profilePicture VARCHAR(255)
+)
+BEGIN
+    UPDATE employees
+    SET firstName = _firstName, lastName = _lastName, birthday = _birthday, email = _email,
+        address = _address, hiringDate = _hiringDate, hourlyRate = _hourlyRate, profilePicture = _profilePicture
+    WHERE code = _employeeCode;
+END //
+DELIMITER ;
+
+/* Procedure to update data in the 'projects_employees' table (for employee-to-project association) */
+DELIMITER //
+CREATE PROCEDURE p_update_employee_project(
+    IN _projectCode VARCHAR(20),
+    IN _employeeCode VARCHAR(20),
+    IN _hoursWorked DOUBLE,
+    IN _salary DOUBLE
+)
+BEGIN
+    UPDATE projects_employees
+    SET hoursWorked = _hoursWorked, salary = _salary
+    WHERE projectCode = _projectCode AND employeeCode = _employeeCode;
+END //
+DELIMITER ;
+
+/* Procedure to delete data from the 'clients' table */
+DELIMITER //
+CREATE PROCEDURE p_delete_client(
+    IN _clientID INT
+)
+BEGIN
+    DELETE FROM clients WHERE id = _clientID;
+END //
+DELIMITER ;
+
+/* Procedure to delete data from the 'projects' table */
+DELIMITER //
+CREATE PROCEDURE p_delete_project(
+    IN _projectCode VARCHAR(20)
+)
+BEGIN
+    DELETE FROM projects WHERE code = _projectCode;
+END //
+DELIMITER ;
+
+/* Procedure to delete data from the 'employees' table */
+DELIMITER //
+CREATE PROCEDURE p_delete_employee(
+    IN _employeeCode VARCHAR(20)
+)
+BEGIN
+    DELETE FROM employees WHERE code = _employeeCode;
+END //
+DELIMITER ;
+
+/* Procedure to delete data from the 'projects_employees' table (employee-to-project association) */
+DELIMITER //
+CREATE PROCEDURE p_delete_employee_project(
+    IN _projectCode VARCHAR(20),
+    IN _employeeCode VARCHAR(20)
+)
+BEGIN
+    DELETE FROM projects_employees WHERE projectCode = _projectCode AND employeeCode = _employeeCode;
+END //
+DELIMITER ;
+
+/* Procédure qui retourne tous les champs editable d'un employé passé en paramètre */
+DELIMITER //
+CREATE PROCEDURE p_return_editable_fields
+    SELECT
+        firstName,
+        lastName,
+        email,
+        address,
+        hourlyRate,
+        profilePicture,
+        status
+    FROM
+        employees;
+DELIMITER ;
+
+
+
 
