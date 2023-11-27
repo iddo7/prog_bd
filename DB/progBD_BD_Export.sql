@@ -15,6 +15,20 @@ drop function if exists f_generate_unique_client_id;
 drop function if exists f_has_a_project;
 drop function if exists f_is_assigned;
 drop function if exists f_number_of_projects;
+drop procedure if exists p_assign_employee_to_project;
+drop procedure if exists p_delete_client;
+drop procedure if exists p_delete_employee;
+drop procedure if exists p_delete_employee_project;
+drop procedure if exists p_delete_project;
+drop procedure if exists p_insert_client;
+drop procedure if exists p_insert_employee;
+drop procedure if exists p_insert_project;
+drop procedure if exists p_update_client;
+drop procedure if exists p_update_employee;
+drop procedure if exists p_update_employee_project;
+drop procedure if exists p_update_project;
+
+
 
 drop table if exists projects_employees cascade;
 drop table if exists employees cascade;
@@ -428,7 +442,9 @@ DELIMITER ;
 
 /* Procédure qui retourne tous les champs editable d'un employé passé en paramètre */
 DELIMITER //
-CREATE PROCEDURE p_return_editable_fields
+
+CREATE PROCEDURE p_return_editable_fields()
+BEGIN
     SELECT
         firstName,
         lastName,
@@ -439,8 +455,6 @@ CREATE PROCEDURE p_return_editable_fields
         status
     FROM
         employees;
+END //
+
 DELIMITER ;
-
-
-
-
