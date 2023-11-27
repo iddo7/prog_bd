@@ -41,7 +41,25 @@ namespace ProgBD
         {
             bool success = true;
 
-            // Create -> BD
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("p_insert_client");
+                cmd.Connection = conn;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("_fullname", client.fullName);
+                cmd.Parameters.AddWithValue("_address", client.fullName);
+                cmd.Parameters.AddWithValue("_phoneNumber", client.fullName);
+                cmd.Parameters.AddWithValue("_email", client.fullName);
+
+                conn.Open();
+                cmd.Prepare();
+                int i = cmd.ExecuteNonQuery(); // Check i value
+            }
+            catch (MySqlException mse)
+            {
+                conn.Close();
+                success = false;
+            }
 
             if (success) UpdateLocalList();
             return success;
@@ -51,7 +69,26 @@ namespace ProgBD
         {
             bool success = true;
 
-            // Edit -> BD
+            try 
+            {
+                MySqlCommand cmd = new MySqlCommand("p_update_client");
+                cmd.Connection = conn;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("_id", clientId);
+                cmd.Parameters.AddWithValue("_fullname", updatedClient.fullName);
+                cmd.Parameters.AddWithValue("_address", updatedClient.fullName);
+                cmd.Parameters.AddWithValue("_phoneNumber", updatedClient.fullName);
+                cmd.Parameters.AddWithValue("_email", updatedClient.fullName);
+
+                conn.Open();
+                cmd.Prepare();
+                int i = cmd.ExecuteNonQuery(); // Check i value
+            }
+            catch (MySqlException mse) 
+            {
+                conn.Close();
+                success = false;
+            }
 
             if (success) UpdateLocalList();
             return success;
@@ -61,7 +98,22 @@ namespace ProgBD
         {
             bool success = true;
 
-            // Detroy -> BD
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("p_delete_client");
+                cmd.Connection = conn;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("_id", clientId);
+
+                conn.Open();
+                cmd.Prepare();
+                int i = cmd.ExecuteNonQuery(); // Check i value
+            }
+            catch (MySqlException mse)
+            {
+                conn.Close();
+                success = false;
+            }
 
             if (success) UpdateLocalList();
             return success;
@@ -70,7 +122,7 @@ namespace ProgBD
 
         public void UpdateLocalList()
         {
-            list.Clear();
+            ClearLocalList();
 
             // select * from
             // add each -> list

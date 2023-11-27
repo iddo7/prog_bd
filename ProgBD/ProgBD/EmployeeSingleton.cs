@@ -42,7 +42,29 @@ namespace ProgBD
         {
             bool success = true;
 
-            // Create -> BD
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("p_insert_employee");
+                cmd.Connection = conn;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("_firstName", employee.firstName);
+                cmd.Parameters.AddWithValue("_lastName", employee.lastName);
+                cmd.Parameters.AddWithValue("_birthday", employee.birthday);
+                cmd.Parameters.AddWithValue("_email", employee.email);
+                cmd.Parameters.AddWithValue("_address", employee.address);
+                cmd.Parameters.AddWithValue("_hiringDate", employee.hiringDate.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("_hourlyRate", employee.hourlyRate);
+                cmd.Parameters.AddWithValue("_profilePicture", employee.profilePicture);
+
+                conn.Open();
+                cmd.Prepare();
+                int i = cmd.ExecuteNonQuery(); // Check i value
+            }
+            catch (MySqlException mse)
+            {
+                conn.Close();
+                success = false;
+            }
 
             if (success) UpdateLocalList();
             return success;
@@ -52,7 +74,31 @@ namespace ProgBD
         {
             bool success = true;
 
-            // Edit -> BD
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("p_update_employee");
+                cmd.Connection = conn;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("_employeeCode", employeeId);
+                cmd.Parameters.AddWithValue("_firstName", updatedEmployee.firstName);
+                cmd.Parameters.AddWithValue("_lastName", updatedEmployee.lastName);
+                cmd.Parameters.AddWithValue("_birthday", updatedEmployee.birthday);
+                cmd.Parameters.AddWithValue("_email", updatedEmployee.email);
+                cmd.Parameters.AddWithValue("_address", updatedEmployee.address);
+                cmd.Parameters.AddWithValue("_hiringDate", updatedEmployee.hiringDate.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("_hourlyRate", updatedEmployee.hourlyRate);
+                cmd.Parameters.AddWithValue("_profilePicture", updatedEmployee.profilePicture);
+
+
+                conn.Open();
+                cmd.Prepare();
+                int i = cmd.ExecuteNonQuery(); // Check i value
+            }
+            catch (MySqlException mse)
+            {
+                conn.Close();
+                success = false;
+            }
 
             if (success) UpdateLocalList();
             return success;
@@ -62,7 +108,22 @@ namespace ProgBD
         {
             bool success = true;
 
-            // Detroy -> BD
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("p_delete_employee");
+                cmd.Connection = conn;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("_code", employeeId);
+
+                conn.Open();
+                cmd.Prepare();
+                int i = cmd.ExecuteNonQuery(); // Check i value
+            }
+            catch (MySqlException mse)
+            {
+                conn.Close();
+                success = false;
+            }
 
             if (success) UpdateLocalList();
             return success;
@@ -71,7 +132,7 @@ namespace ProgBD
 
         public void UpdateLocalList()
         {
-            list.Clear();
+            ClearLocalList();
 
             // select * from
             // add each -> list
