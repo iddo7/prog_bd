@@ -18,7 +18,7 @@ namespace ProgBD
         public EmployeeSingleton()
         {
             list = new ObservableCollection<Employee>();
-            conn = new MySqlConnection("Server=cours.cegep3r.info;Database=2236478-isaac-negreiros;Uid=2236478;Pwd=2236478;");
+            conn = new MySqlConnection(BdConnexionInfo.ConnectionString());
         }
 
         public static EmployeeSingleton Instance()

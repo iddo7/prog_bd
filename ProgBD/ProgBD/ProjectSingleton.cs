@@ -17,7 +17,7 @@ namespace ProgBD
         public ProjectSingleton()
         {
             list = new ObservableCollection<Project>();
-            conn = new MySqlConnection("Server=cours.cegep3r.info;Database=2236478-isaac-negreiros;Uid=2236478;Pwd=2236478;");
+            conn = new MySqlConnection(BdConnexionInfo.ConnectionString());
         }
 
         public static ProjectSingleton Instance()
