@@ -291,7 +291,7 @@ CREATE PROCEDURE p_insert_client(
     IN _email VARCHAR(255)
 )
 BEGIN
-    INSERT INTO clients (id, fullName, address, phoneNumber, email)
+    INSERT INTO clients (fullName, address, phoneNumber, email)
     VALUES (_fullName, _address, _phoneNumber, _email);
 END //
 DELIMITER ;
