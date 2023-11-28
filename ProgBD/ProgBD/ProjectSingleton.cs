@@ -46,13 +46,13 @@ namespace ProgBD
                 MySqlCommand cmd = new MySqlCommand("p_insert_project");
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("_title", project.title);
-                cmd.Parameters.AddWithValue("_startDate", project.startDate.ToString("yyyy-MM-dd"));
-                cmd.Parameters.AddWithValue("_description", project.description);
-                cmd.Parameters.AddWithValue("_budget", project.budget);
-                cmd.Parameters.AddWithValue("_numberOfEmployees", project.numberOfEmployees);
-                cmd.Parameters.AddWithValue("_totalSalaries", project.totalSalaries);
-                cmd.Parameters.AddWithValue("_client", project.client.id);
+                cmd.Parameters.AddWithValue("_title", project.Title);
+                cmd.Parameters.AddWithValue("_startDate", project.StartDate.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("_description", project.Description);
+                cmd.Parameters.AddWithValue("_budget", project.Budget);
+                cmd.Parameters.AddWithValue("_numberOfEmployees", project.NumberOfEmployees);
+                cmd.Parameters.AddWithValue("_totalSalaries", project.TotalSalaries);
+                cmd.Parameters.AddWithValue("_client", project.Client.Id);
 
                 conn.Open();
                 cmd.Prepare();
@@ -78,13 +78,13 @@ namespace ProgBD
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("_employeeCode", projectId);
-                cmd.Parameters.AddWithValue("_title", updatedProject.title);
-                cmd.Parameters.AddWithValue("_startDate", updatedProject.startDate.ToString("yyyy-MM-dd"));
-                cmd.Parameters.AddWithValue("_description", updatedProject.description);
-                cmd.Parameters.AddWithValue("_budget", updatedProject.budget);
-                cmd.Parameters.AddWithValue("_numberOfEmployees", updatedProject.numberOfEmployees);
-                cmd.Parameters.AddWithValue("_totalSalaries", updatedProject.totalSalaries);
-                cmd.Parameters.AddWithValue("_client", updatedProject.client.id);
+                cmd.Parameters.AddWithValue("_title", updatedProject.Title);
+                cmd.Parameters.AddWithValue("_startDate", updatedProject.StartDate.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("_description", updatedProject.Description);
+                cmd.Parameters.AddWithValue("_budget", updatedProject.Budget);
+                cmd.Parameters.AddWithValue("_numberOfEmployees", updatedProject.NumberOfEmployees);
+                cmd.Parameters.AddWithValue("_totalSalaries", updatedProject.TotalSalaries);
+                cmd.Parameters.AddWithValue("_client", updatedProject.Client.Id);
 
 
                 conn.Open();

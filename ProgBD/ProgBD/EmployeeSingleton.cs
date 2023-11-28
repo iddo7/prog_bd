@@ -47,14 +47,14 @@ namespace ProgBD
                 MySqlCommand cmd = new MySqlCommand("p_insert_employee");
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("_firstName", employee.firstName);
-                cmd.Parameters.AddWithValue("_lastName", employee.lastName);
-                cmd.Parameters.AddWithValue("_birthday", employee.birthday);
-                cmd.Parameters.AddWithValue("_email", employee.email);
-                cmd.Parameters.AddWithValue("_address", employee.address);
-                cmd.Parameters.AddWithValue("_hiringDate", employee.hiringDate.ToString("yyyy-MM-dd"));
-                cmd.Parameters.AddWithValue("_hourlyRate", employee.hourlyRate);
-                cmd.Parameters.AddWithValue("_profilePicture", employee.profilePicture);
+                cmd.Parameters.AddWithValue("_firstName", employee.FirstName);
+                cmd.Parameters.AddWithValue("_lastName", employee.LastName);
+                cmd.Parameters.AddWithValue("_birthday", employee.Birthday);
+                cmd.Parameters.AddWithValue("_email", employee.Email);
+                cmd.Parameters.AddWithValue("_address", employee.Address);
+                cmd.Parameters.AddWithValue("_hiringDate", employee.HiringDate.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("_hourlyRate", employee.HourlyRate);
+                cmd.Parameters.AddWithValue("_profilePicture", employee.ProfilePicture);
 
                 conn.Open();
                 cmd.Prepare();
@@ -80,14 +80,14 @@ namespace ProgBD
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("_employeeCode", employeeId);
-                cmd.Parameters.AddWithValue("_firstName", updatedEmployee.firstName);
-                cmd.Parameters.AddWithValue("_lastName", updatedEmployee.lastName);
-                cmd.Parameters.AddWithValue("_birthday", updatedEmployee.birthday);
-                cmd.Parameters.AddWithValue("_email", updatedEmployee.email);
-                cmd.Parameters.AddWithValue("_address", updatedEmployee.address);
-                cmd.Parameters.AddWithValue("_hiringDate", updatedEmployee.hiringDate.ToString("yyyy-MM-dd"));
-                cmd.Parameters.AddWithValue("_hourlyRate", updatedEmployee.hourlyRate);
-                cmd.Parameters.AddWithValue("_profilePicture", updatedEmployee.profilePicture);
+                cmd.Parameters.AddWithValue("_firstName", updatedEmployee.FirstName);
+                cmd.Parameters.AddWithValue("_lastName", updatedEmployee.LastName);
+                cmd.Parameters.AddWithValue("_birthday", updatedEmployee.Birthday);
+                cmd.Parameters.AddWithValue("_email", updatedEmployee.Email);
+                cmd.Parameters.AddWithValue("_address", updatedEmployee.Address);
+                cmd.Parameters.AddWithValue("_hiringDate", updatedEmployee.HiringDate.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("_hourlyRate", updatedEmployee.HourlyRate);
+                cmd.Parameters.AddWithValue("_profilePicture", updatedEmployee.ProfilePicture);
 
 
                 conn.Open();

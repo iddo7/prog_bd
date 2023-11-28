@@ -46,10 +46,10 @@ namespace ProgBD
                 MySqlCommand cmd = new MySqlCommand("p_insert_client");
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("_fullname", client.fullName);
-                cmd.Parameters.AddWithValue("_address", client.fullName);
-                cmd.Parameters.AddWithValue("_phoneNumber", client.fullName);
-                cmd.Parameters.AddWithValue("_email", client.fullName);
+                cmd.Parameters.AddWithValue("_fullname", client.FullName);
+                cmd.Parameters.AddWithValue("_address", client.Address);
+                cmd.Parameters.AddWithValue("_phoneNumber", client.PhoneNumber);
+                cmd.Parameters.AddWithValue("_email", client.Email);
 
                 conn.Open();
                 cmd.Prepare();
@@ -75,10 +75,10 @@ namespace ProgBD
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("_id", clientId);
-                cmd.Parameters.AddWithValue("_fullname", updatedClient.fullName);
-                cmd.Parameters.AddWithValue("_address", updatedClient.fullName);
-                cmd.Parameters.AddWithValue("_phoneNumber", updatedClient.fullName);
-                cmd.Parameters.AddWithValue("_email", updatedClient.fullName);
+                cmd.Parameters.AddWithValue("_fullname", updatedClient.FullName);
+                cmd.Parameters.AddWithValue("_address", updatedClient.Address);
+                cmd.Parameters.AddWithValue("_phoneNumber", updatedClient.PhoneNumber);
+                cmd.Parameters.AddWithValue("_email", updatedClient.Email);
 
                 conn.Open();
                 cmd.Prepare();
