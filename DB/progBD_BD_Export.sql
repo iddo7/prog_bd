@@ -95,16 +95,16 @@ CREATE TABLE projects_employees (
 
 INSERT INTO clients (id, fullName, address, phoneNumber, email)
 VALUES
-    (100, 'John Doe', '123 Main St', '+1234567890', 'john.doe@example.com'),
-    (101, 'Jane Smith', '456 Oak Ave', '+0987654321', 'jane.smith@example.com'),
-    (102, 'Robert Johnson', '789 Pine Rd', '+1122334455', 'robert.j@example.com'),
-    (103, 'Maria Garcia', '101 Maple Ln', '+3344556677', 'maria.g@example.com'),
-    (104, 'William Davis', '202 Cedar Blvd', '+5566778899', 'william.d@example.com'),
-    (105, 'Sophie Brown', '303 Walnut St', '+9900112233', 'sophie.b@example.com'),
-    (106, 'Michael White', '404 Birch Rd', '+6677889900', 'michael.w@example.com'),
-    (107, 'Eva Robinson', '505 Pine Ave', '+1122334455', 'eva.r@example.com'),
-    (108, 'Alex Turner', '606 Oak Ln', '+3344556677', 'alex.t@example.com'),
-    (109, 'Olivia Taylor', '707 Elm Blvd', '+5566778899', 'olivia.t@example.com');
+    (100, 'John Doe', '123 Main St', '(123) 456-7890', 'john.doe@example.com'),
+    (101, 'Jane Smith', '456 Oak Ave', '(098) 765-4321', 'jane.smith@example.com'),
+    (102, 'Robert Johnson', '789 Pine Rd', '(112) 233-4455', 'robert.j@example.com'),
+    (103, 'Maria Garcia', '101 Maple Ln', '(334) 455-6677', 'maria.g@example.com'),
+    (104, 'William Davis', '202 Cedar Blvd', '(556) 677-8899', 'william.d@example.com'),
+    (105, 'Sophie Brown', '303 Walnut St', '(990) 011-2233', 'sophie.b@example.com'),
+    (106, 'Michael White', '404 Birch Rd', '(667) 788-9900', 'michael.w@example.com'),
+    (107, 'Eva Robinson', '505 Pine Ave', '(112) 233-4455', 'eva.r@example.com'),
+    (108, 'Alex Turner', '606 Oak Ln', '(334) 455-6677', 'alex.t@example.com'),
+    (109, 'Olivia Taylor', '707 Elm Blvd', '(556) 677-8899', 'olivia.t@example.com');
 
 INSERT INTO projects (code, title, startDate, description, budget, numberOfEmployees, totalSalaries, clientId, status)
 VALUES
