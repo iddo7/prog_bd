@@ -21,9 +21,10 @@
         </Button>
 
         <GridView x:Name="listeMateriel" Grid.Row="2" Padding="20"  HorizontalAlignment="Center">
+            
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="35" Background="White" Width="220" CornerRadius="8">
+                    <StackPanel Margin="35" Background="White" Width="220" CornerRadius="15">
                         <Grid Margin="15">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -32,7 +33,8 @@
                             </Grid.RowDefinitions>
 
                             <Image Grid.Row="0" Source="{Binding ImageUrl}" Width="100" Height="100" Margin="0 0 0 10"/>
-                            <StackPanel Grid.Row="1" Orientation="Horizontal" >
+                            
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
                                 <TextBlock Text="{Binding FirstName}" FontSize="18" FontFamily="Arial Rounded" Margin="3"/>
                                 <TextBlock Text="{Binding LastName}" FontSize="18" FontFamily="Arial Rounded"  Margin="3"/>
                             </StackPanel>

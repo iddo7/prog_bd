@@ -10,6 +10,39 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Projets" Margin="35"  FontSize="40" FontFamily="Terminal" HorizontalAlignment="Left" Grid.Row="0"/>
+
+        <Button x:Name="btExport" HorizontalAlignment="Right" FontSize="20" Background="LightGray" Margin="35" Grid.Row="0">
+            <TextBlock Foreground="Black">Ajouter</TextBlock>
+        </Button>
+
+        <ListView x:Name="listeMateriel" Grid.Row="1" Padding="20" HorizontalAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="20" Margin="10" HorizontalAlignment="Stretch" CornerRadius="15" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{Binding code}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="0"/>
+                        <TextBlock Text="{Binding title}" FontSize="18" FontFamily="Arial Rounded" Grid.Column="1" />
+                        <TextBlock Text="{Binding startDate}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="2" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding budget}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding status}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </Grid>
 </Page>

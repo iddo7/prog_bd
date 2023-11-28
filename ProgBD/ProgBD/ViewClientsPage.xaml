@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Page
     x:Class="ProgBD.ViewClientsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -10,6 +9,40 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Employés" Margin="35"  FontSize="40" FontFamily="Terminal" HorizontalAlignment="Left" Grid.Row="0"/>
+        
+        <Button x:Name="btExport" HorizontalAlignment="Right" FontSize="20" Background="LightGray" Margin="35" Grid.Row="0">
+            <TextBlock Foreground="Black">Ajouter</TextBlock>
+        </Button>
+
+        <ListView x:Name="listeMateriel" Grid.Row="1" Padding="20" HorizontalAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="20" Margin="10" HorizontalAlignment="Stretch" CornerRadius="15" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{Binding LastName}" FontSize="18" FontFamily="Arial Rounded" Margin="0,30,0,0" Grid.Column="0"/>
+                        <TextBlock Text="{Binding FirstName}" FontSize="18" FontFamily="Arial Rounded" Margin="0,0,0,0" Grid.Column="0" />
+                        <TextBlock Text="{Binding Adress}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="1" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding phoneNumber}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="2" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Email}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <TextBlock Text="boutton" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="4" HorizontalAlignment="Right" />
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </Grid>
 </Page>
