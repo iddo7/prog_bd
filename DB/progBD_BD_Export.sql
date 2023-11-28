@@ -108,18 +108,18 @@ VALUES
 
 INSERT INTO projects (code, title, startDate, description, budget, numberOfEmployees, totalSalaries, clientId, status)
 VALUES
-    ('P001', 'Website Redesign', '2023-01-15', 'Redesigning the company website', 5000.00, 3, 3000.00, 100, 'En cours'),
-    ('P002', 'Product Launch', '2023-02-01', 'Launching a new product line', 10000.00, 5, 5000.00, 101, 'En cours'),
-    ('P003', 'Marketing Campaign', '2023-03-10', 'Promoting the brand through various channels', 8000.00, 4, 4000.00, 103, 'En cours'),
-    ('P004', 'Sales Training', '2023-04-05', 'Training the sales team on new techniques', 6000.00, 2, 2000.00, 104, 'En cours'),
-    ('P005', 'Inventory System Upgrade', '2023-05-20', 'Upgrading the inventory management system', 7000.00, 3, 3000.00, 105, 'En cours'),
-    ('P006', 'Customer Support Improvement', '2023-06-15', 'Enhancing customer support services', 4000.00, 2, 2000.00, 106, 'En cours'),
-    ('P007', 'Employee Wellness Program', '2023-07-01', 'Implementing a wellness program for employees', 3000.00, 1, 1000.00, 107, 'En cours'),
-    ('P008', 'Mobile App Development', '2023-08-10', 'Developing a mobile application', 12000.00, 4, 4000.00, 108, 'En cours'),
-    ('P009', 'Training Videos Production', '2023-09-05', 'Creating training videos for internal use', 5000.00, 2, 2000.00, 109, 'En cours'),
-    ('P010', 'Community Outreach', '2023-10-20', 'Engaging with the local community', 2500.00, 1, 1000.00, 102, 'En cours'),
-    ('P011', 'Community Outreach', '2023-10-20', 'Engaging with the local community', 2500.00, 1, 1000.00, 102, 'En cours'),
-    ('P012', 'Community Outreach', '2023-10-20', 'Engaging with the local community', 2500.00, 1, 1000.00, 102, 'En cours');
+    ('P001', 'Website Redesign', '2024-01-15', 'Redesigning the company website', 5000.00, 3, 3000.00, 100, 'En cours'),
+    ('P002', 'Product Launch', '2024-02-01', 'Launching a new product line', 10000.00, 5, 5000.00, 101, 'En cours'),
+    ('P003', 'Marketing Campaign', '2024-03-10', 'Promoting the brand through various channels', 8000.00, 4, 4000.00, 103, 'En cours'),
+    ('P004', 'Sales Training', '2024-04-05', 'Training the sales team on new techniques', 6000.00, 2, 2000.00, 104, 'En cours'),
+    ('P005', 'Inventory System Upgrade', '2024-05-20', 'Upgrading the inventory management system', 7000.00, 3, 3000.00, 105, 'En cours'),
+    ('P006', 'Customer Support Improvement', '2024-06-15', 'Enhancing customer support services', 4000.00, 2, 2000.00, 106, 'En cours'),
+    ('P007', 'Employee Wellness Program', '2024-07-01', 'Implementing a wellness program for employees', 3000.00, 1, 1000.00, 107, 'En cours'),
+    ('P008', 'Mobile App Development', '2024-08-10', 'Developing a mobile application', 12000.00, 4, 4000.00, 108, 'En cours'),
+    ('P009', 'Training Videos Production', '2024-09-05', 'Creating training videos for internal use', 5000.00, 2, 2000.00, 109, 'En cours'),
+    ('P010', 'Community Outreach', '2024-10-20', 'Engaging with the local community', 2500.00, 1, 1000.00, 102, 'En cours'),
+    ('P011', 'Community Outreach', '2024-10-20', 'Engaging with the local community', 2500.00, 1, 1000.00, 102, 'En cours'),
+    ('P012', 'Community Outreach', '2024-10-20', 'Engaging with the local community', 2500.00, 1, 1000.00, 102, 'En cours');
 
 INSERT INTO employees (code, firstName, lastName, birthday, email, address, hiringDate, hourlyRate, profilePicture, status)
 VALUES
