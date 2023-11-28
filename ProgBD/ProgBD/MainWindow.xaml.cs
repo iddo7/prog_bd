@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -28,9 +29,27 @@ namespace ProgBD
             this.InitializeComponent();
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            myButton.Content = "Clicked";
+            var item = args.SelectedItem as NavigationViewItem;
+
+            switch (item.Name)
+            {
+                case "navClients":
+                    mainFrame.Navigate(typeof(ViewClientsPage));
+                    break;
+                case "navProjects":
+                    mainFrame.Navigate(typeof(ViewProjectsPage));
+                    break;
+                case "navEmployees":
+                    mainFrame.Navigate(typeof(ViewEmployeesPage));
+                    break;
+                default:
+                    break;
+
+            }
         }
+
+
     }
 }
