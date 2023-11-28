@@ -27,6 +27,13 @@ drop procedure if exists p_update_client;
 drop procedure if exists p_update_employee;
 drop procedure if exists p_update_employee_project;
 drop procedure if exists p_update_project;
+drop procedure if exists p_return_editable_fields;
+drop procedure if exists p_select_clients;
+drop procedure if exists p_select_employees;
+drop procedure if exists p_select_projects;
+drop procedure if exists p_select_projects_employees;
+
+
 
 
 
@@ -267,6 +274,12 @@ INNER JOIN clients c on p.clientId = c.id
 ORDER BY p.startDate;
 -- Ex: SELECT * FROM v_projects
 
+
+
+
+
+/*   --- CREATING PROCEDURES ---   */
+
 /* Procedure to insert data into the 'clients' table */
 DELIMITER //
 CREATE PROCEDURE p_insert_client(
@@ -455,6 +468,34 @@ BEGIN
         status
     FROM
         employees;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+/* Procedure pour sélectionner tous les enregistrements de la table 'clients' */
+CREATE PROCEDURE p_select_clients()
+BEGIN
+    SELECT * FROM clients;
+END //
+
+/* Procedure pour sélectionner tous les enregistrements de la table 'projects' */
+CREATE PROCEDURE p_select_projects()
+BEGIN
+    SELECT * FROM projects;
+END //
+
+/* Procedure pour sélectionner tous les enregistrements de la table 'employees' */
+CREATE PROCEDURE p_select_employees()
+BEGIN
+    SELECT * FROM employees;
+END //
+
+/* Procedure pour sélectionner tous les enregistrements de la table 'projects_employees' */
+CREATE PROCEDURE p_select_projects_employees()
+BEGIN
+    SELECT * FROM projects_employees;
 END //
 
 DELIMITER ;
