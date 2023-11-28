@@ -39,7 +39,17 @@ namespace ProgBD
 
         private void myButton_Click(object sender, RoutedEventArgs e)
         {
-            myButton.Content = a;
+
+            Client client = new Client(
+                201,
+                "Isaac Negreiros",
+                "123 rue Test",
+                "(873) 266-7053",
+                "isaacnegreiros11@gmail.com"
+            );
+
+            ClientSingleton.Instance().Create( client );
+            myButton.Content = client.ToString();
         }
     }
 }
