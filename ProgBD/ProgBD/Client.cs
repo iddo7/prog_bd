@@ -73,5 +73,25 @@ namespace ProgBD
                 email = value;
             }
         }
+
+        public override string ToString()
+        {
+            return $"Client ID: {Id}\n" +
+                   $"Full Name: {FullName}\n" +
+                   $"Address: {Address}\n" +
+                   $"Phone Number: {PhoneNumber}\n" +
+                   $"Email: {Email}\n";
+        }
+
+        public bool Equals(Client other)
+        {
+            return this.Id == other.Id;
+        }
+
+        public bool Equals(int otherId)
+        {
+            return this.Id == otherId;
+        }
+
     }
 }

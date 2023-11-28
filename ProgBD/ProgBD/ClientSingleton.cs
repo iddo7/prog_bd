@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,9 +33,15 @@ namespace ProgBD
             return list;
         }
 
-        public Client Client(int index)
+        public Client Client(int searchedClientId)
         {
-            return (Client)list[index];
+            Client searchedClient = null;
+            foreach (Client client in list)
+            {
+                if (client.Equals(searchedClientId)) searchedClient = client;
+            }
+
+            return searchedClient;
         }
 
         public bool Create(Client client)
@@ -124,8 +131,41 @@ namespace ProgBD
         {
             ClearLocalList();
 
-            // select * from
-            // add each -> list
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("p_select_clients");
+                cmd.Connection = conn;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                conn.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+
+                while (reader.Read())
+                {
+                    int id = (int)reader["id"];
+                    string fullName = (string)reader["fullName"];
+                    string address = (string)reader["address"];
+                    string phoneNumber = (string)reader["phoneNumber"];
+                    string email = (string)reader["email"];
+
+                    Client client = new Client
+                    (
+                        id,
+                        fullName,
+                        address,
+                        phoneNumber,
+                        email
+                    );
+                    list.Add(client);
+                }
+                reader.Close();
+                conn.Close();
+            }
+            catch (MySqlException mse)
+            {
+                conn.Close();
+            }
 
         }
 

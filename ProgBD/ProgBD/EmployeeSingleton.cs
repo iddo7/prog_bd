@@ -134,8 +134,51 @@ namespace ProgBD
         {
             ClearLocalList();
 
-            // select * from
-            // add each -> list
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("p_select_employees");
+                cmd.Connection = conn;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                conn.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+
+                while (reader.Read())
+                {
+                    string code = (string)reader["code"];
+                    string firstName = (string)reader["firstName"];
+                    string lastName = (string)reader["lastName"];
+                    DateTime birthday = (DateTime)reader["birthday"];
+                    string email = (string)reader["email"];
+                    string address = (string)reader["address"];
+                    DateTime hiringDate = (DateTime)reader["hiringDate"];
+                    double hourlyRate = (double)reader["hourlyRate"];
+                    // You may need to adjust how you retrieve the Uri for the profile picture
+                    Uri profilePicture = new Uri((string)reader["profilePicture"]);
+
+                    Employee employee = new Employee
+                    (
+                        code,
+                        firstName,
+                        lastName,
+                        birthday,
+                        email,
+                        address,
+                        hiringDate,
+                        hourlyRate,
+                        profilePicture
+                    );
+
+                    list.Add(employee);
+                }
+                reader.Close();
+                conn.Close();
+            }
+            catch (MySqlException mse)
+            {
+                conn.Close();
+            }
 
         }
 

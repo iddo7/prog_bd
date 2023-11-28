@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,14 +24,22 @@ namespace ProgBD
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        string a;
         public MainWindow()
         {
             this.InitializeComponent();
+            ObservableCollection<Project> clients = ProjectSingleton.Instance().List();
+
+            
+            foreach (Project client in clients)
+            {
+                a = client.ToString();
+            }
         }
 
         private void myButton_Click(object sender, RoutedEventArgs e)
         {
-            myButton.Content = "Clicked";
+            myButton.Content = a;
         }
     }
 }

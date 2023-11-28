@@ -81,7 +81,7 @@ namespace ProgBD
             get => birthday;
             set 
             {
-                int age = Utilities.CurrentAge(birthday);
+                int age = Utilities.CurrentAge(value);
                 if (age < 18 || age > 65) throw new ArgumentException("Invalid birthday");
 
                 birthday = value;
@@ -123,5 +123,19 @@ namespace ProgBD
             }
         }
         public Uri ProfilePicture { get => profilePicture; set => profilePicture = value; }
+
+        public override string ToString()
+        {
+            return $"Employee Code: {Code}\n" +
+                   $"First Name: {FirstName}\n" +
+                   $"Last Name: {LastName}\n" +
+                   $"Birthday: {Birthday.ToShortDateString()}\n" +
+                   $"Email: {Email}\n" +
+                   $"Address: {Address}\n" +
+                   $"Hiring Date: {HiringDate.ToShortDateString()}\n" +
+                   $"Hourly Rate: {HourlyRate}\n" +
+                   $"Profile Picture URI: {ProfilePicture?.ToString() ?? "N/A"}\n";
+        }
+
     }
 }
