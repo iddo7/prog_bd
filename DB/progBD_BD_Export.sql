@@ -33,8 +33,9 @@ drop procedure if exists p_select_employees;
 drop procedure if exists p_select_projects;
 drop procedure if exists p_select_projects_employees;
 
-
-
+drop trigger if exists before_insert_clients;
+drop trigger if exists before_insert_projects;
+drop trigger if exists before_insert_employees;
 
 
 drop table if exists projects_employees cascade;
@@ -246,7 +247,47 @@ BEGIN
 END;
 -- Ex: SELECT f_generate_unique_client_id() AS uniqueClientId
 
+-- clients trigger
+DELIMITER //
+CREATE TRIGGER before_insert_clients
+BEFORE INSERT ON clients
+    FOR EACH ROW
 
+BEGIN
+    DECLARE new_id INT;
+    SET new_id = f_generate_unique_client_id();
+    SET NEW.id = new_id;
+END;
+//
+DELIMITER ;
+
+-- projects trigger
+DELIMITER //
+CREATE TRIGGER before_insert_projects
+BEFORE INSERT ON projects
+    FOR EACH ROW
+
+BEGIN
+    DECLARE new_code INT;
+    -- SET new_id = f_generate_unique_projects_id();
+    SET NEW.code = new_code;
+END;
+//
+DELIMITER ;
+
+-- employees trigger
+DELIMITER //
+CREATE TRIGGER before_insert_employees
+BEFORE INSERT ON employees
+    FOR EACH ROW
+
+BEGIN
+    DECLARE new_code INT;
+    -- SET new_id = f_generate_unique_employees_id();
+    SET NEW.code = new_code;
+END;
+//
+DELIMITER ;
 
 
 
