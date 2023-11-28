@@ -123,16 +123,17 @@ VALUES
 
 INSERT INTO employees (code, firstName, lastName, birthday, email, address, hiringDate, hourlyRate, profilePicture, status)
 VALUES
-    ('E001', 'Alice', 'Johnson', '1990-05-20', 'alice.johnson@example.com', '789 Pine Rd', '2022-03-10', 20.00, 'alice.jpg', 'Active'),
-    ('E002', 'Bob', 'Williams', '1985-12-15', 'bob.williams@example.com', '456 Elm St', '2021-02-28', 25.00, 'bob.jpg', 'Active'),
-    ('E003', 'Charlie', 'Smith', '1992-08-30', 'charlie.smith@example.com', '101 Oak Ln', '2023-01-15', 18.00, 'charlie.jpg', 'Active'),
-    ('E004', 'Diana', 'Miller', '1988-04-05', 'diana.miller@example.com', '202 Maple Blvd', '2020-11-05', 22.00, 'diana.jpg', 'Active'),
-    ('E005', 'Edward', 'Jones', '1995-06-22', 'edward.jones@example.com', '303 Cedar Ave', '2022-05-10', 23.00, 'edward.jpg', 'Active'),
-    ('E006', 'Fiona', 'Brown', '1987-02-18', 'fiona.brown@example.com', '404 Birch Rd', '2021-09-01', 19.00, 'fiona.jpg', 'Active'),
-    ('E007', 'George', 'Clark', '1991-11-12', 'george.clark@example.com', '505 Pine St', '2022-07-15', 21.00, 'george.jpg', 'Active'),
-    ('E008', 'Helen', 'White', '1986-07-08', 'helen.white@example.com', '606 Elm Ave', '2020-12-20', 26.00, 'helen.jpg', 'Active'),
-    ('E009', 'Ian', 'Martin', '1993-09-25', 'ian.martin@example.com', '707 Walnut Ln', '2023-02-05', 24.00, 'ian.jpg', 'Active'),
-    ('E010', 'Jessica', 'Wilson', '1989-03-14', 'jessica.wilson@example.com', '808 Cedar Blvd', '2022-04-18', 21.50, 'jessica.jpg', 'Active');
+    ('E001', 'Alice', 'Johnson', '1990-05-20', 'alice.johnson@example.com', '789 Pine Rd', '2022-03-10', 20.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
+    ('E002', 'Bob', 'Williams', '1985-12-15', 'bob.williams@example.com', '456 Elm St', '2021-02-28', 25.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
+    ('E003', 'Charlie', 'Smith', '1992-08-30', 'charlie.smith@example.com', '101 Oak Ln', '2023-01-15', 18.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
+    ('E004', 'Diana', 'Miller', '1988-04-05', 'diana.miller@example.com', '202 Maple Blvd', '2020-11-05', 22.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
+    ('E005', 'Edward', 'Jones', '1995-06-22', 'edward.jones@example.com', '303 Cedar Ave', '2022-05-10', 23.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
+    ('E006', 'Fiona', 'Brown', '1987-02-18', 'fiona.brown@example.com', '404 Birch Rd', '2021-09-01', 19.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
+    ('E007', 'George', 'Clark', '1991-11-12', 'george.clark@example.com', '505 Pine St', '2022-07-15', 21.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
+    ('E008', 'Helen', 'White', '1986-07-08', 'helen.white@example.com', '606 Elm Ave', '2020-12-20', 26.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
+    ('E009', 'Ian', 'Martin', '1993-09-25', 'ian.martin@example.com', '707 Walnut Ln', '2023-02-05', 24.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
+    ('E010', 'Jessica', 'Wilson', '1989-03-14', 'jessica.wilson@example.com', '808 Cedar Blvd', '2022-04-18', 21.50, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active');
+
 
 INSERT INTO projects_employees (projectCode, employeeCode, hoursWorked)
 VALUES
