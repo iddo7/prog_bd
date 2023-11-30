@@ -348,7 +348,7 @@ CREATE PROCEDURE p_insert_project(
     IN _totalSalaries DOUBLE
 )
 BEGIN
-    INSERT INTO projects (code, title, startDate, description, budget, numberOfEmployees, totalSalaries, clientId, status)
+    INSERT INTO projects (title, startDate, description, budget, numberOfEmployees, totalSalaries)
     VALUES (_title, _startDate, _description, _budget, _numberOfEmployees, _totalSalaries);
 END //
 DELIMITER ;
@@ -366,7 +366,7 @@ CREATE PROCEDURE p_insert_employee(
     IN _profilePicture VARCHAR(255)
 )
 BEGIN
-    INSERT INTO employees (code, firstName, lastName, birthday, email, address, hiringDate, hourlyRate, profilePicture, status)
+    INSERT INTO employees (firstName, lastName, birthday, email, address, hiringDate, hourlyRate, profilePicture)
     VALUES (_firstName, _lastName, _birthday, _email, _address, _hiringDate, _hourlyRate, _profilePicture);
 END //
 DELIMITER ;
@@ -379,7 +379,7 @@ CREATE PROCEDURE p_assign_employee_to_project(
     IN employee_code VARCHAR(20)
 )
 BEGIN
-    INSERT INTO projects_employees (projectCode, employeeCode, hoursWorked)
+    INSERT INTO projects_employees (projectCode, employeeCode)
     VALUES (project_code, employee_code);
 END //
 DELIMITER ;
