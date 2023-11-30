@@ -55,6 +55,7 @@ namespace ProgBD
                 cmd.Parameters.AddWithValue("_hiringDate", employee.HiringDate.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("_hourlyRate", employee.HourlyRate);
                 cmd.Parameters.AddWithValue("_profilePicture", employee.ProfilePicture);
+                cmd.Parameters.AddWithValue("_status", employee.Status);
 
                 conn.Open();
                 cmd.Prepare();
@@ -88,6 +89,7 @@ namespace ProgBD
                 cmd.Parameters.AddWithValue("_hiringDate", updatedEmployee.HiringDate.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("_hourlyRate", updatedEmployee.HourlyRate);
                 cmd.Parameters.AddWithValue("_profilePicture", updatedEmployee.ProfilePicture);
+                cmd.Parameters.AddWithValue("_status", updatedEmployee.Status);
 
 
                 conn.Open();
@@ -156,6 +158,7 @@ namespace ProgBD
                     double hourlyRate = (double)reader["hourlyRate"];
                     // You may need to adjust how you retrieve the Uri for the profile picture
                     Uri profilePicture = new Uri((string)reader["profilePicture"]);
+                    string status = (string)reader["status"];
 
                     Employee employee = new Employee
                     (
@@ -167,7 +170,8 @@ namespace ProgBD
                         address,
                         hiringDate,
                         hourlyRate,
-                        profilePicture
+                        profilePicture,
+                        status
                     );
 
                     list.Add(employee);

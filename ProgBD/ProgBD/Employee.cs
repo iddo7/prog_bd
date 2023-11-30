@@ -17,6 +17,7 @@ namespace ProgBD
         DateTime hiringDate;
         double hourlyRate;
         Uri profilePicture;
+        string status;
 
         public Employee()
         {
@@ -29,9 +30,10 @@ namespace ProgBD
             this.HiringDate = new DateTime();
             this.HourlyRate = 0;
             this.ProfilePicture = null;
+            this.Status = "Journalier";
         }
 
-        public Employee(string code, string firstName, string lastName, DateTime birthday, string email, string address, DateTime hiringDate, double hourlyRate, Uri profilePicture)
+        public Employee(string code, string firstName, string lastName, DateTime birthday, string email, string address, DateTime hiringDate, double hourlyRate, Uri profilePicture, string status)
         {
             this.Code = code;
             this.FirstName = firstName;
@@ -42,6 +44,7 @@ namespace ProgBD
             this.HiringDate = hiringDate;
             this.HourlyRate = hourlyRate;
             this.ProfilePicture = profilePicture;
+            this.Status = status;
         }
 
         public string Code 
@@ -123,6 +126,15 @@ namespace ProgBD
             }
         }
         public Uri ProfilePicture { get => profilePicture; set => profilePicture = value; }
+        public string Status 
+        { 
+            get => status; 
+            set
+            {
+                if (value != "Journalier" && value != "Permanent") throw new ArgumentException("Invalid status");
+                status = value;
+            }
+        }
 
         public override string ToString()
         {
@@ -134,7 +146,8 @@ namespace ProgBD
                    $"Address: {Address}\n" +
                    $"Hiring Date: {HiringDate.ToShortDateString()}\n" +
                    $"Hourly Rate: {HourlyRate}\n" +
-                   $"Profile Picture URI: {ProfilePicture?.ToString() ?? "N/A"}\n";
+                   $"Profile Picture URI: {ProfilePicture?.ToString() ?? "N/A"}\n" +
+                   $"Status: {status}\n";
         }
 
     }
