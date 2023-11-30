@@ -9,12 +9,15 @@ drop view if exists v_clients_with_projects;
 drop view if exists v_projects;
 drop view if exists v_unassigned_employees;
 
+drop function if exists f_random_int;
 drop function if exists f_calculate_salary_for_project;
 drop function if exists f_client_id_exists;
 drop function if exists f_generate_unique_client_id;
 drop function if exists f_has_a_project;
 drop function if exists f_is_assigned;
 drop function if exists f_number_of_projects;
+drop function if exists f_generate_employee_code;
+drop function if exists f_generate_project_code;
 drop procedure if exists p_assign_employee_to_project;
 drop procedure if exists p_delete_client;
 drop procedure if exists p_delete_employee;
@@ -97,6 +100,11 @@ CREATE TABLE projects_employees (
 );
 
 
+
+
+
+/*   --- INSERTING VALUES ---   */
+
 INSERT INTO clients (id, fullName, address, phoneNumber, email)
 VALUES
     (100, 'John Doe', '123 Main St', '(123) 456-7890', 'john.doe@example.com'),
@@ -127,18 +135,16 @@ VALUES
 
 INSERT INTO employees (code, firstName, lastName, birthday, email, address, hiringDate, hourlyRate, profilePicture, status)
 VALUES
-    ('E001', 'Alice', 'Johnson', '1990-05-20', 'alice.johnson@example.com', '789 Pine Rd', '2022-03-10', 20.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
-    ('E002', 'Bob', 'Williams', '1985-12-15', 'bob.williams@example.com', '456 Elm St', '2021-02-28', 25.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
-    ('E003', 'Charlie', 'Smith', '1992-08-30', 'charlie.smith@example.com', '101 Oak Ln', '2023-01-15', 18.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
-    ('E004', 'Diana', 'Miller', '1988-04-05', 'diana.miller@example.com', '202 Maple Blvd', '2020-11-05', 22.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
-    ('E005', 'Edward', 'Jones', '1995-06-22', 'edward.jones@example.com', '303 Cedar Ave', '2022-05-10', 23.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
-    ('E006', 'Fiona', 'Brown', '1987-02-18', 'fiona.brown@example.com', '404 Birch Rd', '2021-09-01', 19.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
-    ('E007', 'George', 'Clark', '1991-11-12', 'george.clark@example.com', '505 Pine St', '2022-07-15', 21.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
-    ('E008', 'Helen', 'White', '1986-07-08', 'helen.white@example.com', '606 Elm Ave', '2020-12-20', 26.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
-    ('E009', 'Ian', 'Martin', '1993-09-25', 'ian.martin@example.com', '707 Walnut Ln', '2023-02-05', 24.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active'),
-    ('E010', 'Jessica', 'Wilson', '1989-03-14', 'jessica.wilson@example.com', '808 Cedar Blvd', '2022-04-18', 21.50, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Active')
-
-
+    ('E001', 'Alice', 'Johnson', '1990-05-20', 'alice.johnson@example.com', '789 Pine Rd', '2022-03-10', 20.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Journalier'),
+    ('E002', 'Bob', 'Williams', '1985-12-15', 'bob.williams@example.com', '456 Elm St', '2021-02-28', 25.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Journalier'),
+    ('E003', 'Charlie', 'Smith', '1992-08-30', 'charlie.smith@example.com', '101 Oak Ln', '2023-01-15', 18.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Journalier'),
+    ('E004', 'Diana', 'Miller', '1988-04-05', 'diana.miller@example.com', '202 Maple Blvd', '2020-11-05', 22.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Journalier'),
+    ('E005', 'Edward', 'Jones', '1995-06-22', 'edward.jones@example.com', '303 Cedar Ave', '2022-05-10', 23.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Journalier'),
+    ('E006', 'Fiona', 'Brown', '1987-02-18', 'fiona.brown@example.com', '404 Birch Rd', '2021-09-01', 19.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Journalier'),
+    ('E007', 'George', 'Clark', '1991-11-12', 'george.clark@example.com', '505 Pine St', '2022-07-15', 21.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Journalier'),
+    ('E008', 'Helen', 'White', '1986-07-08', 'helen.white@example.com', '606 Elm Ave', '2020-12-20', 26.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Journalier'),
+    ('E009', 'Ian', 'Martin', '1993-09-25', 'ian.martin@example.com', '707 Walnut Ln', '2023-02-05', 24.00, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Journalier'),
+    ('E010', 'Jessica', 'Wilson', '1989-03-14', 'jessica.wilson@example.com', '808 Cedar Blvd', '2022-04-18', 21.50, 'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png', 'Journalier');
 
 INSERT INTO projects_employees (projectCode, employeeCode, hoursWorked)
 VALUES
@@ -154,6 +160,15 @@ VALUES
 
 
 /*   --- CREATING FUNCTIONS ---   */
+
+
+/* -  - */
+CREATE FUNCTION f_random_int(_min INT, _max INT)
+RETURNS INT
+BEGIN
+    RETURN FLOOR(RAND() * (_max - _min) + _min);
+END;
+-- Ex: SELECT f_random_int(10, 99);
 
 
 /* - Returns current salary for an employee for it's assigned project based on hoursWorked & hourlyRate - */
@@ -243,12 +258,41 @@ BEGIN
     SET max = 999;
 
     REPEAT
-        SET uniqueId = FLOOR(RAND() * (max - min) + min);
+        SET uniqueId = f_random_int(min, max);
     UNTIL f_client_id_exists(uniqueId) = 0 END REPEAT;
 
     RETURN uniqueId;
 END;
 -- Ex: SELECT f_generate_unique_client_id() AS uniqueClientId
+
+
+/* - Generates an employee code - */
+CREATE FUNCTION f_generate_employee_code(_lastName VARCHAR(255), _birthday DATE)
+RETURNS VARCHAR(20)
+BEGIN
+    DECLARE code VARCHAR(20);
+    SET code = CONCAT(LEFT(_lastName, 2), '-', YEAR(_birthday), '-', f_random_int(10, 99));
+    RETURN code;
+END;
+-- Ex: SELECT f_generate_employee_code('Johnson', '1990-05-20') AS employeeCode
+
+
+/* - Generates a project code - */
+CREATE FUNCTION f_generate_project_code(_clientId INT, _startDate DATE)
+RETURNS VARCHAR(20)
+BEGIN
+    DECLARE code VARCHAR(20);
+    SET code = CONCAT(_clientId, '-', f_random_int(10, 99), '-', YEAR(_startDate));
+    RETURN code;
+END;
+-- Ex: SELECT f_generate_project_code(104, '2024-02-01') AS employeeCode
+
+
+
+
+
+/*   --- CREATING TRIGGERS ---   */
+
 
 -- clients trigger
 DELIMITER //
@@ -271,8 +315,8 @@ BEFORE INSERT ON projects
     FOR EACH ROW
 
 BEGIN
-    DECLARE new_code INT;
-    -- SET new_id = f_generate_unique_projects_id();
+    DECLARE new_code VARCHAR(20);
+    SET new_code = f_generate_project_code(NEW.clientId, NEW.startDate);
     SET NEW.code = new_code;
 END;
 //
@@ -285,8 +329,8 @@ BEFORE INSERT ON employees
     FOR EACH ROW
 
 BEGIN
-    DECLARE new_code INT;
-    -- SET new_id = f_generate_unique_employees_id();
+    DECLARE new_code  VARCHAR(20);
+    SET new_code = f_generate_employee_code(NEW.lastName, NEW.birthday);
     SET NEW.code = new_code;
 END;
 //
@@ -300,14 +344,19 @@ FOR EACH ROW
 BEGIN
     IF NEW.status <> OLD.status THEN
         IF DATEDIFF(NOW(), NEW.hiringDate) >= 1095 THEN
-            SET NEW.status = 'permanent';
+            SET NEW.status = 'Permanent';
         ELSE
-            SET NEW.status = 'journalier';
+            SET NEW.status = 'Journalier';
         END IF;
     END IF;
 END //
 
 DELIMITER ;
+
+
+
+
+
 /*   --- CREATING VIEWS ---   */
 
 CREATE VIEW v_unassigned_employees AS
@@ -363,11 +412,12 @@ CREATE PROCEDURE p_insert_project(
     IN _budget DOUBLE,
     IN _numberOfEmployees INT,
     IN _totalSalaries DOUBLE,
+    IN _clientId INT,
     IN _status VARCHAR(20)
 )
 BEGIN
-    INSERT INTO projects (code, title, startDate, description, budget, numberOfEmployees, totalSalaries, clientId, status)
-    VALUES (_title, _startDate, _description, _budget, _numberOfEmployees, _totalSalaries, _status);
+    INSERT INTO projects (title, startDate, description, budget, numberOfEmployees, totalSalaries, clientId, status)
+    VALUES (_title, _startDate, _description, _budget, _numberOfEmployees, _totalSalaries, _clientId, _status);
 END //
 DELIMITER ;
 
@@ -592,3 +642,6 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
+
