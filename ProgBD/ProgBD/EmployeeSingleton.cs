@@ -71,7 +71,7 @@ namespace ProgBD
             return success;
         }
 
-        public bool Edit(int employeeId,  Employee updatedEmployee)
+        public bool Edit(string employeeCode,  Employee updatedEmployee)
         {
             bool success = true;
 
@@ -80,7 +80,7 @@ namespace ProgBD
                 MySqlCommand cmd = new MySqlCommand("p_update_employee");
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("_employeeCode", employeeId);
+                cmd.Parameters.AddWithValue("_employeeCode", employeeCode);
                 cmd.Parameters.AddWithValue("_firstName", updatedEmployee.FirstName);
                 cmd.Parameters.AddWithValue("_lastName", updatedEmployee.LastName);
                 cmd.Parameters.AddWithValue("_birthday", updatedEmployee.Birthday);
@@ -106,7 +106,7 @@ namespace ProgBD
             return success;
         }
 
-        public bool Destroy(int employeeId)
+        public bool Destroy(string employeeCode)
         {
             bool success = true;
 
@@ -115,7 +115,7 @@ namespace ProgBD
                 MySqlCommand cmd = new MySqlCommand("p_delete_employee");
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("_code", employeeId);
+                cmd.Parameters.AddWithValue("_code", employeeCode);
 
                 conn.Open();
                 cmd.Prepare();
