@@ -32,6 +32,7 @@ drop procedure if exists p_select_clients;
 drop procedure if exists p_select_employees;
 drop procedure if exists p_select_projects;
 drop procedure if exists p_select_projects_employees;
+drop procedure if exists p_return_assigned_project_employees;
 
 drop trigger if exists before_insert_clients;
 drop trigger if exists before_insert_projects;
@@ -345,11 +346,12 @@ CREATE PROCEDURE p_insert_project(
     IN _description TEXT,
     IN _budget DOUBLE,
     IN _numberOfEmployees INT,
-    IN _totalSalaries DOUBLE
+    IN _totalSalaries DOUBLE,
+    IN _status VARCHAR(20)
 )
 BEGIN
-    INSERT INTO projects (title, startDate, description, budget, numberOfEmployees, totalSalaries)
-    VALUES (_title, _startDate, _description, _budget, _numberOfEmployees, _totalSalaries);
+    INSERT INTO projects (code, title, startDate, description, budget, numberOfEmployees, totalSalaries, clientId, status)
+    VALUES (_title, _startDate, _description, _budget, _numberOfEmployees, _totalSalaries, _status);
 END //
 DELIMITER ;
 
@@ -363,11 +365,13 @@ CREATE PROCEDURE p_insert_employee(
     IN _address VARCHAR(255),
     IN _hiringDate DATE,
     IN _hourlyRate DOUBLE,
-    IN _profilePicture VARCHAR(255)
+    IN _profilePicture VARCHAR(255),
+    IN _status VARCHAR(20)
+
 )
 BEGIN
-    INSERT INTO employees (firstName, lastName, birthday, email, address, hiringDate, hourlyRate, profilePicture)
-    VALUES (_firstName, _lastName, _birthday, _email, _address, _hiringDate, _hourlyRate, _profilePicture);
+    INSERT INTO employees (firstName, lastName, birthday, email, address, hiringDate, hourlyRate, profilePicture, status)
+    VALUES (_firstName, _lastName, _birthday, _email, _address, _hiringDate, _hourlyRate, _profilePicture, _status);
 END //
 DELIMITER ;
 
@@ -376,11 +380,12 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE p_assign_employee_to_project(
     IN project_code VARCHAR(20),
-    IN employee_code VARCHAR(20)
+    IN employee_code VARCHAR(20),
+    IN hours_worked DOUBLE
 )
 BEGIN
-    INSERT INTO projects_employees (projectCode, employeeCode)
-    VALUES (project_code, employee_code);
+    INSERT INTO projects_employees (projectCode, employeeCode, hoursWorked)
+    VALUES (project_code, employee_code, hours_worked);
 END //
 DELIMITER ;
 
@@ -499,7 +504,11 @@ DELIMITER ;
 /* Procédure qui retourne tous les champs editable d'un employé passé en paramètre */
 DELIMITER //
 
-CREATE PROCEDURE p_return_editable_fields()
+DELIMITER //
+
+CREATE PROCEDURE p_return_editable_fields(
+    IN _employeeCode VARCHAR(20)
+)
 BEGIN
     SELECT
         firstName,
@@ -510,10 +519,32 @@ BEGIN
         profilePicture,
         status
     FROM
-        employees;
+        employees
+    WHERE
+        code = _employeeCode;
 END //
 
 DELIMITER ;
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE p_return_assigned_project_employees(
+    IN _projectCode VARCHAR(20)
+)
+BEGIN
+    SELECT
+        employeeCode
+    FROM
+        projects_employees
+    WHERE
+        projectCode = _projectCode;
+END //
+
+DELIMITER ;
+
+
 
 DELIMITER //
 
