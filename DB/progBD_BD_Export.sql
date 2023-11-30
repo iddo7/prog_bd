@@ -37,6 +37,8 @@ drop procedure if exists p_return_assigned_project_employees;
 drop trigger if exists before_insert_clients;
 drop trigger if exists before_insert_projects;
 drop trigger if exists before_insert_employees;
+drop trigger if exists before_update_employee_status;
+
 
 
 drop table if exists projects_employees cascade;
@@ -290,8 +292,22 @@ END;
 //
 DELIMITER ;
 
+DELIMITER //
 
+CREATE TRIGGER before_update_employee_status
+BEFORE UPDATE ON employees
+FOR EACH ROW
+BEGIN
+    IF NEW.status <> OLD.status THEN
+        IF DATEDIFF(NOW(), NEW.hiringDate) >= 1095 THEN
+            SET NEW.status = 'permanent';
+        ELSE
+            SET NEW.status = 'journalier';
+        END IF;
+    END IF;
+END //
 
+DELIMITER ;
 /*   --- CREATING VIEWS ---   */
 
 CREATE VIEW v_unassigned_employees AS
@@ -435,15 +451,18 @@ CREATE PROCEDURE p_update_employee(
     IN _address VARCHAR(255),
     IN _hiringDate DATE,
     IN _hourlyRate DOUBLE,
-    IN _profilePicture VARCHAR(255)
+    IN _profilePicture VARCHAR(255),
+    IN _status VARCHAR(20)
 )
 BEGIN
     UPDATE employees
     SET firstName = _firstName, lastName = _lastName, birthday = _birthday, email = _email,
-        address = _address, hiringDate = _hiringDate, hourlyRate = _hourlyRate, profilePicture = _profilePicture
+        address = _address, hiringDate = _hiringDate, hourlyRate = _hourlyRate, profilePicture = _profilePicture, status = _status
     WHERE code = _employeeCode;
 END //
 DELIMITER ;
+
+
 
 /* Procedure to update data in the 'projects_employees' table (for employee-to-project association) */
 DELIMITER //
