@@ -64,6 +64,7 @@ CREATE TABLE clients (
     email VARCHAR(255)
 );
 
+
 CREATE TABLE projects (
     code VARCHAR(20) PRIMARY KEY,
     title VARCHAR(255),
@@ -76,6 +77,7 @@ CREATE TABLE projects (
     status VARCHAR(10) DEFAULT 'En cours',
     FOREIGN KEY (clientId) REFERENCES clients(id)
 );
+
 
 CREATE TABLE employees (
     code VARCHAR(20) PRIMARY KEY,
@@ -90,6 +92,7 @@ CREATE TABLE employees (
     status VARCHAR(20)
 );
 
+
 CREATE TABLE projects_employees (
     projectCode VARCHAR(20),
     employeeCode VARCHAR(20),
@@ -98,7 +101,6 @@ CREATE TABLE projects_employees (
     FOREIGN KEY (employeeCode) REFERENCES employees(code),
     FOREIGN KEY (projectCode) REFERENCES projects(code)
 );
-
 
 
 
@@ -383,6 +385,20 @@ INNER JOIN clients c on p.clientId = c.id
 ORDER BY p.startDate;
 -- Ex: SELECT * FROM v_projects
 
+CREATE VIEW v_employees_with_projects AS
+SELECT e.*, COUNT(pe.projectCode) AS numberOfProjects
+FROM employees e
+LEFT JOIN projects_employees pe ON e.code = pe.employeeCode
+GROUP BY e.code;
+-- Ex: SELECT * FROM v_employees_with_projects
+
+CREATE VIEW v_clients_without_projects AS
+SELECT *
+FROM clients c
+WHERE NOT f_has_a_project(c.id);
+-- Ex: SELECT * FROM v_clients_without_projects
+
+
 
 
 
@@ -642,6 +658,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-
-
