@@ -68,17 +68,17 @@ CREATE TABLE clients (
 
 
 CREATE TABLE projects (
-    code VARCHAR(20) PRIMARY KEY,
-    title VARCHAR(255),
-    startDate DATE,
-    description TEXT,
-    budget DOUBLE,
-    numberOfEmployees
-        INT CHECK (numberOfEmployees <= 5 AND numberOfEmployees > 0),
-    totalSalaries DOUBLE,
-    clientId INT,
-    status VARCHAR(10) DEFAULT 'En cours',
-    FOREIGN KEY (clientId) REFERENCES clients(id)
+                          code VARCHAR(20) PRIMARY KEY,
+                          title VARCHAR(255),
+                          startDate DATE,
+                          description TEXT,
+                          budget DOUBLE,
+                          numberOfEmployees
+                              INT CHECK (numberOfEmployees <= 5 AND numberOfEmployees > 0),
+                          totalSalaries DOUBLE,
+                          clientId INT,
+                          status VARCHAR(10) DEFAULT 'En cours',
+                          FOREIGN KEY (clientId) REFERENCES clients(id)
 );
 
 
@@ -358,7 +358,37 @@ END //
 
 DELIMITER ;
 
+-- delete_employees_on_project_delete
+DELIMITER //
+CREATE TRIGGER before_delete_project
+    BEFORE DELETE ON projects
+    FOR EACH ROW
+BEGIN
+    DELETE FROM projects_employees WHERE projectCode = OLD.code;
+END //
+DELIMITER ;
 
+
+-- delete_projects_on_employee_delete
+DELIMITER //
+CREATE TRIGGER before_delete_employee
+    before DELETE ON employees
+    FOR EACH ROW
+BEGIN
+    DELETE FROM projects_employees WHERE employeeCode = OLD.code;
+END //
+DELIMITER ;
+
+
+-- delete_projects_on_employee_delete
+DELIMITER //
+CREATE TRIGGER before_delete_client
+    before DELETE ON clients
+    FOR EACH ROW
+BEGIN
+    DELETE FROM projects WHERE clientId = OLD.id;
+END //
+DELIMITER ;
 
 
 
@@ -436,9 +466,9 @@ CREATE PROCEDURE p_insert_project(
 )
 BEGIN
     DECLARE EXIT HANDLER FOR 1452
-    BEGIN
-        SELECT 'Cannot create a project with a non-existing client';
-    end ;
+        BEGIN
+            SELECT 'Cannot create a project with a non-existing client';
+        end ;
     IF (_numberOfEmployees < 0 || _numberOfEmployees > 5) THEN
         SIGNAL SQLSTATE '45000' SET message_text="Invalid number of employees";
     end if ;
@@ -466,9 +496,9 @@ CREATE PROCEDURE p_insert_employee(
 )
 BEGIN
     DECLARE EXIT HANDLER FOR 3819
-    BEGIN
-        SELECT 'Invalid hourly rate';
-    end ;
+        BEGIN
+            SELECT 'Invalid hourly rate';
+        end ;
     IF (_status != 'Journalier' || _status != 'Permanent') THEN
         SIGNAL SQLSTATE '45000' SET message_text="Invalid status";
     end if ;
