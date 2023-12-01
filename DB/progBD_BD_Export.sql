@@ -43,6 +43,9 @@ drop trigger if exists before_insert_clients;
 drop trigger if exists before_insert_projects;
 drop trigger if exists before_insert_employees;
 drop trigger if exists before_update_employee_status;
+drop trigger if exists before_delete_project;
+drop trigger if exists before_delete_employee;
+drop trigger if exists before_delete_client;
 
 
 
@@ -358,7 +361,7 @@ END //
 
 DELIMITER ;
 
--- delete_employees_on_project_delete
+
 DELIMITER //
 CREATE TRIGGER before_delete_project
     BEFORE DELETE ON projects
@@ -369,7 +372,7 @@ END //
 DELIMITER ;
 
 
--- delete_projects_on_employee_delete
+
 DELIMITER //
 CREATE TRIGGER before_delete_employee
     before DELETE ON employees
@@ -380,7 +383,7 @@ END //
 DELIMITER ;
 
 
--- delete_projects_on_employee_delete
+
 DELIMITER //
 CREATE TRIGGER before_delete_client
     before DELETE ON clients
