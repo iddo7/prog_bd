@@ -5,9 +5,11 @@
 */
 
 /*   --- DROPPING ---   */
-drop view if exists v_clients_with_projects;
-drop view if exists v_projects;
-drop view if exists v_unassigned_employees;
+drop view if exists v_clients_with_projects cascade;
+drop view if exists v_clients_without_projects cascade;
+drop view if exists v_employees_with_projects cascade;
+drop view if exists v_projects cascade;
+drop view if exists v_unassigned_employees cascade;
 
 drop function if exists f_random_int;
 drop function if exists f_calculate_salary_for_project;
@@ -57,11 +59,11 @@ drop table if exists clients cascade;
 SET lc_time_names = 'fr_CA';
 
 CREATE TABLE clients (
-    id INT PRIMARY KEY,
-    fullName VARCHAR(255),
-    address VARCHAR(255),
-    phoneNumber VARCHAR(20),
-    email VARCHAR(255)
+                         id INT PRIMARY KEY,
+                         fullName VARCHAR(255),
+                         address VARCHAR(255),
+                         phoneNumber VARCHAR(20),
+                         email VARCHAR(255)
 );
 
 
@@ -71,7 +73,8 @@ CREATE TABLE projects (
     startDate DATE,
     description TEXT,
     budget DOUBLE,
-    numberOfEmployees INT CHECK (numberOfEmployees <= 5),
+    numberOfEmployees
+        INT CHECK (numberOfEmployees <= 5 AND numberOfEmployees > 0),
     totalSalaries DOUBLE,
     clientId INT,
     status VARCHAR(10) DEFAULT 'En cours',
@@ -80,26 +83,26 @@ CREATE TABLE projects (
 
 
 CREATE TABLE employees (
-    code VARCHAR(20) PRIMARY KEY,
-    firstName VARCHAR(255),
-    lastName VARCHAR(255),
-    birthday DATE,
-    email VARCHAR(255),
-    address VARCHAR(255),
-    hiringDate DATE,
-    hourlyRate DOUBLE CHECK (hourlyRate >= 15),
-    profilePicture VARCHAR(255),
-    status VARCHAR(20)
+                           code VARCHAR(20) PRIMARY KEY,
+                           firstName VARCHAR(255),
+                           lastName VARCHAR(255),
+                           birthday DATE,
+                           email VARCHAR(255),
+                           address VARCHAR(255),
+                           hiringDate DATE,
+                           hourlyRate DOUBLE CHECK (hourlyRate >= 15),
+                           profilePicture VARCHAR(255),
+                           status VARCHAR(20)
 );
 
 
 CREATE TABLE projects_employees (
-    projectCode VARCHAR(20),
-    employeeCode VARCHAR(20),
-    hoursWorked DOUBLE DEFAULT 0,
-    salary DOUBLE,
-    FOREIGN KEY (employeeCode) REFERENCES employees(code),
-    FOREIGN KEY (projectCode) REFERENCES projects(code)
+                                    projectCode VARCHAR(20),
+                                    employeeCode VARCHAR(20),
+                                    hoursWorked DOUBLE DEFAULT 0,
+                                    salary DOUBLE,
+                                    FOREIGN KEY (employeeCode) REFERENCES employees(code),
+                                    FOREIGN KEY (projectCode) REFERENCES projects(code)
 );
 
 
@@ -166,7 +169,7 @@ VALUES
 
 /* -  - */
 CREATE FUNCTION f_random_int(_min INT, _max INT)
-RETURNS INT
+    RETURNS INT
 BEGIN
     RETURN FLOOR(RAND() * (_max - _min) + _min);
 END;
@@ -175,13 +178,13 @@ END;
 
 /* - Returns current salary for an employee for it's assigned project based on hoursWorked & hourlyRate - */
 CREATE FUNCTION f_calculate_salary_for_project (_employeeCode VARCHAR(20), _projectCode VARCHAR(20))
-RETURNS DOUBLE
+    RETURNS DOUBLE
 BEGIN
     DECLARE salary DOUBLE;
 
     SELECT hoursWorked * hourlyRate INTO salary
     FROM projects_employees pe
-    INNER JOIN employees e ON pe.employeeCode = e.code
+             INNER JOIN employees e ON pe.employeeCode = e.code
     WHERE pe.employeeCode = _employeeCode AND pe.projectCode = _projectCode;
 
     RETURN salary;
@@ -191,7 +194,7 @@ END;
 
 /* - Checks if an employee is assigned to a project - */
 CREATE FUNCTION f_is_assigned (_employeeCode VARCHAR(20))
-RETURNS BOOL
+    RETURNS BOOL
 BEGIN
     DECLARE isAssigned BOOL;
 
@@ -206,7 +209,7 @@ END;
 
 /* - Checks if a client has a project - */
 CREATE FUNCTION f_has_a_project (_id INT)
-RETURNS BOOL
+    RETURNS BOOL
 BEGIN
     DECLARE hasProject BOOL;
 
@@ -221,7 +224,7 @@ END;
 
 /* - Returns how many projects a client has - */
 CREATE FUNCTION f_number_of_projects (_id INT)
-RETURNS INT
+    RETURNS INT
 BEGIN
     DECLARE numberOfProjects INT;
 
@@ -236,7 +239,7 @@ END;
 
 /* - Checks if a given client id already exists - */
 CREATE FUNCTION f_client_id_exists (_id INT)
-RETURNS BOOL
+    RETURNS BOOL
 BEGIN
     DECLARE idExists BOOL;
 
@@ -251,7 +254,7 @@ END;
 
 /* - Generates a unique id between min and max - */
 CREATE FUNCTION f_generate_unique_client_id()
-RETURNS INT
+    RETURNS INT
 BEGIN
     DECLARE uniqueId INT;
     DECLARE min INT;
@@ -270,7 +273,7 @@ END;
 
 /* - Generates an employee code - */
 CREATE FUNCTION f_generate_employee_code(_lastName VARCHAR(255), _birthday DATE)
-RETURNS VARCHAR(20)
+    RETURNS VARCHAR(20)
 BEGIN
     DECLARE code VARCHAR(20);
     SET code = CONCAT(LEFT(_lastName, 2), '-', YEAR(_birthday), '-', f_random_int(10, 99));
@@ -281,7 +284,7 @@ END;
 
 /* - Generates a project code - */
 CREATE FUNCTION f_generate_project_code(_clientId INT, _startDate DATE)
-RETURNS VARCHAR(20)
+    RETURNS VARCHAR(20)
 BEGIN
     DECLARE code VARCHAR(20);
     SET code = CONCAT(_clientId, '-', f_random_int(10, 99), '-', YEAR(_startDate));
@@ -299,7 +302,7 @@ END;
 -- clients trigger
 DELIMITER //
 CREATE TRIGGER before_insert_clients
-BEFORE INSERT ON clients
+    BEFORE INSERT ON clients
     FOR EACH ROW
 
 BEGIN
@@ -313,7 +316,7 @@ DELIMITER ;
 -- projects trigger
 DELIMITER //
 CREATE TRIGGER before_insert_projects
-BEFORE INSERT ON projects
+    BEFORE INSERT ON projects
     FOR EACH ROW
 
 BEGIN
@@ -327,7 +330,7 @@ DELIMITER ;
 -- employees trigger
 DELIMITER //
 CREATE TRIGGER before_insert_employees
-BEFORE INSERT ON employees
+    BEFORE INSERT ON employees
     FOR EACH ROW
 
 BEGIN
@@ -341,8 +344,8 @@ DELIMITER ;
 DELIMITER //
 
 CREATE TRIGGER before_update_employee_status
-BEFORE UPDATE ON employees
-FOR EACH ROW
+    BEFORE UPDATE ON employees
+    FOR EACH ROW
 BEGIN
     IF NEW.status <> OLD.status THEN
         IF DATEDIFF(NOW(), NEW.hiringDate) >= 1095 THEN
@@ -381,14 +384,14 @@ SELECT
     DATE_FORMAT(p.startDate, '%d %M %Y') AS startDate,
     p.budget
 FROM projects p
-INNER JOIN clients c on p.clientId = c.id
+         INNER JOIN clients c on p.clientId = c.id
 ORDER BY p.startDate;
 -- Ex: SELECT * FROM v_projects
 
 CREATE VIEW v_employees_with_projects AS
 SELECT e.*, COUNT(pe.projectCode) AS numberOfProjects
 FROM employees e
-LEFT JOIN projects_employees pe ON e.code = pe.employeeCode
+         LEFT JOIN projects_employees pe ON e.code = pe.employeeCode
 GROUP BY e.code;
 -- Ex: SELECT * FROM v_employees_with_projects
 
@@ -432,10 +435,21 @@ CREATE PROCEDURE p_insert_project(
     IN _status VARCHAR(20)
 )
 BEGIN
+    DECLARE EXIT HANDLER FOR 1452
+    BEGIN
+        SELECT 'Cannot create a project with a non-existing client';
+    end ;
+    IF (_numberOfEmployees < 0 || _numberOfEmployees > 5) THEN
+        SIGNAL SQLSTATE '45000' SET message_text="Invalid number of employees";
+    end if ;
+
+
     INSERT INTO projects (title, startDate, description, budget, numberOfEmployees, totalSalaries, clientId, status)
     VALUES (_title, _startDate, _description, _budget, _numberOfEmployees, _totalSalaries, _clientId, _status);
 END //
 DELIMITER ;
+-- CALL p_insert_project('test', '2023-08-14', 'baa', 1200, -1, 60000, 100, 'aaa');
+
 
 /* Procedure to insert data into the 'employees' table */
 DELIMITER //
@@ -449,25 +463,37 @@ CREATE PROCEDURE p_insert_employee(
     IN _hourlyRate DOUBLE,
     IN _profilePicture VARCHAR(255),
     IN _status VARCHAR(20)
-
 )
 BEGIN
+    DECLARE EXIT HANDLER FOR 3819
+    BEGIN
+        SELECT 'Invalid hourly rate';
+    end ;
+    IF (_status != 'Journalier' || _status != 'Permanent') THEN
+        SIGNAL SQLSTATE '45000' SET message_text="Invalid status";
+    end if ;
+
     INSERT INTO employees (firstName, lastName, birthday, email, address, hiringDate, hourlyRate, profilePicture, status)
     VALUES (_firstName, _lastName, _birthday, _email, _address, _hiringDate, _hourlyRate, _profilePicture, _status);
 END //
 DELIMITER ;
+-- CALL p_insert_employee('a', 'b', '2002-02-01', 'asd@asd.ca', '123 ra asd', '2012-11-01', 18, 'asdasdasdas.ca', 'aa');
 
 
 /* Procedure to assign employees to projects */
 DELIMITER //
 CREATE PROCEDURE p_assign_employee_to_project(
-    IN project_code VARCHAR(20),
-    IN employee_code VARCHAR(20),
-    IN hours_worked DOUBLE
+    IN _projectCode VARCHAR(20),
+    IN _employeeCode VARCHAR(20),
+    IN _hoursWorked DOUBLE
 )
 BEGIN
+    IF (_hoursWorked < 0) THEN
+        SIGNAL SQLSTATE '45000' SET message_text="Invalid hours worked";
+    end if ;
+
     INSERT INTO projects_employees (projectCode, employeeCode, hoursWorked)
-    VALUES (project_code, employee_code, hours_worked);
+    VALUES (_projectCode, _employeeCode, _hoursWorked);
 END //
 DELIMITER ;
 
@@ -606,7 +632,7 @@ BEGIN
     FROM
         employees
     WHERE
-        code = _employeeCode;
+            code = _employeeCode;
 END //
 
 DELIMITER ;
@@ -624,7 +650,7 @@ BEGIN
     FROM
         projects_employees
     WHERE
-        projectCode = _projectCode;
+            projectCode = _projectCode;
 END //
 
 DELIMITER ;
