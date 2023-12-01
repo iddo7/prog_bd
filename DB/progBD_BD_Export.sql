@@ -38,6 +38,10 @@ drop procedure if exists p_select_employees;
 drop procedure if exists p_select_projects;
 drop procedure if exists p_select_projects_employees;
 drop procedure if exists p_return_assigned_project_employees;
+drop procedure if exists p_insert_admin;
+drop procedure if exists p_update_admin;
+drop procedure if exists p_delete_admin;
+
 
 drop trigger if exists before_insert_clients;
 drop trigger if exists before_insert_projects;
@@ -53,6 +57,8 @@ drop table if exists projects_employees cascade;
 drop table if exists employees cascade;
 drop table if exists projects cascade;
 drop table if exists clients cascade;
+drop table if exists admin cascade;
+
 
 
 
@@ -109,9 +115,20 @@ CREATE TABLE projects_employees (
 );
 
 
+CREATE TABLE admin (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+
 
 
 /*   --- INSERTING VALUES ---   */
+
+INSERT INTO admin (username, password) VALUES ('admin', 'hashed_password_here');
+
+
 
 INSERT INTO clients (id, fullName, address, phoneNumber, email)
 VALUES
@@ -513,6 +530,20 @@ DELIMITER ;
 -- CALL p_insert_employee('a', 'b', '2002-02-01', 'asd@asd.ca', '123 ra asd', '2012-11-01', 18, 'asdasdasdas.ca', 'aa');
 
 
+-- procedure add admin
+DELIMITER //
+CREATE PROCEDURE p_insert_admin(
+    IN _username VARCHAR(50),
+    IN _password VARCHAR(255)
+)
+BEGIN
+    INSERT INTO admin (username, password)
+    VALUES (_username, _password);
+END //
+DELIMITER ;
+
+
+
 /* Procedure to assign employees to projects */
 DELIMITER //
 CREATE PROCEDURE p_assign_employee_to_project(
@@ -587,6 +618,20 @@ BEGIN
 END //
 DELIMITER ;
 
+-- procedure modify admin
+DELIMITER //
+CREATE PROCEDURE p_update_admin(
+    IN _adminID INT,
+    IN _newUsername VARCHAR(50),
+    IN _newPassword VARCHAR(255)
+)
+BEGIN
+    UPDATE admin
+    SET username = _newUsername, password = _newPassword
+    WHERE id = _adminID;
+END //
+DELIMITER ;
+
 
 
 /* Procedure to update data in the 'projects_employees' table (for employee-to-project association) */
@@ -633,6 +678,17 @@ BEGIN
     DELETE FROM employees WHERE code = _employeeCode;
 END //
 DELIMITER ;
+
+-- delete admin
+DELIMITER //
+CREATE PROCEDURE p_delete_admin(
+    IN _adminID INT
+)
+BEGIN
+    DELETE FROM admin WHERE id = _adminID;
+END //
+DELIMITER ;
+
 
 /* Procedure to delete data from the 'projects_employees' table (employee-to-project association) */
 DELIMITER //
