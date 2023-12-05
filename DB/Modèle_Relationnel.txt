@@ -1,0 +1,4 @@
+-- clients = (pk(id), fullName, address, phoneNumber)
+-- projet = (pk(code), title, startDate, description, budget, numberOfEmployees, totalSalarie, #ClientId, status)
+-- employees = (pk(code), firstName, lastName, birthday, email. address, hiringDate, hourlyRate, profilePicture, status)
+-- projects_employees = (#projectCode, #employeeCode, hoursWorked, salary)
