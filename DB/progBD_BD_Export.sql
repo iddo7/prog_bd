@@ -519,7 +519,7 @@ BEGIN
         BEGIN
             SELECT 'Invalid hourly rate';
         end ;
-    IF (_status != 'Journalier' || _status != 'Permanent') THEN
+    IF (_status != 'Journalier' && _status != 'Permanent') THEN
         SIGNAL SQLSTATE '45000' SET message_text="Invalid status";
     end if ;
 
