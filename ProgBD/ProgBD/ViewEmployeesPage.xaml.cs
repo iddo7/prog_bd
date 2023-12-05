@@ -32,7 +32,7 @@ namespace ProgBD {
                 new { FirstName = "Alex", LastName = "Johnson", Position = "Designer", ImageUrl = "https://randomuser.me/api/portraits/lego/1.jpg" },
             };
 
-            listeMateriel.ItemsSource = employees;
+            listeMateriel.ItemsSource = EmployeeSingleton.Instance().List();
         }
     }
 }
