@@ -586,12 +586,13 @@ CREATE PROCEDURE p_update_project(
     IN _description TEXT,
     IN _budget DOUBLE,
     IN _numberOfEmployees INT,
-    IN _totalSalaries DOUBLE
+    IN _totalSalaries DOUBLE,
+    IN _clientId INT
 )
 BEGIN
     UPDATE projects
     SET title = _title, startDate = _startDate, description = _description, budget = _budget,
-        numberOfEmployees = _numberOfEmployees, totalSalaries = _totalSalaries
+        numberOfEmployees = _numberOfEmployees, totalSalaries = _totalSalaries, clientId = _clientId
     WHERE code = _projectCode;
 END //
 DELIMITER ;
