@@ -49,10 +49,12 @@ namespace ProgBD
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("_projectCode", task.ProjectCode);
                 cmd.Parameters.AddWithValue("_employeeCode", task.EmployeeCode);
+                cmd.Parameters.AddWithValue("_hoursWorked", task.HoursWorked);
 
                 conn.Open();
                 cmd.Prepare();
                 int i = cmd.ExecuteNonQuery(); // Check i value
+                conn.Close();
             }
             catch (MySqlException mse)
             {
@@ -82,6 +84,7 @@ namespace ProgBD
                 conn.Open();
                 cmd.Prepare();
                 int i = cmd.ExecuteNonQuery(); // Check i value
+                conn.Close();
             }
             catch (MySqlException mse)
             {
@@ -108,6 +111,7 @@ namespace ProgBD
                 conn.Open();
                 cmd.Prepare();
                 int i = cmd.ExecuteNonQuery(); // Check i value
+                conn.Close();
             }
             catch (MySqlException mse)
             {

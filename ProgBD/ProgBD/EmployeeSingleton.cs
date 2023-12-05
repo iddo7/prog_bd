@@ -60,6 +60,7 @@ namespace ProgBD
                 conn.Open();
                 cmd.Prepare();
                 int i = cmd.ExecuteNonQuery(); // Check i value
+                conn.Close();
             }
             catch (MySqlException mse)
             {
@@ -86,7 +87,7 @@ namespace ProgBD
                 cmd.Parameters.AddWithValue("_birthday", updatedEmployee.Birthday);
                 cmd.Parameters.AddWithValue("_email", updatedEmployee.Email);
                 cmd.Parameters.AddWithValue("_address", updatedEmployee.Address);
-                cmd.Parameters.AddWithValue("_hiringDate", updatedEmployee.HiringDate.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("_hiringDate", updatedEmployee.HiringDate);
                 cmd.Parameters.AddWithValue("_hourlyRate", updatedEmployee.HourlyRate);
                 cmd.Parameters.AddWithValue("_profilePicture", updatedEmployee.ProfilePicture);
                 cmd.Parameters.AddWithValue("_status", updatedEmployee.Status);
@@ -95,6 +96,7 @@ namespace ProgBD
                 conn.Open();
                 cmd.Prepare();
                 int i = cmd.ExecuteNonQuery(); // Check i value
+                conn.Close();
             }
             catch (MySqlException mse)
             {
@@ -120,6 +122,7 @@ namespace ProgBD
                 conn.Open();
                 cmd.Prepare();
                 int i = cmd.ExecuteNonQuery(); // Check i value
+                conn.Close();
             }
             catch (MySqlException mse)
             {

@@ -24,32 +24,14 @@ namespace ProgBD
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        string a;
         public MainWindow()
         {
             this.InitializeComponent();
-            ObservableCollection<Project> clients = ProjectSingleton.Instance().List();
-
-            
-            foreach (Project client in clients)
-            {
-                a = client.ToString();
-            }
         }
 
         private void myButton_Click(object sender, RoutedEventArgs e)
         {
 
-            Client client = new Client(
-                201,
-                "Isaac Negreiros",
-                "123 rue Test",
-                "(873) 266-7053",
-                "isaacnegreiros11@gmail.com"
-            );
-
-            ClientSingleton.Instance().Create( client );
-            myButton.Content = client.ToString();
         }
     }
 }

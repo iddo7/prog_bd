@@ -52,6 +52,8 @@ namespace ProgBD
             set
             {
                 if (value < DateTime.Today) throw new ArgumentException("Invalid Start Date");
+
+                startDate = value;
             }
         }
         public string Description { get => description; set => description = value; }

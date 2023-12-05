@@ -48,16 +48,18 @@ namespace ProgBD
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("_title", project.Title);
-                cmd.Parameters.AddWithValue("_startDate", project.StartDate.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("_startDate", project.StartDate);
                 cmd.Parameters.AddWithValue("_description", project.Description);
                 cmd.Parameters.AddWithValue("_budget", project.Budget);
                 cmd.Parameters.AddWithValue("_numberOfEmployees", project.NumberOfEmployees);
                 cmd.Parameters.AddWithValue("_totalSalaries", project.TotalSalaries);
-                cmd.Parameters.AddWithValue("_client", project.Client.Id);
+                cmd.Parameters.AddWithValue("_clientId", project.Client.Id);
+                cmd.Parameters.AddWithValue("_status", project.Status);
 
                 conn.Open();
                 cmd.Prepare();
                 int i = cmd.ExecuteNonQuery(); // Check i value
+                conn.Close();
             }
             catch (MySqlException mse)
             {
@@ -69,28 +71,29 @@ namespace ProgBD
             return success;
         }
 
-        public bool Edit(int projectId, Project updatedProject)
+        public bool Edit(string projectCode, Project updatedProject)
         {
             bool success = true;
 
             try
             {
-                MySqlCommand cmd = new MySqlCommand("p_update_employee");
+                MySqlCommand cmd = new MySqlCommand("p_update_project");
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("_employeeCode", projectId);
+                cmd.Parameters.AddWithValue("_projectCode", projectCode);
                 cmd.Parameters.AddWithValue("_title", updatedProject.Title);
-                cmd.Parameters.AddWithValue("_startDate", updatedProject.StartDate.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("_startDate", updatedProject.StartDate);
                 cmd.Parameters.AddWithValue("_description", updatedProject.Description);
                 cmd.Parameters.AddWithValue("_budget", updatedProject.Budget);
                 cmd.Parameters.AddWithValue("_numberOfEmployees", updatedProject.NumberOfEmployees);
                 cmd.Parameters.AddWithValue("_totalSalaries", updatedProject.TotalSalaries);
-                cmd.Parameters.AddWithValue("_client", updatedProject.Client.Id);
+                cmd.Parameters.AddWithValue("_clientId", updatedProject.Client.Id);
 
 
                 conn.Open();
                 cmd.Prepare();
                 int i = cmd.ExecuteNonQuery(); // Check i value
+                conn.Close();
             }
             catch (MySqlException mse)
             {
@@ -116,6 +119,7 @@ namespace ProgBD
                 conn.Open();
                 cmd.Prepare();
                 int i = cmd.ExecuteNonQuery(); // Check i value
+                conn.Close();
             }
             catch (MySqlException mse)
             {

@@ -61,6 +61,7 @@ namespace ProgBD
                 conn.Open();
                 cmd.Prepare();
                 int i = cmd.ExecuteNonQuery(); // Check i value
+                conn.Close();
             }
             catch (MySqlException mse)
             {
@@ -68,6 +69,7 @@ namespace ProgBD
                 success = false;
             }
 
+            conn.Close();
             if (success) UpdateLocalList();
             return success;
         }
@@ -81,7 +83,7 @@ namespace ProgBD
                 MySqlCommand cmd = new MySqlCommand("p_update_client");
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("_id", clientId);
+                cmd.Parameters.AddWithValue("_clientId", clientId);
                 cmd.Parameters.AddWithValue("_fullname", updatedClient.FullName);
                 cmd.Parameters.AddWithValue("_address", updatedClient.Address);
                 cmd.Parameters.AddWithValue("_phoneNumber", updatedClient.PhoneNumber);
@@ -90,6 +92,7 @@ namespace ProgBD
                 conn.Open();
                 cmd.Prepare();
                 int i = cmd.ExecuteNonQuery(); // Check i value
+                conn.Close();
             }
             catch (MySqlException mse) 
             {
@@ -115,13 +118,14 @@ namespace ProgBD
                 conn.Open();
                 cmd.Prepare();
                 int i = cmd.ExecuteNonQuery(); // Check i value
+                conn.Close();
             }
             catch (MySqlException mse)
             {
                 conn.Close();
                 success = false;
             }
-
+            
             if (success) UpdateLocalList();
             return success;
         }
