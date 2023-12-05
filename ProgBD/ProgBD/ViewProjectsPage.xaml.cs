@@ -26,16 +26,7 @@ namespace ProgBD
         public ViewProjectsPage()
         {
             this.InitializeComponent();
-
-            // Creating hardcoded employee data for demonstration
-            List<object> projects = new List<object>
-            {
-                new { code = "123", title = "project1", startDate = "3 décembre 2023", budget = "10$", status = "En cours.." },
-                new { code = "123", title = "project1", startDate = "3 décembre 2023", budget = "10$", status = "En cours.." },
-                new { code = "123", title = "project1", startDate = "3 décembre 2023", budget = "10$", status = "En cours.." },
-            };
-
-            listeMateriel.ItemsSource = projects;
+            listeMateriel.ItemsSource = ProjectSingleton.Instance().List();
         }
     }
 }
