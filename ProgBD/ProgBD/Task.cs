@@ -51,5 +51,14 @@ namespace ProgBD
                 salary = value;
             }
         }
+
+        public override string ToString()
+        {
+            return $"Project Code: {ProjectCode}\n" +
+                   $"Employee Code: {EmployeeCode}\n" +
+                   $"Hours Worked: {HoursWorked}\n" +
+                   $"Salary: {Salary}\n";
+        }
+
     }
 }
