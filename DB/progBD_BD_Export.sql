@@ -109,7 +109,7 @@ CREATE TABLE projects_employees (
                                     projectCode VARCHAR(20),
                                     employeeCode VARCHAR(20),
                                     hoursWorked DOUBLE DEFAULT 0,
-                                    salary DOUBLE,
+                                    salary DOUBLE DEFAULT 0,
                                     FOREIGN KEY (employeeCode) REFERENCES employees(code),
                                     FOREIGN KEY (projectCode) REFERENCES projects(code)
 );
