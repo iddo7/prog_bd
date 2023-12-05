@@ -37,5 +37,10 @@ namespace ProgBD
 
             listeMateriel.ItemsSource = projects;
         }
+
+        private void btCreateProject_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(CreateProjectsPage));
+        }
     }
 }

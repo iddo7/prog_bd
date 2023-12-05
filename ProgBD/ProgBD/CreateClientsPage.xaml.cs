@@ -28,8 +28,58 @@ namespace ProgBD
             this.InitializeComponent();
         }
 
+        bool verification_client = true;
+
+        private void btAjouterClient_Click(object sender, RoutedEventArgs e)
+        {
+            alert_client_email.Visibility = Visibility.Visible;
+            Client client = new Client();
+
+            try 
+            {
+                client.FullName = input_client_fullName.Text;
+            } 
+            catch (Exception a)
+            { 
+                alert_client_fullName.Visibility = Visibility.Visible;
+                verification_client = false;
+            }
+
+            try
+            {
+                client.Address = input_client_address.Text;
+            }
+            catch (Exception a)
+            {
+                alert_client_address.Visibility = Visibility.Visible;
+                verification_client = false;
+            }
+
+            try
+            {
+                client.PhoneNumber = input_client_phoneNumber.Text;
+            }
+            catch (Exception a)
+            {
+                alert_client_phoneNumber.Visibility = Visibility.Visible;
+                verification_client = false;
+            }
+
+            try
+            {
+                client.Email = input_client_email.Text;
+            }
+            catch (Exception a)
+            {
+                alert_client_email.Visibility = Visibility.Visible;
+                verification_client = false;
+            }
+
+            if (!verification_client) return;
+
+        }
     }
-    
+
     /*clients = new clients 
 
         try (

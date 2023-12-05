@@ -34,5 +34,12 @@ namespace ProgBD {
 
             listeMateriel.ItemsSource = employees;
         }
+
+        private void btCreateEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(CreateEmployeesPage));
+        }
+
+
     }
 }

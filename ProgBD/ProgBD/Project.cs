@@ -45,7 +45,14 @@ namespace ProgBD
         }
 
         public string Code { get => code; set => code = value; }
-        public string Title { get => title; set => title = value; }
+        public string Title 
+        { 
+            get => title; 
+            set
+            {
+                if (value == string.Empty) throw new ArgumentException("Invalid title");
+            }
+        }
         public DateTime StartDate 
         { 
             get => startDate; 
@@ -54,7 +61,14 @@ namespace ProgBD
                 if (value < DateTime.Today) throw new ArgumentException("Invalid Start Date");
             }
         }
-        public string Description { get => description; set => description = value; }
+        public string Description 
+        { 
+            get => description; 
+            set
+            {
+                if (value == string.Empty) throw new ArgumentException("Invalid description");
+            }
+        }
         public int Budget 
         { 
             get => budget; 

@@ -38,9 +38,10 @@ namespace ProgBD
             listeMateriel.ItemsSource = clients;
         }
 
-        private void btExport_Click(object sender, RoutedEventArgs e)
+        private void btCreateClient_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(CreateClientsPage)); 
         }
+
     }
 }

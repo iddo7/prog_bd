@@ -27,5 +27,99 @@ namespace ProgBD
         {
             this.InitializeComponent();
         }
+
+        bool verification_employee = true;
+
+        private void btAjouterEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            Employee employee = new Employee();
+
+
+            try
+            {
+                employee.FirstName = input_employee_firstName.Text;
+            }
+            catch (Exception ex)
+            {
+                alert_employee_firstName.Visibility = Visibility.Visible;
+                verification_employee = false;
+            }
+
+            try
+            {
+                employee.LastName = input_employee_lastName.Text;
+            }
+            catch (Exception ex)
+            {
+                alert_employee_lastName.Visibility = Visibility.Visible;
+                verification_employee = false;
+            }
+
+            try
+            {
+                employee.Address = input_employee_address.Text;
+            }
+            catch (Exception ex)
+            {
+                alert_employee_address.Visibility = Visibility.Visible;
+                verification_employee = false;
+            }
+
+            try
+            {
+                employee.Email = input_employee_email.Text;
+            }
+            catch (Exception ex)
+            {
+                alert_employee_email.Visibility = Visibility.Visible;
+                verification_employee = false;
+            }
+
+            try
+            {
+                employee.ProfilePicture = new Uri(input_employee_profilePicture.Text); // Assuming a property exists for profile picture
+            }
+            catch (Exception ex)
+            {
+                alert_employee_profilePicture.Visibility = Visibility.Visible;
+                verification_employee = false;
+            }
+
+            try
+            {
+                // Parse the hourly rate from input_employee_hourlyRate.Text and assign it to employee.HourlyRate
+                employee.HourlyRate = double.Parse(input_employee_hourlyRate.Text);
+            }
+            catch (Exception ex)
+            {
+                alert_employee_hourlyRate.Visibility = Visibility.Visible;
+                verification_employee = false;
+            }
+
+            try
+            {
+                // Parse the hiring date from input_employee_hiringDate.Text and assign it to employee.HiringDate
+                employee.HiringDate = DateTime.Parse(input_employee_hiringDate.Text);
+            }
+            catch (Exception ex)
+            {
+                alert_employee_hiringDate.Visibility = Visibility.Visible;
+                verification_employee = false;
+            }
+
+            try
+            {
+                // Parse the birthday from input_employee_birthday.Text and assign it to employee.Birthday
+                employee.Birthday = DateTime.Parse(input_employee_birthday.Text);
+            }
+            catch (Exception ex)
+            {
+                alert_employee_birthday.Visibility = Visibility.Visible;
+                verification_employee = false;
+            }
+
+            if (!verification_employee) return;
+        }
+
     }
 }

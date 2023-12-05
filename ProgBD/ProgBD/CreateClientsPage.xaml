@@ -18,24 +18,28 @@
             <TextBlock x:Name="display_createEvent_Title" FontSize="30" FontWeight="Medium" Margin="0 0 0 40">Création de client</TextBlock>
 
             <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20 160 20 20">
-                <TextBox x:Name="input_eventName" Header="Nom"></TextBox>
-                <TextBlock x:Name="alert_input_EventName" Foreground="Red" Visibility="Collapsed"></TextBlock>
+                <TextBox x:Name="input_client_fullName" Header="Nom complet"></TextBox>
+            <TextBlock x:Name="alert_client_fullName" Foreground="Red" Visibility="Collapsed">Veuillez indiquer un nom complet valide</TextBlock>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20 80 20 20">
-                <TextBox Header="Nom"></TextBox>
-                <TextBlock Foreground="Red" Visibility="Collapsed"></TextBlock>
+                <TextBox x:Name="input_client_address" Header="Adresse"></TextBox>
+            <TextBlock x:Name="alert_client_address" Foreground="Red" Visibility="Collapsed">Veuillez indiquer une adresse valide</TextBlock>
             </StackPanel>
 
             <StackPanel  Grid.Column="0" Orientation="Vertical" Margin="20 80 20 20">
-                <TextBox Header="Nom"></TextBox>
-                <TextBlock Foreground="Red" Visibility="Collapsed"></TextBlock>
+                <TextBox x:Name="input_client_phoneNumber" Header="Numéro de téléphone"></TextBox>
+                <TextBlock x:Name="alert_client_phoneNumber" Foreground="Red" Visibility="Collapsed">Veuillez indiquer un uméro de téléphone valide</TextBlock>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20 160 20 20">
-                <TextBox Header="Nom"></TextBox>
-                <TextBlock Foreground="Red" Visibility="Collapsed"></TextBlock>
+                <TextBox x:Name="input_client_email" Header="Email"></TextBox>
+                <TextBlock x:Name="alert_client_email" Foreground="Red" Visibility="Collapsed">Veuillez indiquer une adresse email valide</TextBlock>
             </StackPanel>
+
+            <Button x:Name="btAjouterClient" Click="btAjouterClient_Click" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="30" CornerRadius="10">
+                <TextBlock Foreground="Black">Ajouter</TextBlock>
+            </Button>
 
     </Grid>
 </Page>
