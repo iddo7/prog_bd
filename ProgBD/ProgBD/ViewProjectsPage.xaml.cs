@@ -28,5 +28,21 @@ namespace ProgBD
             this.InitializeComponent();
             listeMateriel.ItemsSource = ProjectSingleton.Instance().List();
         }
+
+        private async void btExportEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            var picker = new Windows.Storage.Pickers.FileSavePicker();
+            List<Project> list = ProjectSingleton.Instance().List().ToList();
+
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(WindowSingleton.Instance().MainWindow);
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
+
+            picker.FileTypeChoices.Add("Fichier CSV", new List<string>() { ".csv" });
+
+            Windows.Storage.StorageFile exportFile = await picker.PickSaveFileAsync();
+            if (exportFile == null) return;
+
+            await Windows.Storage.FileIO.WriteLinesAsync(exportFile, list.ConvertAll(project => project.ToCSV()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+        }
     }
 }
