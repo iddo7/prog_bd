@@ -174,7 +174,7 @@ VALUES
 INSERT INTO projects_employees (projectCode, employeeCode, hoursWorked)
 VALUES
     ('P001', 'E001', 40.0),
-    ('P009', 'E001', 40.0),
+    ('P001', 'E006', 40.0),
     ('P001', 'E002', 32.5),
     ('P002', 'E003', 45.0),
     ('P002', 'E004', 28.0),
@@ -224,7 +224,7 @@ BEGIN
 
     RETURN isAssigned;
 END;
--- Ex: SELECT f_is_assigned('E006') AS isAssigned
+-- Ex: SELECT f_is_assigned('E001') AS isAssigned
 
 
 /* - Checks if a client has a project - */
@@ -555,11 +555,15 @@ BEGIN
     IF (_hoursWorked < 0) THEN
         SIGNAL SQLSTATE '45000' SET message_text="Invalid hours worked";
     end if ;
+    IF (f_is_assigned(_employeeCode)) THEN
+        SIGNAL SQLSTATE '45001' SET message_text="Employee already assigned to a project";
+    end if ;
 
     INSERT INTO projects_employees (projectCode, employeeCode, hoursWorked)
     VALUES (_projectCode, _employeeCode, _hoursWorked);
 END //
 DELIMITER ;
+
 
 /* Procedure to update data in the 'clients' table */
 DELIMITER //
