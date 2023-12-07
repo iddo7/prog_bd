@@ -34,9 +34,7 @@ namespace ProgBD
 
         public Client(int id, string fullName, string address, string phoneNumber, string email)
         {
-            this.id = idCounter;
-            idCounter++;
-
+            this.id = id;
             this.FullName = fullName;
             this.Address = address;
             this.PhoneNumber = phoneNumber;
