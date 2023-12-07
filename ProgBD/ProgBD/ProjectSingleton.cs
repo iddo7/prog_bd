@@ -158,6 +158,7 @@ namespace ProgBD
                     int clientId = (int)reader["clientId"];
                     string status = (string)reader["status"];
 
+                    ClientSingleton.Instance().UpdateLocalList();
                     Client clientAttached = ClientSingleton.Instance().Client(clientId);
                     
 
