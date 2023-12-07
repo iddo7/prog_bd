@@ -26,16 +26,23 @@ namespace ProgBD
         public ViewProjectsPage()
         {
             this.InitializeComponent();
+            listeMateriel.ItemsSource = ProjectSingleton.Instance().List();
+        }
 
-            // Creating hardcoded employee data for demonstration
-            List<object> projects = new List<object>
-            {
-                new { code = "123", title = "project1", startDate = "3 décembre 2023", budget = "10$", status = "En cours.." },
-                new { code = "123", title = "project1", startDate = "3 décembre 2023", budget = "10$", status = "En cours.." },
-                new { code = "123", title = "project1", startDate = "3 décembre 2023", budget = "10$", status = "En cours.." },
-            };
+        private async void btExportEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            var picker = new Windows.Storage.Pickers.FileSavePicker();
+            List<Project> list = ProjectSingleton.Instance().List().ToList();
 
-            listeMateriel.ItemsSource = projects;
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(WindowSingleton.Instance().MainWindow);
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
+
+            picker.FileTypeChoices.Add("Fichier CSV", new List<string>() { ".csv" });
+
+            Windows.Storage.StorageFile exportFile = await picker.PickSaveFileAsync();
+            if (exportFile == null) return;
+
+            await Windows.Storage.FileIO.WriteLinesAsync(exportFile, list.ConvertAll(project => project.ToCSV()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
         }
 
         private void btCreateProject_Click(object sender, RoutedEventArgs e)

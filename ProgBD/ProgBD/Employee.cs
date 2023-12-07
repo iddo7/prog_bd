@@ -17,6 +17,7 @@ namespace ProgBD
         DateTime hiringDate;
         double hourlyRate;
         Uri profilePicture;
+        string status;
 
         public Employee()
         {
@@ -29,11 +30,11 @@ namespace ProgBD
             this.hiringDate = new DateTime();
             this.hourlyRate = 0;
             this.profilePicture = null;
+            this.status = "Journalier";
         }
 
-        public Employee(string code, string firstName, string lastName, DateTime birthday, string email, string address, DateTime hiringDate, double hourlyRate, Uri profilePicture)
+        public Employee(string code, string firstName, string lastName, DateTime birthday, string email, string address, DateTime hiringDate, double hourlyRate, Uri profilePicture, string status)
         {
-            this.Code = code;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Birthday = birthday;
@@ -42,6 +43,7 @@ namespace ProgBD
             this.HiringDate = hiringDate;
             this.HourlyRate = hourlyRate;
             this.ProfilePicture = profilePicture;
+            this.Status = status;
         }
 
         public string Code 
@@ -140,5 +142,29 @@ namespace ProgBD
             }
         }
         public Uri ProfilePicture { get => profilePicture; set => profilePicture = value; }
+        public string Status 
+        { 
+            get => status; 
+            set
+            {
+                if (value != "Journalier" && value != "Permanent") throw new ArgumentException("Invalid status");
+                status = value;
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"Employee Code: {Code}\n" +
+                   $"First Name: {FirstName}\n" +
+                   $"Last Name: {LastName}\n" +
+                   $"Birthday: {Birthday.ToShortDateString()}\n" +
+                   $"Email: {Email}\n" +
+                   $"Address: {Address}\n" +
+                   $"Hiring Date: {HiringDate.ToShortDateString()}\n" +
+                   $"Hourly Rate: {HourlyRate}\n" +
+                   $"Profile Picture URI: {ProfilePicture?.ToString() ?? "N/A"}\n" +
+                   $"Status: {status}\n";
+        }
+
     }
 }

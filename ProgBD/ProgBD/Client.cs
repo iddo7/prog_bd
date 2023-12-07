@@ -27,11 +27,14 @@ namespace ProgBD
             this.email = string.Empty;
         }
 
+        public Client(int id)
+        {
+            this.id = id;
+        }
+
         public Client(int id, string fullName, string address, string phoneNumber, string email)
         {
-            this.id = idCounter;
-            idCounter++;
-
+            this.id = id;
             this.FullName = fullName;
             this.Address = address;
             this.PhoneNumber = phoneNumber;
@@ -92,5 +95,25 @@ namespace ProgBD
                 email = value;
             }
         }
+
+        public override string ToString()
+        {
+            return $"Client ID: {Id}\n" +
+                   $"Full Name: {FullName}\n" +
+                   $"Address: {Address}\n" +
+                   $"Phone Number: {PhoneNumber}\n" +
+                   $"Email: {Email}\n";
+        }
+
+        public bool Equals(Client other)
+        {
+            return this.Id == other.Id;
+        }
+
+        public bool Equals(int otherId)
+        {
+            return this.Id == otherId;
+        }
+
     }
 }

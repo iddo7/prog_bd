@@ -23,16 +23,7 @@ namespace ProgBD {
         public ViewEmployeesPage()
         {
             this.InitializeComponent();
-
-            // Creating hardcoded employee data for demonstration
-            List<object> employees = new List<object>
-            {
-                new { FirstName = "John", LastName = "Doe", Position = "Manager", ImageUrl = "https://randomuser.me/api/portraits/lego/4.jpg"},
-                new { FirstName = "Jane", LastName = "Smith", Position = "Developer",  ImageUrl = "https://randomuser.me/api/portraits/lego/0.jpg" },
-                new { FirstName = "Alex", LastName = "Johnson", Position = "Designer", ImageUrl = "https://randomuser.me/api/portraits/lego/1.jpg" },
-            };
-
-            listeMateriel.ItemsSource = employees;
+            listeMateriel.ItemsSource = EmployeeSingleton.Instance().List();
         }
 
         private void btCreateEmployee_Click(object sender, RoutedEventArgs e)

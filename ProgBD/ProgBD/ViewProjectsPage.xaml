@@ -17,27 +17,32 @@
 
         <TextBlock Text="Projets" Margin="35"  FontSize="40" FontFamily="Terminal" HorizontalAlignment="Left" Grid.Row="0"/>
 
-        <Button x:Name="btCreateProject" Click="btCreateProject_Click" HorizontalAlignment="Right" FontSize="20" Background="LightGray" Margin="35" Grid.Row="0">
-            <TextBlock Foreground="Black">Ajouter</TextBlock>
-        </Button>
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="35" Grid.Row="0">
+            <Button x:Name="btCreateProject" Click="btCreateProject_Click" HorizontalAlignment="Right" FontSize="20" Background="LightGray" Margin="35" Grid.Row="0">
+              <TextBlock Foreground="Black">Ajouter</TextBlock>
+            </Button>
+            <Button x:Name="btExportEmployees" Click="btExportEmployees_Click" HorizontalAlignment="Right" FontSize="20" Background="LightGray">
+                <TextBlock Foreground="Black">Export</TextBlock>
+            </Button>
+        </StackPanel>
 
         <ListView x:Name="listeMateriel" Grid.Row="1" Padding="20" HorizontalAlignment="Stretch">
             <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="20" Margin="10" HorizontalAlignment="Stretch" CornerRadius="15" Background="White">
+                <DataTemplate x:DataType="local:Project">
+                    <Grid Padding="30" Margin="10" HorizontalAlignment="Stretch" CornerRadius="15" Background="White">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="2*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="{Binding code}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="0"/>
-                        <TextBlock Text="{Binding title}" FontSize="18" FontFamily="Arial Rounded" Grid.Column="1" />
-                        <TextBlock Text="{Binding startDate}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="2" VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding budget}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding status}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding Code}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="0"/>
+                        <TextBlock Text="{Binding Title}" FontSize="18" FontFamily="Arial Rounded" Grid.Column="1" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding StartDate}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="2" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Budget}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Status}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Right"/>
 
                     </Grid>
                 </DataTemplate>

@@ -12,9 +12,9 @@ namespace ProgBD
         string title;
         DateTime startDate;
         string description;
-        int budget;
+        double budget;
         int numberOfEmployees;
-        int totalSalaries;
+        double totalSalaries;
         Client client;
         string status;
 
@@ -31,7 +31,7 @@ namespace ProgBD
             this.Status = "En cours";
         }
 
-        public Project(string code, string title, DateTime startDate, string description, int budget, int numberOfEmployees, int totalSalaries, Client client, string status)
+        public Project(string code, string title, DateTime startDate, string description, double budget, int numberOfEmployees, double totalSalaries, Client client, string status)
         {
             this.Code = code;
             this.Title = title;
@@ -59,6 +59,8 @@ namespace ProgBD
             set
             {
                 if (value < DateTime.Today) throw new ArgumentException("Invalid Start Date");
+
+                startDate = value;
             }
         }
         public string Description 
@@ -69,7 +71,7 @@ namespace ProgBD
                 if (value == string.Empty) throw new ArgumentException("Invalid description");
             }
         }
-        public int Budget 
+        public double Budget 
         { 
             get => budget; 
             set 
@@ -89,7 +91,7 @@ namespace ProgBD
                 numberOfEmployees = value;
             }
         }
-        public int TotalSalaries 
+        public double TotalSalaries 
         { 
             get => totalSalaries; 
             set
@@ -104,11 +106,30 @@ namespace ProgBD
             get => status; 
             set
             {
-                if (value != "En cours" || value != "Terminé") throw new ArgumentException("Invalid status");
+                if (value != "En cours" && value != "Terminé") throw new ArgumentException("Invalid status");
 
                 status = value;
             }
         }
         internal Client Client { get => client; set => client = value; }
+
+        public override string ToString()
+        {
+            return $"Project Code: {Code}\n" +
+                   $"Title: {Title}\n" +
+                   $"Start Date: {StartDate.ToShortDateString()}\n" +
+                   $"Description: {Description}\n" +
+                   $"Budget: {Budget}\n" +
+                   $"Number of Employees: {NumberOfEmployees}\n" +
+                   $"Total Salaries: {TotalSalaries}\n" +
+                   $"Client: {Client.ToString()}\n" +
+                   $"Status: {Status}\n";
+        }
+
+        public string ToCSV()
+        {
+            return $"{Code};{Title};{StartDate};{Description};{Budget};{NumberOfEmployees};{TotalSalaries};{Client.Id};{Status}";
+        }
+
     }
 }

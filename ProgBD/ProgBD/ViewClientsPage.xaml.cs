@@ -26,16 +26,7 @@ namespace ProgBD
         public ViewClientsPage()
         {
             this.InitializeComponent();
-
-            // Creating hardcoded employee data for demonstration
-            List<object> clients = new List<object>
-            {
-                new { FirstName = "John", LastName = "Doe", Adress = "134 Ave. Park", phoneNumber = "123-456-7890", Email = "johndoe@gmail.com" },
-                new { FirstName = "John", LastName = "Doe", Adress = "134 Ave. Park", phoneNumber = "123-456-7890", Email = "johndoe@gmail.com" },
-                new { FirstName = "John", LastName = "Doe", Adress = "134 Ave. Park", phoneNumber = "123-456-7890", Email = "johndoe@gmail.com" },
-            };
-
-            listeMateriel.ItemsSource = clients;
+            listeMateriel.ItemsSource = ClientSingleton.Instance().List();
         }
 
         private void btCreateClient_Click(object sender, RoutedEventArgs e)

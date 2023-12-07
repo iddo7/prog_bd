@@ -23,21 +23,20 @@
 
         <ListView x:Name="listeMateriel" Grid.Row="1" Padding="20" HorizontalAlignment="Stretch">
             <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="20" Margin="10" HorizontalAlignment="Stretch" CornerRadius="15" Background="White">
+                <DataTemplate x:DataType="local:Client">
+                    <Grid Padding="30" Margin="10" HorizontalAlignment="Stretch" CornerRadius="15" Background="White">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="{Binding LastName}" FontSize="18" FontFamily="Arial Rounded" Margin="0,30,0,0" Grid.Column="0"/>
-                        <TextBlock Text="{Binding FirstName}" FontSize="18" FontFamily="Arial Rounded" Margin="0,0,0,0" Grid.Column="0" />
-                        <TextBlock Text="{Binding Adress}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="1" VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding phoneNumber}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="2" VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding Email}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding FullName}" FontSize="18" FontFamily="Arial Rounded" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Address}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="1" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding PhoneNumber}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="2" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Email}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Text="boutton" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="4" HorizontalAlignment="Right" />
 
                     </Grid>
