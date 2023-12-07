@@ -26,9 +26,7 @@ namespace ProgBD
         public ViewClientsPage()
         {
             this.InitializeComponent();
-
             listeMateriel.ItemsSource = ClientSingleton.Instance().List();
-
         }
     }
 }

@@ -112,5 +112,10 @@ namespace ProgBD
                    $"Status: {Status}\n";
         }
 
+        public string ToCSV()
+        {
+            return $"{Code};{Title};{StartDate};{Description};{Budget};{NumberOfEmployees};{TotalSalaries};{Client.Id};{Status}";
+        }
+
     }
 }
