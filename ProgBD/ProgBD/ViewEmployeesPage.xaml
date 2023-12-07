@@ -16,7 +16,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Text="Employés" Margin="35"  FontSize="40" FontFamily="Terminal" HorizontalAlignment="Left" Grid.Row="0"/>
-        <Button x:Name="btExport" HorizontalAlignment="Right" FontSize="20" Background="LightGray" Margin="35">
+        <Button x:Name="btCreateEmployee" Click="btCreateEmployee_Click" HorizontalAlignment="Right" FontSize="20" Background="LightGray" Margin="35">
             <TextBlock Foreground="Black">Ajouter</TextBlock>
         </Button>
 

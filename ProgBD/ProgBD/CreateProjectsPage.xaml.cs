@@ -16,21 +16,16 @@ using Microsoft.UI.Xaml.Navigation;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace ProgBD { 
-
-    public sealed partial class ViewEmployeesPage : Page
+namespace ProgBD
+{
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class CreateProjectsPage : Page
     {
-        public ViewEmployeesPage()
+        public CreateProjectsPage()
         {
             this.InitializeComponent();
-            listeMateriel.ItemsSource = EmployeeSingleton.Instance().List();
         }
-
-        private void btCreateEmployee_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(CreateEmployeesPage));
-        }
-
-
     }
 }

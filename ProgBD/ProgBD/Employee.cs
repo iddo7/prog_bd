@@ -21,16 +21,16 @@ namespace ProgBD
 
         public Employee()
         {
-            this.Code = string.Empty;
-            this.FirstName = string.Empty;
-            this.LastName = string.Empty;
-            this.Birthday = new DateTime();
-            this.Email = string.Empty;
-            this.Address = string.Empty;
-            this.HiringDate = new DateTime();
-            this.HourlyRate = 0;
-            this.ProfilePicture = null;
-            this.Status = "Journalier";
+            this.code = string.Empty;
+            this.firstName = string.Empty;
+            this.lastName = string.Empty;
+            this.birthday = new DateTime();
+            this.email = string.Empty;
+            this.address = string.Empty;
+            this.hiringDate = new DateTime();
+            this.hourlyRate = 0;
+            this.profilePicture = null;
+            this.status = "Journalier";
         }
 
         public Employee(string code, string firstName, string lastName, DateTime birthday, string email, string address, DateTime hiringDate, double hourlyRate, Uri profilePicture, string status)
@@ -61,7 +61,11 @@ namespace ProgBD
             get => firstName; 
             set
             {
-                if (Utilities.ContainsNumbers(value) || Utilities.ContainsSymbols(value)) throw new ArgumentException("Invalid first name");
+                if (
+                    Utilities.ContainsNumbers(value) || 
+                    Utilities.ContainsSymbols(value) ||
+                    value == string.Empty
+                ) throw new ArgumentException("Invalid first name");
 
                 firstName = value;
             }
@@ -72,7 +76,11 @@ namespace ProgBD
             get => lastName;
             set
             {
-                if (Utilities.ContainsNumbers(value) || Utilities.ContainsSymbols(value)) throw new ArgumentException("Invalid last name");
+                if (
+                    Utilities.ContainsNumbers(value) || 
+                    Utilities.ContainsSymbols(value) ||
+                    value == string.Empty
+                ) throw new ArgumentException("Invalid last name");
 
                 lastName = value;
             }
@@ -101,14 +109,23 @@ namespace ProgBD
             }
         }
 
-        public string Address { get => address; set => address = value; }
+        public string Address 
+        { 
+            get => address;
+            set
+            {
+                if (value == string.Empty) throw new ArgumentException("Invalid address");
+                address = value;
+            } 
+        }
 
         public DateTime HiringDate 
         {
             get => hiringDate;
             set
             {
-                if (value > DateTime.Today) throw new ArgumentException("Hiring Date cannot be in future");
+                if (value > DateTime.Today || value < new DateTime(1940, 1, 1)) throw new ArgumentException("Hiring Date cannot be in future");
+
 
                 hiringDate = value;
             }
@@ -119,7 +136,7 @@ namespace ProgBD
             get => hourlyRate; 
             set
             {
-                if (hourlyRate < 0) throw new ArgumentOutOfRangeException(nameof(hourlyRate));
+                if (value < 0) throw new ArgumentOutOfRangeException(nameof(hourlyRate));
 
                 hourlyRate = value;
             }

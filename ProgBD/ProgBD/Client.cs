@@ -49,13 +49,32 @@ namespace ProgBD
             get => fullName; 
             set
             {
-                if (Utilities.ContainsNumbers(value) || Utilities.ContainsSymbols(value)) throw new ArgumentException("Invalid full name");
+                if (
+                    Utilities.ContainsNumbers(value) || 
+                    Utilities.ContainsSymbols(value) || 
+                    value == string.Empty
+                    )
+                    throw new ArgumentException("Invalid full name");
 
                 fullName = value;
             }
         }
 
-        public string Address { get => address; set => address = value; }
+        public string Address
+        {
+            get => address;
+            set
+            {
+                if (Utilities.ContainsSymbols(value) || 
+                    value == string.Empty)
+                {
+                    throw new ArgumentException("Address cannot be empty");
+                }
+
+
+                address = value;
+            }
+        }
         public string PhoneNumber 
         { 
             get => phoneNumber; 

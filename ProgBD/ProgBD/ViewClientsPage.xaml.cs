@@ -28,5 +28,11 @@ namespace ProgBD
             this.InitializeComponent();
             listeMateriel.ItemsSource = ClientSingleton.Instance().List();
         }
+
+        private void btCreateClient_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(CreateClientsPage)); 
+        }
+
     }
 }
