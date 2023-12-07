@@ -28,97 +28,114 @@ namespace ProgBD
             this.InitializeComponent();
         }
 
-        bool verification_employee = true;
 
         private void btAjouterEmployee_Click(object sender, RoutedEventArgs e)
         {
             Employee employee = new Employee();
 
+            bool verification_employee = true;
 
             try
             {
                 employee.FirstName = input_employee_firstName.Text;
+                verification_input(alert_employee_firstName, false);
             }
             catch (Exception ex)
             {
-                alert_employee_firstName.Visibility = Visibility.Visible;
+                verification_input(alert_employee_firstName, true); ;
                 verification_employee = false;
             }
 
             try
             {
                 employee.LastName = input_employee_lastName.Text;
+                verification_input(alert_employee_lastName, false);
             }
             catch (Exception ex)
             {
-                alert_employee_lastName.Visibility = Visibility.Visible;
+                verification_input(alert_employee_lastName, true); ;
                 verification_employee = false;
             }
 
             try
             {
                 employee.Address = input_employee_address.Text;
+                verification_input(alert_employee_address, false);
             }
             catch (Exception ex)
             {
-                alert_employee_address.Visibility = Visibility.Visible;
+                verification_input(alert_employee_address, true); ;
                 verification_employee = false;
             }
 
             try
             {
                 employee.Email = input_employee_email.Text;
+                verification_input(alert_employee_email, false);
+
             }
             catch (Exception ex)
             {
-                alert_employee_email.Visibility = Visibility.Visible;
+                verification_input(alert_employee_email, true); ;
                 verification_employee = false;
             }
 
             try
             {
-                employee.ProfilePicture = new Uri(input_employee_profilePicture.Text); // Assuming a property exists for profile picture
+                employee.ProfilePicture = new Uri(input_employee_profilePicture.Text);
+                verification_input(alert_employee_profilePicture, false);
+
             }
             catch (Exception ex)
             {
-                alert_employee_profilePicture.Visibility = Visibility.Visible;
+                verification_input(alert_employee_profilePicture, true); ;
                 verification_employee = false;
             }
 
             try
             {
-                // Parse the hourly rate from input_employee_hourlyRate.Text and assign it to employee.HourlyRate
                 employee.HourlyRate = double.Parse(input_employee_hourlyRate.Text);
+                verification_input(alert_employee_hourlyRate, false);
+
             }
             catch (Exception ex)
             {
-                alert_employee_hourlyRate.Visibility = Visibility.Visible;
+                verification_input(alert_employee_hourlyRate, true); ;
                 verification_employee = false;
             }
 
             try
             {
-                // Parse the hiring date from input_employee_hiringDate.Text and assign it to employee.HiringDate
-                employee.HiringDate = DateTime.Parse(input_employee_hiringDate.Text);
+                employee.HiringDate = input_employee_hiringDate.Date.DateTime;
+                verification_input(alert_employee_hiringDate, false);
             }
             catch (Exception ex)
             {
-                alert_employee_hiringDate.Visibility = Visibility.Visible;
+                verification_input(alert_employee_hiringDate, true); ;
                 verification_employee = false;
             }
 
             try
             {
-                // Parse the birthday from input_employee_birthday.Text and assign it to employee.Birthday
-                employee.Birthday = DateTime.Parse(input_employee_birthday.Text);
+                employee.Birthday = input_employee_birthday.Date.DateTime;
+                verification_input(alert_employee_birthday, false);
+
             }
             catch (Exception ex)
             {
-                alert_employee_birthday.Visibility = Visibility.Visible;
+                verification_input(alert_employee_birthday, true); ;
                 verification_employee = false;
             }
 
             if (!verification_employee) return;
+        }
+
+        private void verification_input(UIElement element, bool state)
+        {
+            if (state)
+                element.Visibility = Visibility.Visible;
+            else 
+                element.Visibility = Visibility.Collapsed;
         }
 
     }

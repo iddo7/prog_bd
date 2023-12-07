@@ -89,7 +89,7 @@ namespace ProgBD
             get => birthday;
             set 
             {
-                int age = Utilities.CurrentAge(birthday);
+                int age = Utilities.CurrentAge(value);
                 if (age < 18 || age > 65) throw new ArgumentException("Invalid birthday");
 
                 birthday = value;
@@ -122,7 +122,8 @@ namespace ProgBD
             get => hiringDate;
             set
             {
-                if (value > DateTime.Today) throw new ArgumentException("Hiring Date cannot be in future");
+                if (value > DateTime.Today || value < new DateTime(1940, 1, 1)) throw new ArgumentException("Hiring Date cannot be in future");
+
 
                 hiringDate = value;
             }
@@ -133,7 +134,7 @@ namespace ProgBD
             get => hourlyRate; 
             set
             {
-                if (hourlyRate < 0) throw new ArgumentOutOfRangeException(nameof(hourlyRate));
+                if (value < 0) throw new ArgumentOutOfRangeException(nameof(hourlyRate));
 
                 hourlyRate = value;
             }

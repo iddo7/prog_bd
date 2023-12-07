@@ -38,12 +38,13 @@
 
             <TextBox x:Name="input_employee_hourlyRate" Header="Taux horaire"></TextBox>
             <TextBlock x:Name="alert_employee_hourlyRate" Foreground="Red" Visibility="Collapsed">Veuillez saisir un taux horaire valide</TextBlock>
-
-            <TextBox x:Name="input_employee_hiringDate" Header="Date d'embauche"></TextBox>
+            
+            <DatePicker x:Name="input_employee_hiringDate" Header="Date d'embauche"></DatePicker>
             <TextBlock x:Name="alert_employee_hiringDate" Foreground="Red" Visibility="Collapsed">Veuillez saisir une date d'embauche valide</TextBlock>
 
-            <TextBox x:Name="input_employee_birthday" Header="Date de naissance"></TextBox>
+            <DatePicker x:Name="input_employee_birthday" Header="Date de naissance"></DatePicker>
             <TextBlock x:Name="alert_employee_birthday" Foreground="Red" Visibility="Collapsed">Veuillez saisir une date de naissance valide</TextBlock>
+
 
             <!-- Ajouter des contrôles pour la photo de profil, si nécessaire -->
         </StackPanel>
