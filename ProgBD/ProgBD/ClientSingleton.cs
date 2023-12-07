@@ -35,13 +35,12 @@ namespace ProgBD
 
         public Client Client(int searchedClientId)
         {
-            Client searchedClient = null;
             foreach (Client client in list)
             {
-                if (client.Equals(searchedClientId)) searchedClient = client;
+                if (client.Id == searchedClientId) return client;
             }
 
-            return searchedClient;
+            return null;   
         }
 
         public bool Create(Client client)

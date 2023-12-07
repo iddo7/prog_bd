@@ -114,7 +114,7 @@ namespace ProgBD
 
         public string ToCSV()
         {
-            return $"{code};{title};{startDate};{description};{budget};{numberOfEmployees};{totalSalaries};{Client.Id};{Status}";
+            return $"{Code};{Title};{StartDate};{Description};{Budget};{NumberOfEmployees};{TotalSalaries};{Client.Id};{Status}";
         }
 
     }
