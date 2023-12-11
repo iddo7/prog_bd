@@ -515,10 +515,9 @@ CREATE PROCEDURE p_insert_employee(
     IN _status VARCHAR(20)
 )
 BEGIN
-    DECLARE EXIT HANDLER FOR 3819
-        BEGIN
-            SELECT 'Invalid hourly rate';
-        end ;
+    IF (_hourlyRate < 15) THEN
+       SIGNAL SQLSTATE '45001' SET message_text = "Invalid hourly rate";
+    end if ;
     IF (_status != 'Journalier' && _status != 'Permanent') THEN
         SIGNAL SQLSTATE '45000' SET message_text="Invalid status";
     end if ;
