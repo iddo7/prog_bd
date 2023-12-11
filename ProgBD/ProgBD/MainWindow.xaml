@@ -23,6 +23,7 @@
             <Frame x:Name="mainFrame"/>
         </NavigationView>
 
+        <StackPanel x:Name="dialogPanel" />
     </Grid>
 
 

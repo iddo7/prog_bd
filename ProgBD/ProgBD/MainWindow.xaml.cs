@@ -29,6 +29,7 @@ namespace ProgBD
         {
             this.InitializeComponent();
             WindowSingleton.Instance().MainWindow = this;
+            WindowSingleton.Instance().DialogPanel = dialogPanel;
         }
 
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
