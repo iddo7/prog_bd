@@ -29,8 +29,21 @@ namespace ProgBD
         }
 
 
-        private void btAjouterEmployee_Click(object sender, RoutedEventArgs e)
+        private async void btAjouterEmployee_Click(object sender, RoutedEventArgs e)
         {
+
+
+
+
+
+
+
+
+
+
+
+
+
             Employee employee = new Employee();
 
             bool verification_employee = true;
@@ -42,7 +55,7 @@ namespace ProgBD
             }
             catch (Exception ex)
             {
-                verification_input(alert_employee_firstName, true); ;
+                verification_input(alert_employee_firstName, true);
                 verification_employee = false;
             }
 
@@ -128,6 +141,23 @@ namespace ProgBD
             }
 
             if (!verification_employee) return;
+
+            bool dbResult = EmployeeSingleton.Instance().Create(employee);
+            string dialogTitle;
+            string dialogContent;
+            if (dbResult)
+            {
+                dialogTitle = "Employe ajoute";
+                dialogContent = $"L'employe {employee.FirstName} {employee.LastName} a bien ete ajoute";
+            }
+            else
+            {
+                dialogTitle = "Erreur systeme";
+                dialogContent = "Desole nous avons rencontre une erreur. S'il vous plait, veuillez ressayer plus tard.";
+            }
+
+            await Feedback.VoidDialog(dialogTitle, dialogContent, "Ok");
+
         }
 
         private void verification_input(UIElement element, bool state)
