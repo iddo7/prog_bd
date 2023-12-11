@@ -10,11 +10,13 @@ using System.Threading.Tasks;
 
 namespace ProgBD
 {
-    internal static class Feedback
+    internal static class Dialog
     {
+        private const string defaultCloseButtonText = "Ok";
+
 
         /*   --- Dialog Box with only close button ---   */
-        public static async Task<ContentDialogResult> VoidDialog(string title, string content, string closeButtonText)
+        public static async Task<ContentDialogResult> VoidDialog(string title, string content, string closeButtonText = defaultCloseButtonText)
         {
             ContentDialog dialog = new ContentDialog()
             {
