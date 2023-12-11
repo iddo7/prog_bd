@@ -31,21 +31,9 @@ namespace ProgBD
 
         private async void btAjouterEmployee_Click(object sender, RoutedEventArgs e)
         {
-
-
-
-
-
-
-
-
-
-
-
-
+            /*   --- Checks ---   */
 
             Employee employee = new Employee();
-
             bool verification_employee = true;
 
             try
@@ -142,10 +130,14 @@ namespace ProgBD
 
             if (!verification_employee) return;
 
-            bool dbResult = EmployeeSingleton.Instance().Create(employee);
+
+            bool actionSucceeded = EmployeeSingleton.Instance().Create(employee);
+
+
+            /*   --- FEEDBACK ---   */
             string dialogTitle;
             string dialogContent;
-            if (dbResult)
+            if (actionSucceeded)
             {
                 dialogTitle = "Employe ajoute";
                 dialogContent = $"L'employe {employee.FirstName} {employee.LastName} a bien ete ajoute";
@@ -155,8 +147,10 @@ namespace ProgBD
                 dialogTitle = "Erreur systeme";
                 dialogContent = "Desole nous avons rencontre une erreur. S'il vous plait, veuillez ressayer plus tard.";
             }
+            await Dialog.VoidDialog(dialogTitle, dialogContent);
 
-            await Feedback.VoidDialog(dialogTitle, dialogContent, "Ok");
+            if (!actionSucceeded) return;
+            Frame.Navigate(typeof(ViewEmployeesPage));
 
         }
 
