@@ -41,6 +41,7 @@ drop procedure if exists p_return_assigned_project_employees;
 drop procedure if exists p_insert_admin;
 drop procedure if exists p_update_admin;
 drop procedure if exists p_delete_admin;
+drop procedure if exists p_select_admins;
 
 
 drop trigger if exists before_insert_clients;
@@ -774,6 +775,12 @@ END //
 CREATE PROCEDURE p_select_projects_employees()
 BEGIN
     SELECT * FROM projects_employees;
+END //
+
+/* Select admins */
+CREATE PROCEDURE p_select_admins()
+BEGIN
+    SELECT * FROM admin;
 END //
 
 DELIMITER ;
