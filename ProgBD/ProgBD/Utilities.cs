@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,14 @@ namespace ProgBD
             }
 
             return age;
+        }
+
+        public static void SetVisibility(UIElement element, bool state)
+        {
+            if (state)
+                element.Visibility = Visibility.Visible;
+            else
+                element.Visibility = Visibility.Collapsed;
         }
 
         public static bool ContainsNumbers(string input)

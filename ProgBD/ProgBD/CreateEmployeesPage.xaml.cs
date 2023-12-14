@@ -36,95 +36,96 @@ namespace ProgBD
             Employee employee = new Employee();
             bool verification_employee = true;
 
+
             try
             {
                 employee.FirstName = input_employee_firstName.Text;
-                verification_input(alert_employee_firstName, false);
+                Utilities.SetVisibility(alert_employee_firstName, false);
             }
             catch (Exception ex)
             {
-                verification_input(alert_employee_firstName, true);
+                Utilities.SetVisibility(alert_employee_firstName, true);
                 verification_employee = false;
             }
 
             try
             {
                 employee.LastName = input_employee_lastName.Text;
-                verification_input(alert_employee_lastName, false);
+                Utilities.SetVisibility(alert_employee_lastName, false);
             }
             catch (Exception ex)
             {
-                verification_input(alert_employee_lastName, true); ;
+                Utilities.SetVisibility(alert_employee_lastName, true); ;
                 verification_employee = false;
             }
 
             try
             {
                 employee.Address = input_employee_address.Text;
-                verification_input(alert_employee_address, false);
+                Utilities.SetVisibility(alert_employee_address, false);
             }
             catch (Exception ex)
             {
-                verification_input(alert_employee_address, true); ;
+                Utilities.SetVisibility(alert_employee_address, true); ;
                 verification_employee = false;
             }
 
             try
             {
                 employee.Email = input_employee_email.Text;
-                verification_input(alert_employee_email, false);
+                Utilities.SetVisibility(alert_employee_email, false);
 
             }
             catch (Exception ex)
             {
-                verification_input(alert_employee_email, true); ;
+                Utilities.SetVisibility(alert_employee_email, true); ;
                 verification_employee = false;
             }
 
             try
             {
                 employee.ProfilePicture = new Uri(input_employee_profilePicture.Text);
-                verification_input(alert_employee_profilePicture, false);
+                Utilities.SetVisibility(alert_employee_profilePicture, false);
 
             }
             catch (Exception ex)
             {
-                verification_input(alert_employee_profilePicture, true); ;
+                Utilities.SetVisibility(alert_employee_profilePicture, true); ;
                 verification_employee = false;
             }
 
             try
             {
                 employee.HourlyRate = double.Parse(input_employee_hourlyRate.Text);
-                verification_input(alert_employee_hourlyRate, false);
+                Utilities.SetVisibility(alert_employee_hourlyRate, false);
 
             }
             catch (Exception ex)
             {
-                verification_input(alert_employee_hourlyRate, true); ;
+                Utilities.SetVisibility(alert_employee_hourlyRate, true); ;
                 verification_employee = false;
             }
 
             try
             {
                 employee.HiringDate = input_employee_hiringDate.Date.DateTime;
-                verification_input(alert_employee_hiringDate, false);
+                Utilities.SetVisibility(alert_employee_hiringDate, false);
             }
             catch (Exception ex)
             {
-                verification_input(alert_employee_hiringDate, true); ;
+                Utilities.SetVisibility(alert_employee_hiringDate, true); ;
                 verification_employee = false;
             }
 
             try
             {
                 employee.Birthday = input_employee_birthday.Date.DateTime;
-                verification_input(alert_employee_birthday, false);
+                Utilities.SetVisibility(alert_employee_birthday, false);
 
             }
             catch (Exception ex)
             {
-                verification_input(alert_employee_birthday, true); ;
+                Utilities.SetVisibility(alert_employee_birthday, true); ;
                 verification_employee = false;
             }
 
@@ -152,14 +153,6 @@ namespace ProgBD
             if (!actionSucceeded) return;
             Frame.Navigate(typeof(ViewEmployeesPage));
 
-        }
-
-        private void verification_input(UIElement element, bool state)
-        {
-            if (state)
-                element.Visibility = Visibility.Visible;
-            else 
-                element.Visibility = Visibility.Collapsed;
         }
 
     }

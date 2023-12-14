@@ -28,50 +28,53 @@ namespace ProgBD
             this.InitializeComponent();
         }
 
-        bool verification_client = true;
 
         private void btAjouterClient_Click(object sender, RoutedEventArgs e)
-        {
-            alert_client_email.Visibility = Visibility.Visible;
+        {    
             Client client = new Client();
+            bool verification_client = true;
 
-            try 
+            try
             {
                 client.FullName = input_client_fullName.Text;
-            } 
-            catch (Exception a)
-            { 
-                alert_client_fullName.Visibility = Visibility.Visible;
+                Utilities.SetVisibility(alert_client_fullName, false);
+            }
+            catch (Exception ex)
+            {
+                Utilities.SetVisibility(alert_client_fullName, true);
                 verification_client = false;
             }
 
             try
             {
                 client.Address = input_client_address.Text;
+                Utilities.SetVisibility(alert_client_address, false);
             }
-            catch (Exception a)
+            catch (Exception ex)
             {
-                alert_client_address.Visibility = Visibility.Visible;
+                Utilities.SetVisibility(alert_client_address, true);
                 verification_client = false;
             }
 
             try
             {
                 client.PhoneNumber = input_client_phoneNumber.Text;
+                Utilities.SetVisibility(alert_client_phoneNumber, false);
             }
-            catch (Exception a)
+            catch (Exception ex)
             {
-                alert_client_phoneNumber.Visibility = Visibility.Visible;
+                Utilities.SetVisibility(alert_client_phoneNumber, true);
                 verification_client = false;
             }
 
             try
             {
                 client.Email = input_client_email.Text;
+                Utilities.SetVisibility(alert_client_email, false);
             }
-            catch (Exception a)
+            catch (Exception ex)
             {
-                alert_client_email.Visibility = Visibility.Visible;
+                Utilities.SetVisibility(alert_client_email, true);
                 verification_client = false;
             }
 
