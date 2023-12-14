@@ -20,15 +20,15 @@ namespace ProgBD
 
         public Project()
         {
-            this.Code = string.Empty;
-            this.Title = string.Empty;
-            this.StartDate = startDate;
-            this.Description = string.Empty;
-            this.Budget = budget;
-            this.NumberOfEmployees = numberOfEmployees;
-            this.TotalSalaries = totalSalaries;
-            this.Client = client;
-            this.Status = "En cours";
+            this.code = string.Empty;
+            this.title = string.Empty;
+            this.startDate = new DateTime();
+            this.description = string.Empty;
+            this.budget = 0;
+            this.numberOfEmployees = 0;
+            this.totalSalaries = 0;
+            this.client = new Client();
+            this.status = "En cours";
         }
 
         public Project(string code, string title, DateTime startDate, string description, double budget, int numberOfEmployees, double totalSalaries, Client client, string status)

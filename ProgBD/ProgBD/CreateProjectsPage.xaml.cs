@@ -27,5 +27,79 @@ namespace ProgBD
         {
             this.InitializeComponent();
         }
+
+        private void btAjouterProject_Click(object sender, RoutedEventArgs e)
+        {
+            Project project = new Project();
+            bool verification_project = true;
+
+            try
+            {
+                project.Title = input_project_title.Text;
+                Utilities.SetVisibility(alert_project_title, false);
+            }
+            catch (Exception ex)
+            {
+                Utilities.SetVisibility(alert_project_title, true);
+                verification_project = false;
+            }
+
+            try
+            {
+                project.StartDate = input_project_startDate.Date.DateTime;
+                Utilities.SetVisibility(alert_project_startDate, false);
+            }
+            catch (Exception ex)
+            {
+                Utilities.SetVisibility(alert_project_startDate, true);
+                verification_project = false;
+            }
+
+            try
+            {
+                project.Description = input_project_description.Text;
+                Utilities.SetVisibility(alert_project_description, false);
+            }
+            catch (Exception ex)
+            {
+                Utilities.SetVisibility(alert_project_description, true);
+                verification_project = false;
+            }
+
+            try
+            {
+                project.Budget = double.Parse(input_project_budget.Text);
+                Utilities.SetVisibility(alert_project_budget, false);
+            }
+            catch (Exception ex)
+            {
+                Utilities.SetVisibility(alert_project_budget, true);
+                verification_project = false;
+            }
+
+            try
+            {
+                project.NumberOfEmployees = int.Parse(input_project_numberOfEmployees.Text);
+                Utilities.SetVisibility(alert_project_numberOfEmployees, false);
+            }
+            catch (Exception ex)
+            {
+                Utilities.SetVisibility(alert_project_numberOfEmployees, true);
+                verification_project = false;
+            }
+
+            try
+            {
+                project.TotalSalaries = double.Parse(input_project_totalSalaries.Text);
+                Utilities.SetVisibility(alert_project_totalSalaries, false);
+            }
+            catch (Exception ex)
+            {
+                Utilities.SetVisibility(alert_project_totalSalaries, true);
+                verification_project = false;
+            }
+
+            if (!verification_project) return;
+        }
     }
 }
