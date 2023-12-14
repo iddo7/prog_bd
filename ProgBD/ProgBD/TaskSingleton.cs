@@ -13,6 +13,7 @@ namespace ProgBD
     {
         MySqlConnection conn;
         ObservableCollection<Task> list;
+        ObservableCollection<Employee> employees;
         static TaskSingleton instance = null;
 
         public TaskSingleton()
@@ -31,6 +32,16 @@ namespace ProgBD
         {
             UpdateLocalList();
             return list;
+        }
+
+        public ObservableCollection<Task> TasksFromProject(string projectCode)
+        {
+            ObservableCollection<Task> tasks = new();
+            foreach (Task task in list)
+            {
+                if (task.ProjectCode == projectCode) tasks.Add(task);
+            }
+            return tasks;
         }
 
         public Task Task(int index)
@@ -77,8 +88,8 @@ namespace ProgBD
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("_projectCode", projectCode);
                 cmd.Parameters.AddWithValue("_employeeCode", employeeCode);
-                cmd.Parameters.AddWithValue("_projectCode", updatedTask.ProjectCode);
-                cmd.Parameters.AddWithValue("_employeeCode", updatedTask.EmployeeCode);
+                cmd.Parameters.AddWithValue("_hoursWorked", updatedTask.HoursWorked);
+                cmd.Parameters.AddWithValue("_salary", updatedTask.Salary);
 
 
                 conn.Open();
