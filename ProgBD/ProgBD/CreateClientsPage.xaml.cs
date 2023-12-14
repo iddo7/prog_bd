@@ -29,7 +29,7 @@ namespace ProgBD
         }
 
 
-        private void btAjouterClient_Click(object sender, RoutedEventArgs e)
+        private async void btAjouterClient_Click(object sender, RoutedEventArgs e)
         {    
             Client client = new Client();
             bool verification_client = true;
@@ -80,14 +80,26 @@ namespace ProgBD
 
             if (!verification_client) return;
 
+            bool actionSucceeded = ClientSingleton.Instance().Create(client);
+
+            /*   --- FEEDBACK ---   */
+            string dialogTitle;
+            string dialogContent;
+            if (actionSucceeded)
+            {
+                dialogTitle = "Client ajoute";
+                dialogContent = $"Le client {client.FullName} a bien ete ajoute";
+            }
+            else
+            {
+                dialogTitle = Dialog.DefaultErrorTitle();
+                dialogContent = Dialog.DefaultErrorContent();
+            }
+            await Dialog.VoidDialog(dialogTitle, dialogContent);
+
+            if (!actionSucceeded) return;
+            Frame.Navigate(typeof(ViewClientsPage));
+
         }
     }
-
-    /*clients = new clients 
-
-        try (
-        clients = eded.text)
-
-        catch(
-        erreur ) */
 }

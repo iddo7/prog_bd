@@ -12,6 +12,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MySqlX.XDevAPI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -28,7 +29,7 @@ namespace ProgBD
             this.InitializeComponent();
         }
 
-        private void btAjouterProject_Click(object sender, RoutedEventArgs e)
+        private async void btAjouterProject_Click(object sender, RoutedEventArgs e)
         {
             Project project = new Project();
             bool verification_project = true;
@@ -100,6 +101,26 @@ namespace ProgBD
             }
 
             if (!verification_project) return;
+
+            bool actionSucceeded = ProjectSingleton.Instance().Create(project);
+
+            /*   --- FEEDBACK ---   */
+            string dialogTitle;
+            string dialogContent;
+            if (actionSucceeded)
+            {
+                dialogTitle = "Projet ajoute";
+                dialogContent = $"Le projet {project.Title} a bien ete ajoute";
+            }
+            else
+            {
+                dialogTitle = Dialog.DefaultErrorTitle();
+                dialogContent = Dialog.DefaultErrorContent();
+            }
+            await Dialog.VoidDialog(dialogTitle, dialogContent);
+
+            if (!actionSucceeded) return;
+            Frame.Navigate(typeof(ViewProjectsPage));
         }
     }
 }

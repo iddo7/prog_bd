@@ -51,6 +51,8 @@ namespace ProgBD
             set
             {
                 if (value == string.Empty) throw new ArgumentException("Invalid title");
+
+                title = value;
             }
         }
         public DateTime StartDate 
@@ -69,6 +71,8 @@ namespace ProgBD
             set
             {
                 if (value == string.Empty) throw new ArgumentException("Invalid description");
+
+                description = value;
             }
         }
         public double Budget 
