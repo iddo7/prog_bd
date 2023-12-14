@@ -145,8 +145,8 @@ namespace ProgBD
             }
             else
             {
-                dialogTitle = "Erreur systeme";
-                dialogContent = "Desole nous avons rencontre une erreur. S'il vous plait, veuillez ressayer plus tard.";
+                dialogTitle = Dialog.DefaultErrorTitle();
+                dialogContent = Dialog.DefaultErrorContent();
             }
             await Dialog.VoidDialog(dialogTitle, dialogContent);
 
