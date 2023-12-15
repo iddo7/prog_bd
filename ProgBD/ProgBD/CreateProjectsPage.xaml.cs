@@ -88,16 +88,6 @@ namespace ProgBD
                 verification_project = false;
             }
 
-            try
-            {
-                project.TotalSalaries = double.Parse(input_project_totalSalaries.Text);
-                Utilities.SetVisibility(alert_project_totalSalaries, false);
-            }
-            catch (Exception ex)
-            {
-                Utilities.SetVisibility(alert_project_totalSalaries, true);
-                verification_project = false;
-            }
 
             if (!verification_project) return;
         }
