@@ -23,7 +23,7 @@
             <TextBlock x:Name="employee_code" Margin="0,0,0,60">as</TextBlock>
             <TextBlock x:Name="employee_email" Margin="0,0,0,60">as</TextBlock>
             <TextBlock x:Name="employee_hiringDate" Margin="0,0,0,60">as</TextBlock>
-            <TextBlock x:Name="employee_profilePicture" Margin="0,0,0,60">as</TextBlock>
+            <Image x:Name="employee_profilePicture" Margin="0,0,0,60"></Image>
 
         </StackPanel>
 
@@ -35,5 +35,9 @@
             <TextBlock x:Name="employee_hourlyRate" Margin="0,0,0,60">as</TextBlock>
             <TextBlock x:Name="employee_status" Margin="0,0,0,60">as</TextBlock>
         </StackPanel>
+
+        <Button x:Name="btModifyEmployee" Click="btModifyEmployee_Click" HorizontalAlignment="Center" Grid.ColumnSpan="2">
+            <TextBlock Foreground="Black">Modifier l'employé</TextBlock>
+        </Button>
     </Grid>
 </Page>

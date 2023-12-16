@@ -27,5 +27,10 @@ namespace ProgBD
         {
             this.InitializeComponent();
         }
+
+        private void btModifyEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(EditEmployeesPage));
+        }
     }
 }

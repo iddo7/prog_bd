@@ -31,5 +31,9 @@
             <TextBlock x:Name="client_fullName" Margin="0,0,0,60">as</TextBlock>
             <TextBlock x:Name="client_phoneNumber" Margin="0,0,0,60">as</TextBlock>
         </StackPanel>
+
+        <Button x:Name="btModifyClient" Click="btModifyClient_Click" HorizontalAlignment="Center" Grid.ColumnSpan="2">
+            <TextBlock Foreground="Black">Modifier le client</TextBlock>
+        </Button>
     </Grid>
 </Page>
