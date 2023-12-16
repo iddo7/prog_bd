@@ -36,7 +36,6 @@ namespace ProgBD
 
         private async void btExportEmployees_Click(object sender, RoutedEventArgs e)
         {
-            /*
             var picker = new Windows.Storage.Pickers.FileSavePicker();
             List<Project> list = ProjectSingleton.Instance().List().ToList();
 
@@ -49,9 +48,6 @@ namespace ProgBD
             if (exportFile == null) return;
 
             await Windows.Storage.FileIO.WriteLinesAsync(exportFile, list.ConvertAll(project => project.ToCSV()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
-            */
-
-            Dialog.CreateAdminDialog();
         }
 
         private void btCreateProject_Click(object sender, RoutedEventArgs e)
