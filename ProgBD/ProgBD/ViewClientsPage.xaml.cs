@@ -25,16 +25,15 @@ namespace ProgBD
 
         private void btCreateClient_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(CreateClientsPage)); 
+            Frame.Navigate(typeof(CreateClientsPage), ClientSingleton.Instance()); 
         }
 
         private void listeClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (listeClients.SelectedIndex >= 0)
-            {
-                this.Frame.Navigate(typeof(ShowClientsPage), listeClients.SelectedIndex);
+            int selectedIndex = listeClients.SelectedIndex;
+            if (selectedIndex == -1) return;
 
-            }
+            this.Frame.Navigate(typeof(ShowClientsPage), listeClients.SelectedItem);
         }
     }
 }
