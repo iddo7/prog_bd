@@ -190,5 +190,10 @@ namespace ProgBD
         {
             list.Clear();
         }
+
+        internal static object getInstance()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

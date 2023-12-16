@@ -33,8 +33,6 @@
 
         <!-- Informations sur l'emploi -->
         <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20 60 20 20">
-            <TextBox x:Name="input_project_totalSalaries" Header="Salaires totaux"></TextBox>
-            <TextBlock x:Name="alert_project_totalSalaries" Foreground="Red" Visibility="Collapsed">Veuillez saisir des salaires valides</TextBlock>
 
             <DatePicker x:Name="input_project_startDate" Header="Date de début"></DatePicker>
             <TextBlock x:Name="alert_project_startDate" Foreground="Red" Visibility="Collapsed">Veuillez saisir une date de début valide</TextBlock>

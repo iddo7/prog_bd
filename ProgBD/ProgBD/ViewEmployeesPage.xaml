@@ -20,8 +20,7 @@
             <TextBlock Foreground="Black">Ajouter</TextBlock>
         </Button>
 
-        <GridView x:Name="listeMateriel" Grid.Row="2" Padding="20"  HorizontalAlignment="Center">
-            
+        <GridView x:Name="listeEmployees" SelectionChanged="listeEmployees_SelectionChanged" Grid.Row="2" Padding="20"  HorizontalAlignment="Center">  
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="local:Employee">
                     <StackPanel Margin="35" Background="White" Width="220" CornerRadius="15">
@@ -33,7 +32,7 @@
                             </Grid.RowDefinitions>
 
                             <Image Grid.Row="0" Source="{Binding ProfilePicture}" Width="100" Height="100" Margin="0 0 0 10"/>
-                            
+
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                 <TextBlock Text="{Binding FirstName}" FontSize="18" FontFamily="Arial Rounded" Margin="3"/>
                                 <TextBlock Text="{Binding LastName}" FontSize="18" FontFamily="Arial Rounded"  Margin="3"/>
@@ -43,7 +42,6 @@
                         </Grid>
                     </StackPanel>
                 </DataTemplate>
-
             </GridView.ItemTemplate>
         </GridView>
     </Grid>

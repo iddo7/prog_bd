@@ -26,7 +26,17 @@ namespace ProgBD
         public ViewProjectsPage()
         {
             this.InitializeComponent();
-            listeMateriel.ItemsSource = ProjectSingleton.Instance().List();
+            listeProjects.ItemsSource = ProjectSingleton.Instance().List();
+        }
+
+
+        private void listeProjects_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (listeProjects.SelectedIndex >= 0)
+            {
+                this.Frame.Navigate(typeof(ShowProjectsPage), listeProjects.SelectedIndex);
+
+            }
         }
 
         private async void btExportEmployees_Click(object sender, RoutedEventArgs e)
@@ -49,5 +59,6 @@ namespace ProgBD
         {
             Frame.Navigate(typeof(CreateProjectsPage));
         }
+
     }
 }

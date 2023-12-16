@@ -23,7 +23,7 @@ namespace ProgBD {
         public ViewEmployeesPage()
         {
             this.InitializeComponent();
-            listeMateriel.ItemsSource = EmployeeSingleton.Instance().List();
+            listeEmployees.ItemsSource = EmployeeSingleton.Instance().List();
         }
 
         private void btCreateEmployee_Click(object sender, RoutedEventArgs e)
@@ -31,6 +31,13 @@ namespace ProgBD {
             Frame.Navigate(typeof(CreateEmployeesPage));
         }
 
+        private void listeEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (listeEmployees.SelectedIndex >= 0)
+            {
+                this.Frame.Navigate(typeof(ShowEmployeesPage), listeEmployees.SelectedIndex);
 
+            }
+        }
     }
 }

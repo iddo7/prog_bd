@@ -26,7 +26,7 @@
             </Button>
         </StackPanel>
 
-        <ListView x:Name="listeMateriel" Grid.Row="1" Padding="20" HorizontalAlignment="Stretch">
+        <ListView x:Name="listeProjects" SelectionChanged="listeProjects_SelectionChanged" Grid.Row="1" Padding="20" HorizontalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Project">
                     <Grid Padding="30" Margin="10" HorizontalAlignment="Stretch" CornerRadius="15" Background="White">
