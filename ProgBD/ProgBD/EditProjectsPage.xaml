@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="ProgBD.EditProjectsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ProgBD"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="display_createProject_Title" FontSize="30" FontWeight="Medium" Margin="0 0 0 40">Modification du projet</TextBlock>
+
+        <!-- Informations personnelles -->
+        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20 60 20 20">
+            <TextBox x:Name="input_project_title" Header="Titre "></TextBox>
+            <TextBlock x:Name="alert_project_title" Foreground="Red" Visibility="Collapsed">Veuillez saisir un titre valide</TextBlock>
+
+            <TextBox x:Name="input_project_description" Header="Description"></TextBox>
+            <TextBlock x:Name="alert_project_description" Foreground="Red" Visibility="Collapsed">Veuillez saisir une description valide</TextBlock>
+
+            <TextBox x:Name="input_project_budget" Header="Budget"></TextBox>
+            <TextBlock x:Name="alert_project_budget" Foreground="Red" Visibility="Collapsed">Veuillez saisir un budget valide</TextBlock>
+
+
+        </StackPanel>
+
+        <!-- Informations sur l'emploi -->
+        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20 60 20 20">
+
+            <DatePicker x:Name="input_project_startDate" Header="Date de début"></DatePicker>
+            <TextBlock x:Name="alert_project_startDate" Foreground="Red" Visibility="Collapsed">Veuillez saisir une date de début valide</TextBlock>
+
+            <TextBox x:Name="input_project_numberOfEmployees" Header="Nombre d'employés"></TextBox>
+            <TextBlock x:Name="alert_project_numberOfEmployees" Foreground="Red" Visibility="Collapsed">Veuillez saisir un nombre d'employés valide</TextBlock>
+        </StackPanel>
+
+        <Button  Grid.ColumnSpan="2" x:Name="btConfirmEditProject" Click="btConfirmEditProject_Click" HorizontalAlignment="Center" FontSize="30" CornerRadius="10" Margin="0 130 0 0">
+            <TextBlock Foreground="Black">Ajouter</TextBlock>
+        </Button>
+    </Grid>
+</Page>

@@ -32,5 +32,10 @@
             <TextBlock x:Name="project_status" Margin="0,0,0,60">as</TextBlock>
             <TextBlock x:Name="project_totalSalaries" Margin="0,0,0,60">as</TextBlock>
         </StackPanel>
+
+
+        <Button x:Name="btModifyProjects" Click="btModifyProjects_Click" HorizontalAlignment="Center" Grid.ColumnSpan="2">
+            <TextBlock Foreground="Black">Modifier le projet</TextBlock>
+        </Button>
     </Grid>
 </Page>

@@ -24,6 +24,10 @@ namespace ProgBD
             this.InitializeComponent();
         }
 
+        private void btModifyEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(EditEmployeesPage));
+        }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             shownEmployee = (Employee)e.Parameter;
