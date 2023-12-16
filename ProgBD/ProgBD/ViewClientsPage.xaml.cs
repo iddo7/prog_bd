@@ -26,7 +26,7 @@ namespace ProgBD
         public ViewClientsPage()
         {
             this.InitializeComponent();
-            listeMateriel.ItemsSource = ClientSingleton.Instance().List();
+            listeClients.ItemsSource = ClientSingleton.Instance().List();
         }
 
         private void btCreateClient_Click(object sender, RoutedEventArgs e)
@@ -34,5 +34,13 @@ namespace ProgBD
             Frame.Navigate(typeof(CreateClientsPage)); 
         }
 
+        private void listeClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (listeClients.SelectedIndex >= 0)
+            {
+                this.Frame.Navigate(typeof(ShowClientsPage), listeClients.SelectedIndex);
+
+            }
+        }
     }
 }

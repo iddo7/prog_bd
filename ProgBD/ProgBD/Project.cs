@@ -17,6 +17,8 @@ namespace ProgBD
         double totalSalaries;
         Client client;
         string status;
+        
+        
 
         public Project()
         {

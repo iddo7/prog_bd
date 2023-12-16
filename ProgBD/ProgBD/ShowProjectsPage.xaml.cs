@@ -23,9 +23,35 @@ namespace ProgBD
     /// </summary>
     public sealed partial class ShowProjectsPage : Page
     {
+        int index = -1;
         public ShowProjectsPage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter is not null)
+            {
+                try
+                {
+                    index = (int)e.Parameter;
+                    Project project = (Project)ProjectSingleton.getInstance();
+
+                    project_code.Text = project.Code ?? "N/A";
+                    project_title.Text = project.Title;
+                    project_startDate.DataContext = project.StartDate;
+                    project_description.Text = project.Description;
+                    project_budget.DataContext = project.Budget;
+                    project_totalSalaries.DataContext = project.TotalSalaries;
+                    project_client.DataContext = project.Client;
+                    project_status.Text = project.Status;
+                }
+                catch
+                {
+
+                }
+            }
         }
     }
 }

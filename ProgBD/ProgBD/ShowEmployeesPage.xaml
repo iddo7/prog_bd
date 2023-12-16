@@ -10,6 +10,30 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <TextBlock x:Name="display_ShowEmployee" FontSize="30" FontWeight="Medium" Margin="0, 0, 0, 0">Détails de l'employé</TextBlock>
+
+        <!-- Informations personnelles -->
+        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,100,0,0">
+            <TextBlock x:Name="employee_firstName" Margin="0,0,0,60">sd</TextBlock>
+            <TextBlock x:Name="employee_code" Margin="0,0,0,60">as</TextBlock>
+            <TextBlock x:Name="employee_email" Margin="0,0,0,60">as</TextBlock>
+            <TextBlock x:Name="employee_hiringDate" Margin="0,0,0,60">as</TextBlock>
+            <TextBlock x:Name="employee_profilePicture" Margin="0,0,0,60">as</TextBlock>
+
+        </StackPanel>
+
+        <!-- Informations sur l'emploi -->
+        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,100,0,0">
+            <TextBlock x:Name="employee_lastName" Margin="0,0,0,60">as</TextBlock>
+            <TextBlock x:Name="employee_birthday" Margin="0,0,0,60">as</TextBlock>
+            <TextBlock x:Name="employee_address" Margin="0,0,0,60">as</TextBlock>
+            <TextBlock x:Name="employee_hourlyRate" Margin="0,0,0,60">as</TextBlock>
+            <TextBlock x:Name="employee_status" Margin="0,0,0,60">as</TextBlock>
+        </StackPanel>
     </Grid>
 </Page>
