@@ -51,7 +51,7 @@ namespace ProgBD
             await Windows.Storage.FileIO.WriteLinesAsync(exportFile, list.ConvertAll(project => project.ToCSV()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
             */
 
-            Dialog.LoginDialog();
+            Dialog.CreateAdminDialog();
         }
 
         private void btCreateProject_Click(object sender, RoutedEventArgs e)

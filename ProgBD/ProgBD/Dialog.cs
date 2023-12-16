@@ -20,6 +20,8 @@ namespace ProgBD
 
         public static string DefaultLoginTitle() => "Authentification";
         public static string DefaultLoginPrimaryButtonText() => "Se connecter";
+        public static string DefaultCreateAdminTitle() => "Creation d'un administrateur";
+        public static string DefaultCreatePrimaryButtonText() => "Creer";
 
 
         /*   --- Dialog Box with only close button ---   */
@@ -45,6 +47,22 @@ namespace ProgBD
                 XamlRoot = WindowSingleton.Instance().DialogPanel.XamlRoot,
                 Title = DefaultLoginTitle(),
                 PrimaryButtonText = DefaultLoginPrimaryButtonText(),
+                CloseButtonText = DefaultCancelButtonText(),
+                DefaultButton = ContentDialogButton.Primary
+            };
+
+            await dialog.ShowAsync();
+        }
+
+
+        /*   --- LOGIN Dialog Box ---   */
+        public static async void CreateAdminDialog()
+        {
+            CreateAdminDialog dialog = new CreateAdminDialog()
+            {
+                XamlRoot = WindowSingleton.Instance().DialogPanel.XamlRoot,
+                Title = DefaultCreateAdminTitle(),
+                PrimaryButtonText = DefaultCreatePrimaryButtonText(),
                 CloseButtonText = DefaultCancelButtonText(),
                 DefaultButton = ContentDialogButton.Primary
             };

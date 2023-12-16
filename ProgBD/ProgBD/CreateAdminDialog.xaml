@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="ProgBD.CreateAdminDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ProgBD"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick">
+
+    <StackPanel>
+
+        <StackPanel>
+            <TextBox x:Name="input_username" Header="Nom d'utilisateur" />
+            <TextBlock x:Name="alert_username" Foreground="Red" Visibility="Collapsed" Margin="0 0 0 10">Nom d'utilisateur invalide</TextBlock>
+        </StackPanel>
+
+        <StackPanel Margin="0 15 0 0">
+            <PasswordBox x:Name="input_password" Header="Mot de passe" />
+            <TextBlock x:Name="alert_password" Foreground="Red" Visibility="Collapsed" Margin="0 0 0 10">Mot de passe invalide. Au moins 8 characteres.</TextBlock>
+        </StackPanel>
+
+        <StackPanel Margin="0 15 0 0">
+            <PasswordBox x:Name="input_repeat_password" Header="Repeter le mot de passe" />
+            <TextBlock x:Name="alert_repeat_password" Foreground="Red" Visibility="Collapsed" Margin="0 0 0 10">Veuillez saisir le meme mot de passe qu'en haut.</TextBlock>
+        </StackPanel>
+
+        <TextBlock x:Name="alert_login" Foreground="Red" Visibility="Collapsed" Margin="0 15 0 0">Erreur lors de l'authentification. Veuillez reessayer.</TextBlock>
+        
+    </StackPanel>
+    
+</ContentDialog>
