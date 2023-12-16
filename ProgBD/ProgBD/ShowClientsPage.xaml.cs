@@ -17,9 +17,22 @@ namespace ProgBD
 {
     public sealed partial class ShowClientsPage : Page
     {
+        Client shownClient;
+
         public ShowClientsPage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            shownClient = (Client) e.Parameter;
+
+            client_id.Text = shownClient.Id.ToString();
+            client_address.Text = shownClient.Address;
+            client_email.Text = shownClient.Email;
+            client_fullName.Text = shownClient.FullName;
+            client_phoneNumber.Text = shownClient.PhoneNumber;
         }
     }
 }

@@ -32,8 +32,10 @@ namespace ProgBD {
         {
             if (listeEmployees.SelectedIndex >= 0)
             {
-                this.Frame.Navigate(typeof(ShowEmployeesPage), listeEmployees.SelectedIndex);
+                Employee selectedEmployee = (Employee) listeEmployees.SelectedItem;
+                if (selectedEmployee == null) return;
 
+                this.Frame.Navigate(typeof(ShowEmployeesPage), selectedEmployee);
             }
         }
     }

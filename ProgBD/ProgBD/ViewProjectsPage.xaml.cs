@@ -23,13 +23,14 @@ namespace ProgBD
             listeProjects.ItemsSource = ProjectSingleton.Instance().List();
         }
 
-
         private void listeProjects_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (listeProjects.SelectedIndex >= 0)
             {
-                this.Frame.Navigate(typeof(ShowProjectsPage), listeProjects.SelectedIndex);
+                Project selectedProject = (Project) listeProjects.SelectedItem;
+                if (selectedProject == null) return;
 
+                this.Frame.Navigate(typeof(ShowProjectsPage), selectedProject);
             }
         }
 
