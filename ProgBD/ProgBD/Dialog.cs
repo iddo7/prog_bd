@@ -13,8 +13,15 @@ namespace ProgBD
     internal static class Dialog
     {
         private const string defaultCloseButtonText = "Ok";
+        public static string DefaultCancelButtonText() => "Annuler";
+
         public static string DefaultErrorTitle() => "Erreur systeme";
         public static string DefaultErrorContent() => "Desole nous avons rencontre une erreur. S'il vous plait, veuillez ressayer plus tard.";
+
+        public static string DefaultLoginTitle() => "Authentification";
+        public static string DefaultLoginPrimaryButtonText() => "Se connecter";
+        public static string DefaultCreateAdminTitle() => "Creation d'un administrateur";
+        public static string DefaultCreatePrimaryButtonText() => "Creer";
 
 
         /*   --- Dialog Box with only close button ---   */
@@ -29,6 +36,38 @@ namespace ProgBD
             };
 
             return await dialog.ShowAsync();
+        }
+
+
+        /*   --- LOGIN Dialog Box ---   */
+        public static async void LoginDialog()
+        {
+            LoginDialog dialog = new LoginDialog()
+            {
+                XamlRoot = WindowSingleton.Instance().DialogPanel.XamlRoot,
+                Title = DefaultLoginTitle(),
+                PrimaryButtonText = DefaultLoginPrimaryButtonText(),
+                CloseButtonText = DefaultCancelButtonText(),
+                DefaultButton = ContentDialogButton.Primary
+            };
+
+            await dialog.ShowAsync();
+        }
+
+
+        /*   --- LOGIN Dialog Box ---   */
+        public static async void CreateAdminDialog()
+        {
+            CreateAdminDialog dialog = new CreateAdminDialog()
+            {
+                XamlRoot = WindowSingleton.Instance().DialogPanel.XamlRoot,
+                Title = DefaultCreateAdminTitle(),
+                PrimaryButtonText = DefaultCreatePrimaryButtonText(),
+                CloseButtonText = DefaultCancelButtonText(),
+                DefaultButton = ContentDialogButton.Primary
+            };
+
+            await dialog.ShowAsync();
         }
     }
 }
