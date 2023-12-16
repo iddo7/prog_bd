@@ -30,7 +30,7 @@ namespace ProgBD
             this.InitializeComponent();
         }
 
-        private void PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             username = input_username.Text;
             password = input_password.Password;
