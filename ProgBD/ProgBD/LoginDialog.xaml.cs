@@ -20,11 +20,6 @@ namespace ProgBD
 {
     public sealed partial class LoginDialog : ContentDialog
     {
-        string username;
-        string password;
-        public string Username { get => username; }
-        public string Password { get => password; }
-
         public LoginDialog()
         {
             this.InitializeComponent();
@@ -32,15 +27,12 @@ namespace ProgBD
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            username = input_username.Text;
-            password = input_password.Password;
-
             Admin admin = new Admin();
             bool verificationAdmin = true;
 
             try
             {
-                admin.Username = username;
+                admin.Username = input_username.Text;
                 Utilities.SetVisibility(alert_username, false);
             }
             catch (Exception ex)
@@ -51,7 +43,7 @@ namespace ProgBD
 
             try
             {
-                admin.Password = password;
+                admin.Password = input_password.Password;
                 Utilities.SetVisibility(alert_password, false);
             }
             catch (Exception ex)
@@ -63,7 +55,7 @@ namespace ProgBD
             bool loginSuccess = false;
             if (verificationAdmin)
             {
-                loginSuccess = AuthSingleton.Instance().Login(username, password);
+                loginSuccess = AuthSingleton.Instance().Login(admin.Username, admin.Password);
                 AuthSingleton.Instance().SetConnection(loginSuccess);
                 Utilities.SetVisibility(alert_login, !loginSuccess);
             }
