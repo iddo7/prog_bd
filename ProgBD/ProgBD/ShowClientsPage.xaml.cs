@@ -24,6 +24,12 @@ namespace ProgBD
             this.InitializeComponent();
         }
 
+
+        private void btModifyClient_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(EditClientsPage));
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             shownClient = (Client) e.Parameter;

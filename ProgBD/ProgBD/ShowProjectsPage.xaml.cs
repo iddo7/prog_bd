@@ -37,5 +37,10 @@ namespace ProgBD
             project_status.Text = shownProject.Status;
             project_totalSalaries.Text = shownProject.TotalSalaries.ToString() + "$";
         }
+
+        private void btModifyProjects_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(EditProjectsPage));
+        }
     }
 }

@@ -17,6 +17,9 @@
     <None Remove="CreateEmployeesPage.xaml" />
     <None Remove="CreateProjectsPage.xaml" />
     <None Remove="LoginDialog.xaml" />
+    <None Remove="EditClientsPage.xaml" />
+    <None Remove="EditEmployeesPage.xaml" />
+    <None Remove="EditProjectsPage.xaml" />
     <None Remove="ShowClientsPage.xaml" />
     <None Remove="ShowEmployeesPage.xaml" />
     <None Remove="ShowProjectsPage.xaml" />
@@ -52,11 +55,18 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="CreateAdminDialog.xaml">
+    <Page Update="EditClientsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="LoginDialog.xaml">
+    <Page Update="EditEmployeesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="EditProjectsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
