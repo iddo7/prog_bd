@@ -35,6 +35,7 @@ namespace ProgBD
 
         public Employee(string code, string firstName, string lastName, DateTime birthday, string email, string address, DateTime hiringDate, double hourlyRate, Uri profilePicture, string status)
         {
+            this.Code = code;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Birthday = birthday;
@@ -52,6 +53,7 @@ namespace ProgBD
             set 
             {
                 if (value == null) throw new ArgumentNullException(nameof(value));
+
                 code = value;
             } 
         }

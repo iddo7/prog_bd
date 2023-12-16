@@ -17,9 +17,27 @@ namespace ProgBD
 {
     public sealed partial class ShowEmployeesPage : Page
     {
+        Employee shownEmployee;
+
         public ShowEmployeesPage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            shownEmployee = (Employee)e.Parameter;
+
+            // employee_profilePicture
+            employee_firstName.Text = shownEmployee.FirstName;
+            employee_lastName.Text = shownEmployee.LastName;
+            employee_code.Text = shownEmployee.Code;
+            employee_email.Text = shownEmployee.Email;
+            employee_hiringDate.Text = shownEmployee.HiringDate.ToString("MMMM dd, yyyy");
+            employee_birthday.Text = shownEmployee.Birthday.ToString("MMMM dd, yyyy");
+            employee_address.Text = shownEmployee.Address;
+            employee_hourlyRate.Text = shownEmployee.HourlyRate.ToString() + "$";
+            employee_status.Text = shownEmployee.Status;
         }
     }
 }
