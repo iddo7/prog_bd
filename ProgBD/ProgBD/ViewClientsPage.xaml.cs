@@ -13,14 +13,8 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace ProgBD
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class ViewClientsPage : Page
     {
         public ViewClientsPage()
@@ -31,16 +25,15 @@ namespace ProgBD
 
         private void btCreateClient_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(CreateClientsPage)); 
+            Frame.Navigate(typeof(CreateClientsPage), ClientSingleton.Instance()); 
         }
 
         private void listeClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (listeClients.SelectedIndex >= 0)
-            {
-                this.Frame.Navigate(typeof(ShowClientsPage), listeClients.SelectedIndex);
+            Client selectedClient = (Client) listeClients.SelectedItem;
+            if (selectedClient == null) return;
 
-            }
+            this.Frame.Navigate(typeof(ShowClientsPage), selectedClient);
         }
     }
 }

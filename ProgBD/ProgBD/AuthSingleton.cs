@@ -1,24 +1,24 @@
-﻿
+﻿using Microsoft.WindowsAppSDK.Runtime.Packages;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 
 namespace ProgBD
 {
-    internal class TaskSingleton
+    internal class AuthSingleton
     {
         MySqlConnection conn;
-        ObservableCollection<Task> list;
-        ObservableCollection<Employee> employees;
+        ObservableCollection<Admin> list;
+        bool isConnected;
         static TaskSingleton instance = null;
 
-        public TaskSingleton()
+        public AuthSingleton()
         {
-            list = new ObservableCollection<Task>();
+            list = new ObservableCollection<Admin>();
             conn = new MySqlConnection(BdConnexionInfo.ConnectionString());
         }
 
@@ -28,43 +28,32 @@ namespace ProgBD
             return instance;
         }
 
-        public ObservableCollection<Task> List()
+        public ObservableCollection<Admin> List()
         {
             UpdateLocalList();
             return list;
         }
 
-        public ObservableCollection<Task> TasksFromProject(string projectCode)
+        public Admin Admin(int index)
         {
-            ObservableCollection<Task> tasks = new();
-            foreach (Task task in list)
-            {
-                if (task.ProjectCode == projectCode) tasks.Add(task);
-            }
-            return tasks;
+            return (Admin)list[index];
         }
 
-        public Task Task(int index)
-        {
-            return (Task)list[index];
-        }
-
-        public bool Create(Task task)
+        public bool Create(Admin admin)
         {
             bool success = true;
 
             try
             {
-                MySqlCommand cmd = new MySqlCommand("p_assign_employee_to_project");
+                MySqlCommand cmd = new MySqlCommand("p_insert_admin");
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("_projectCode", task.ProjectCode);
-                cmd.Parameters.AddWithValue("_employeeCode", task.EmployeeCode);
-                cmd.Parameters.AddWithValue("_hoursWorked", task.HoursWorked);
+                cmd.Parameters.AddWithValue("_username", admin.Username);
+                cmd.Parameters.AddWithValue("_password", admin.Password);
 
                 conn.Open();
                 cmd.Prepare();
-                int i = cmd.ExecuteNonQuery(); // Check i value
+                int i = cmd.ExecuteNonQuery();
                 conn.Close();
             }
             catch (MySqlException mse)
@@ -77,7 +66,7 @@ namespace ProgBD
             return success;
         }
 
-        public bool Edit(string projectCode, string employeeCode, Task updatedTask)
+        public bool Edit(int adminId, Admin updatedAdmin)
         {
             bool success = true;
 
@@ -86,10 +75,9 @@ namespace ProgBD
                 MySqlCommand cmd = new MySqlCommand("p_update_employee_project");
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("_projectCode", projectCode);
-                cmd.Parameters.AddWithValue("_employeeCode", employeeCode);
-                cmd.Parameters.AddWithValue("_hoursWorked", updatedTask.HoursWorked);
-                cmd.Parameters.AddWithValue("_salary", updatedTask.Salary);
+                cmd.Parameters.AddWithValue("_adminId", adminId);
+                cmd.Parameters.AddWithValue("_newUsername", updatedAdmin.Username);
+                cmd.Parameters.AddWithValue("_newPassword", updatedAdmin.Password);
 
 
                 conn.Open();
@@ -107,21 +95,20 @@ namespace ProgBD
             return success;
         }
 
-        public bool Destroy(string projectCode, string employeeCode)
+        public bool Destroy(int adminId)
         {
             bool success = true;
 
             try
             {
-                MySqlCommand cmd = new MySqlCommand("p_delete_employee_project");
+                MySqlCommand cmd = new MySqlCommand("p_delete_admin");
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("_projectCode", projectCode);
-                cmd.Parameters.AddWithValue("_employeeCode", employeeCode);
+                cmd.Parameters.AddWithValue("_adminId", adminId);
 
                 conn.Open();
                 cmd.Prepare();
-                int i = cmd.ExecuteNonQuery(); // Check i value
+                int i = cmd.ExecuteNonQuery();
                 conn.Close();
             }
             catch (MySqlException mse)
@@ -133,7 +120,6 @@ namespace ProgBD
             if (success) UpdateLocalList();
             return success;
         }
-
 
         public void UpdateLocalList()
         {
@@ -141,7 +127,7 @@ namespace ProgBD
 
             try
             {
-                MySqlCommand cmd = new MySqlCommand("p_select_projects_employees");
+                MySqlCommand cmd = new MySqlCommand("p_select_admins");
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -151,17 +137,15 @@ namespace ProgBD
 
                 while (reader.Read())
                 {
-                    string projectCode = (string)reader["projectCode"];
-                    string employeeCode = (string)reader["employeeCode"];
-                    double hoursWorked = (double)reader["hoursWorked"];
-                    double salary = (double)reader["salary"];
+                    int id = (int)reader["id"];
+                    string username = (string)reader["username"];
+                    string password = (string)reader["password"];
 
-                    Task task = new Task
+                    Admin task = new Admin
                     (
-                        projectCode,
-                        employeeCode,
-                        hoursWorked,
-                        salary
+                        id,
+                        username,
+                        password
                     );
 
                     list.Add(task);
@@ -179,6 +163,35 @@ namespace ProgBD
         public void ClearLocalList()
         {
             list.Clear();
+        }
+
+        public bool Login(string username, string password)
+        {
+            bool success = false;
+            foreach (Admin admin in list)
+            {
+                if (username == admin.Username && password == admin.Password)
+                {
+                    success = true;
+                    break;
+                }
+            }
+            return success;
+        }
+
+        public bool HasAdmins()
+        {
+            return list.Count > 0;
+        }
+
+        public bool IsConnected()
+        {
+            return isConnected;
+        }
+
+        public void SetConnection(bool connection)
+        {
+            isConnected = connection;
         }
     }
 }

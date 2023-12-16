@@ -13,24 +13,32 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace ProgBD
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class ShowClientsPage : Page
     {
+        Client shownClient;
+
         public ShowClientsPage()
         {
             this.InitializeComponent();
         }
 
+
         private void btModifyClient_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(EditClientsPage));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            shownClient = (Client) e.Parameter;
+
+            client_id.Text = shownClient.Id.ToString();
+            client_address.Text = shownClient.Address;
+            client_email.Text = shownClient.Email;
+            client_fullName.Text = shownClient.FullName;
+            client_phoneNumber.Text = shownClient.PhoneNumber;
         }
     }
 }

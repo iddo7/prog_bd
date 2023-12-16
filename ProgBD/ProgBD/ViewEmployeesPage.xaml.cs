@@ -13,9 +13,6 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace ProgBD { 
 
     public sealed partial class ViewEmployeesPage : Page
@@ -35,8 +32,10 @@ namespace ProgBD {
         {
             if (listeEmployees.SelectedIndex >= 0)
             {
-                this.Frame.Navigate(typeof(ShowEmployeesPage), listeEmployees.SelectedIndex);
+                Employee selectedEmployee = (Employee) listeEmployees.SelectedItem;
+                if (selectedEmployee == null) return;
 
+                this.Frame.Navigate(typeof(ShowEmployeesPage), selectedEmployee);
             }
         }
     }

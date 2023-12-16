@@ -13,16 +13,12 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace ProgBD
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class ShowEmployeesPage : Page
     {
+        Employee shownEmployee;
+
         public ShowEmployeesPage()
         {
             this.InitializeComponent();
@@ -31,6 +27,21 @@ namespace ProgBD
         private void btModifyEmployee_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(EditEmployeesPage));
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            shownEmployee = (Employee)e.Parameter;
+
+            // employee_profilePicture
+            employee_firstName.Text = shownEmployee.FirstName;
+            employee_lastName.Text = shownEmployee.LastName;
+            employee_code.Text = shownEmployee.Code;
+            employee_email.Text = shownEmployee.Email;
+            employee_hiringDate.Text = shownEmployee.HiringDate.ToString("MMMM dd, yyyy");
+            employee_birthday.Text = shownEmployee.Birthday.ToString("MMMM dd, yyyy");
+            employee_address.Text = shownEmployee.Address;
+            employee_hourlyRate.Text = shownEmployee.HourlyRate.ToString() + "$";
+            employee_status.Text = shownEmployee.Status;
         }
     }
 }
