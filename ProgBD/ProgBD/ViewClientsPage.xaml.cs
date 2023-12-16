@@ -30,10 +30,10 @@ namespace ProgBD
 
         private void listeClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int selectedIndex = listeClients.SelectedIndex;
-            if (selectedIndex == -1) return;
+            Client selectedClient = (Client) listeClients.SelectedItem;
+            if (selectedClient == null) return;
 
-            this.Frame.Navigate(typeof(ShowClientsPage), listeClients.SelectedItem);
+            this.Frame.Navigate(typeof(ShowClientsPage), selectedClient);
         }
     }
 }
