@@ -32,7 +32,7 @@ namespace ProgBD
             get => username;
             set
             {
-                if (Utilities.ContainsSymbols(value)) throw new ArgumentException();
+                if (Utilities.ContainsSymbols(value) || value == string.Empty) throw new ArgumentException();
                 username = value;
             }
         }
@@ -41,7 +41,7 @@ namespace ProgBD
             get => password; 
             set
             {
-                if (value.Length < 8) throw new ArgumentException();
+                if (value.Length < 8 || value == string.Empty) throw new ArgumentException();
                 password = value;
             }
         }

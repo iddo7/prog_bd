@@ -15,6 +15,7 @@
     <None Remove="CreateClientsPage.xaml" />
     <None Remove="CreateEmployeesPage.xaml" />
     <None Remove="CreateProjectsPage.xaml" />
+    <None Remove="LoginDialog.xaml" />
     <None Remove="ShowClientsPage.xaml" />
     <None Remove="ShowEmployeesPage.xaml" />
     <None Remove="ShowProjectsPage.xaml" />
@@ -47,6 +48,11 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="LoginDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="ShowEmployeesPage.xaml">

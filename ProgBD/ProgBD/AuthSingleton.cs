@@ -14,7 +14,7 @@ namespace ProgBD
         MySqlConnection conn;
         ObservableCollection<Admin> list;
         bool isConnected;
-        static TaskSingleton instance = null;
+        static AuthSingleton instance = null;
 
         public AuthSingleton()
         {
@@ -22,9 +22,9 @@ namespace ProgBD
             conn = new MySqlConnection(BdConnexionInfo.ConnectionString());
         }
 
-        public static TaskSingleton Instance()
+        public static AuthSingleton Instance()
         {
-            if (instance == null) instance = new TaskSingleton();
+            if (instance == null) instance = new AuthSingleton();
             return instance;
         }
 
@@ -167,6 +167,7 @@ namespace ProgBD
 
         public bool Login(string username, string password)
         {
+            UpdateLocalList();
             bool success = false;
             foreach (Admin admin in list)
             {
@@ -176,6 +177,8 @@ namespace ProgBD
                     break;
                 }
             }
+
+            SetConnection(success);
             return success;
         }
 

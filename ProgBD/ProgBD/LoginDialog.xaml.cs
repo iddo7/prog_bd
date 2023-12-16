@@ -34,6 +34,40 @@ namespace ProgBD
         {
             username = input_username.Text;
             password = input_password.Password;
+
+            Admin admin = new Admin();
+            bool verificationAdmin = true;
+
+            try
+            {
+                admin.Username = username;
+                Utilities.SetVisibility(alert_username, false);
+            }
+            catch (Exception ex)
+            {
+                Utilities.SetVisibility(alert_username, true);
+                verificationAdmin = false;
+            }
+
+            try
+            {
+                admin.Password = password;
+                Utilities.SetVisibility(alert_password, false);
+            }
+            catch (Exception ex)
+            {
+                Utilities.SetVisibility(alert_password, true);
+                verificationAdmin = false;
+            }
+
+            bool loginSuccess = false;
+            if (verificationAdmin)
+            {
+                loginSuccess = AuthSingleton.Instance().Login(username, password);
+                AuthSingleton.Instance().SetConnection(loginSuccess);
+                Utilities.SetVisibility(alert_login, !loginSuccess);
+            }
+            args.Cancel = !(loginSuccess && verificationAdmin); // Only close dialog if logged
         }
     }
 }

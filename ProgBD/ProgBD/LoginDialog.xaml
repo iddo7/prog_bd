@@ -10,8 +10,18 @@
     PrimaryButtonClick="PrimaryButtonClick">
 
     <StackPanel>
-        <TextBox x:Name="input_username" Header="Nom d'utilisateur" />
-        <PasswordBox x:Name="input_password" Header="Mot de passe" />
+
+        <StackPanel>
+            <TextBox x:Name="input_username" Header="Nom d'utilisateur" />
+            <TextBlock x:Name="alert_username" Foreground="Red" Visibility="Collapsed" Margin="0 0 0 10">Nom d'utilisateur invalide</TextBlock>
+        </StackPanel>
+
+        <StackPanel Margin="0 15 0 0">
+            <PasswordBox x:Name="input_password" Header="Mot de passe" />
+            <TextBlock x:Name="alert_password" Foreground="Red" Visibility="Collapsed" Margin="0 0 0 10">Mot de passe invalide. Au moins 8 characteres.</TextBlock>
+        </StackPanel>
+
+        <TextBlock x:Name="alert_login" Foreground="Red" Visibility="Collapsed" Margin="0 15 0 0">Erreur lors de l'authentification. Veuillez reessayer.</TextBlock>
     </StackPanel>
     
 </ContentDialog>

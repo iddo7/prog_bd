@@ -38,7 +38,7 @@ namespace ProgBD
 
 
         /*   --- LOGIN Dialog Box ---   */
-        public static async Task<ContentDialogResult> LoginDialog()
+        public static async void LoginDialog()
         {
             LoginDialog dialog = new LoginDialog()
             {
@@ -49,7 +49,7 @@ namespace ProgBD
                 DefaultButton = ContentDialogButton.Primary
             };
 
-            return await dialog.ShowAsync();
+            await dialog.ShowAsync();
         }
     }
 }
