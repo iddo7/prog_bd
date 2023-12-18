@@ -21,7 +21,7 @@ namespace ProgBD
             this.Salary = 0;
         }
 
-        public Task(string projectCode, string employeeCode, double hoursWorked, double salary)
+        public Task(string projectCode, string employeeCode, double hoursWorked = 0, double salary = 0)
         {
             this.ProjectCode = projectCode;
             this.EmployeeCode = employeeCode;

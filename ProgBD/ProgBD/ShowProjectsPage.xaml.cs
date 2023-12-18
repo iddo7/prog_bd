@@ -29,11 +29,7 @@ namespace ProgBD
         {
             shownProject = (Project)e.Parameter;
 
-            TaskSingleton.Instance().UpdateLocalList();
-            listeTasks.ItemsSource = TaskSingleton.Instance().TasksFromProject(shownProject.Code);
-
-            listUnassignedEmployees.ItemsSource = EmployeeSingleton.Instance().List();
-
+            UpdateLists();
 
             project_code.Text = shownProject.Code;
             project_title.Text = shownProject.Title;
@@ -55,24 +51,33 @@ namespace ProgBD
             Frame.Navigate(typeof(EditProjectsPage), shownProject);
         }
 
-        private void listUnassignedEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void listUnassignedEmployees_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void listeTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
 
-        private void btAssignEmployeeToProject_Click(object sender, RoutedEventArgs e)
+        private async void btAssignEmployeeToProject_Click(object sender, RoutedEventArgs e)
         {
+            Employee selectedEmployee = (Employee)listUnassignedEmployees.SelectedItem;
 
+            if (selectedEmployee == null) return;
+            if (shownProject.Status == "Terminé")
+            {
+                await Dialog.VoidDialog("Creation tache", "Ce projet est terminé, vous ne pouvez pas y ajouter des taches.");
+                return;
+            }
+
+            Task task = new(shownProject.Code, selectedEmployee.Code);
+
+            TaskSingleton.Instance().Create(task);
+            UpdateLists();
+        }
+
+        private void UpdateLists()
+        {
+            TaskSingleton.Instance().UpdateLocalList();
+            listeTasks.ItemsSource = TaskSingleton.Instance().TasksFromProject(shownProject.Code);
+            listUnassignedEmployees.ItemsSource = EmployeeSingleton.Instance().UnassignedEmployees();
         }
     }
 }
