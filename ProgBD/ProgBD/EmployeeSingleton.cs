@@ -38,6 +38,59 @@ namespace ProgBD
             return (Employee)list[index];
         }
 
+        public ObservableCollection<Employee> UnassignedEmployees()
+        {
+            ObservableCollection<Employee> unassignedEmployees = new();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("p_select_unassigned_employees");
+                cmd.Connection = conn;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                conn.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+
+                while (reader.Read())
+                {
+                    string code = (string)reader["code"];
+                    string firstName = (string)reader["firstName"];
+                    string lastName = (string)reader["lastName"];
+                    DateTime birthday = (DateTime)reader["birthday"];
+                    string email = (string)reader["email"];
+                    string address = (string)reader["address"];
+                    DateTime hiringDate = (DateTime)reader["hiringDate"];
+                    double hourlyRate = (double)reader["hourlyRate"];
+                    Uri profilePicture = new Uri((string)reader["profilePicture"]);
+                    string status = (string)reader["status"];
+
+                    Employee employee = new Employee
+                    (
+                        code,
+                        firstName,
+                        lastName,
+                        birthday,
+                        email,
+                        address,
+                        hiringDate,
+                        hourlyRate,
+                        profilePicture,
+                        status
+                    );
+
+                    unassignedEmployees.Add(employee);
+                }
+                reader.Close();
+                conn.Close();
+            }
+            catch (MySqlException mse)
+            {
+                conn.Close();
+            }
+
+            return unassignedEmployees;
+        }
+
         public bool Create(Employee employee)
         {
             bool success = true;
