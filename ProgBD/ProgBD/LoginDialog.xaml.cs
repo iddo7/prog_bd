@@ -56,7 +56,7 @@ namespace ProgBD
             if (verificationAdmin)
             {
                 loginSuccess = AuthSingleton.Instance().Login(admin.Username, Utilities.HashSHA256(admin.Password));
-                AuthSingleton.Instance().SetConnection(loginSuccess);
+                AuthSingleton.Instance().SetConnection(loginSuccess, admin);
                 Utilities.SetVisibility(alert_login, !loginSuccess);
             }
             args.Cancel = !(loginSuccess && verificationAdmin); // Only close dialog if logged
