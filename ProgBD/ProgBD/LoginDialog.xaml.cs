@@ -55,7 +55,7 @@ namespace ProgBD
             bool loginSuccess = false;
             if (verificationAdmin)
             {
-                loginSuccess = AuthSingleton.Instance().Login(admin.Username, admin.Password);
+                loginSuccess = AuthSingleton.Instance().Login(admin.Username, Utilities.HashSHA256(admin.Password));
                 AuthSingleton.Instance().SetConnection(loginSuccess);
                 Utilities.SetVisibility(alert_login, !loginSuccess);
             }
