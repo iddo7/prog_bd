@@ -136,7 +136,7 @@ namespace ProgBD
             await Dialog.VoidDialog(dialogTitle, dialogContent);
 
             if (!actionSucceeded) return;
-            Frame.Navigate(typeof(ViewEmployeesPage));
+            Frame.Navigate(typeof(ViewProjectsPage));
 
 
         }

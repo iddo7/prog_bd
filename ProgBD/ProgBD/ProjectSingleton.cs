@@ -87,6 +87,7 @@ namespace ProgBD
                 cmd.Parameters.AddWithValue("_budget", updatedProject.Budget);
                 cmd.Parameters.AddWithValue("_numberOfEmployees", updatedProject.NumberOfEmployees);
                 cmd.Parameters.AddWithValue("_totalSalaries", updatedProject.TotalSalaries);
+                cmd.Parameters.AddWithValue("_status", updatedProject.Status);
                 cmd.Parameters.AddWithValue("_clientId", updatedProject.Client.Id);
 
 
