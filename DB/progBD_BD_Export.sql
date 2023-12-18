@@ -732,6 +732,24 @@ END //
 DELIMITER ;
 
 
+/* Retourne unassigned employees */
+DELIMITER //
+
+CREATE PROCEDURE p_select_unassigned_employees()
+BEGIN
+    SELECT *
+    FROM employees e
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM projects_employees pe
+        WHERE pe.employeeCode = e.code
+    );
+END //
+
+DELIMITER ;
+-- CALL p_select_unassigned_employees();
+
+
 
 DELIMITER //
 
