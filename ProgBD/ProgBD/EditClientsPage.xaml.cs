@@ -24,7 +24,7 @@ namespace ProgBD
     /// </summary>
     public sealed partial class EditClientsPage : Page
     {
-        int index = -1;
+        Client shownClient;
 
         public EditClientsPage()
         {
@@ -33,12 +33,17 @@ namespace ProgBD
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            shownClient = (Client)e.Parameter;
 
+            input_client_address.Text = shownClient.Address;
+            input_client_email.Text = shownClient.Email;
+            input_client_fullName.Text = shownClient.FullName;
+            input_client_phoneNumber.Text = shownClient.PhoneNumber;
         }
 
         private void btConfirmEditClient_Click(object sender, RoutedEventArgs e)
         {
-                        Client client = new Client();
+            Client client = new Client();
             bool verification_client = true;
 
             try

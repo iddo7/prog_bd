@@ -27,7 +27,7 @@ namespace ProgBD
 
         private void btModifyClient_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(EditClientsPage));
+            Frame.Navigate(typeof(EditClientsPage), shownClient);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

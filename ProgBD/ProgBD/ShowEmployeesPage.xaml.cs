@@ -26,7 +26,7 @@ namespace ProgBD
 
         private void btModifyEmployee_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(EditEmployeesPage));
+            Frame.Navigate(typeof(EditEmployeesPage), shownEmployee);
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -42,6 +42,7 @@ namespace ProgBD
             employee_address.Text = shownEmployee.Address;
             employee_hourlyRate.Text = shownEmployee.HourlyRate.ToString() + "$";
             employee_status.Text = shownEmployee.Status;
+            employee_profilePicture.DataContext = shownEmployee.ProfilePicture;
         }
     }
 }
