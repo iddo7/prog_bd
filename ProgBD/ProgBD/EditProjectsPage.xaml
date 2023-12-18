@@ -40,7 +40,7 @@
             <TextBox x:Name="input_project_numberOfEmployees" Header="Nombre d'employés"></TextBox>
             <TextBlock x:Name="alert_project_numberOfEmployees" Foreground="Red" Visibility="Collapsed">Veuillez saisir un nombre d'employés valide</TextBlock>
 
-            <TextBox x:Name="input_project_status" Header="Nombre d'employés"></TextBox>
+            <TextBox x:Name="input_project_status" Header="Statut du projet"></TextBox>
             <TextBlock x:Name="alert_project_status" Foreground="Red" Visibility="Collapsed">Veuillez saisir un statut</TextBlock>
         </StackPanel>
         
