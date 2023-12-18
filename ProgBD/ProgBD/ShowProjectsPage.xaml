@@ -15,27 +15,90 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock x:Name="display_ShowProject" FontSize="30" FontWeight="Medium" Margin="0, 0, 0, 0">Détails du projet</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Grid.Row="0">
+            <TextBlock x:Name="display_ShowProject" FontSize="30" FontWeight="Medium" Margin="0, 0, 0, 0">Détails du projet</TextBlock>
 
         <!-- Informations personnelles -->
-        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,100,0,0">
-            <TextBlock x:Name="project_code" Margin="0,0,0,60"></TextBlock>
-            <TextBlock x:Name="project_title" Margin="0,0,0,60">as</TextBlock>
-            <TextBlock x:Name="project_description" Margin="0,0,0,60">as</TextBlock>
-            <TextBlock x:Name="project_budget" Margin="0,0,0,60">as</TextBlock>
+        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,0">
+            <TextBlock x:Name="project_code" Margin="0,0,0,0"></TextBlock>
+            <TextBlock x:Name="project_title" Margin="0,0,0,0">as</TextBlock>
+            <TextBlock x:Name="project_description" Margin="0,0,0,0">as</TextBlock>
+            <TextBlock x:Name="project_budget" Margin="0,0,0,0">as</TextBlock>
         </StackPanel>
 
         <!-- Informations sur l'emploi -->
-        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,100,0,0">
-            <TextBlock x:Name="project_startDate" Margin="0,0,0,60">as</TextBlock>
-            <TextBlock x:Name="project_client" Margin="0,0,0,60">as</TextBlock>
-            <TextBlock x:Name="project_status" Margin="0,0,0,60">as</TextBlock>
-            <TextBlock x:Name="project_totalSalaries" Margin="0,0,0,60">as</TextBlock>
+        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,0">
+            <TextBlock x:Name="project_startDate" Margin="0,0,0,0">as</TextBlock>
+            <TextBlock x:Name="project_client" Margin="0,0,0,0">as</TextBlock>
+            <TextBlock x:Name="project_status" Margin="0,0,0,0">as</TextBlock>
+            <TextBlock x:Name="project_totalSalaries" Margin="0,0,0,0">as</TextBlock>
         </StackPanel>
-
-
-        <Button x:Name="btModifyProjects" Click="btModifyProjects_Click" HorizontalAlignment="Center" Grid.ColumnSpan="2">
+        </StackPanel>
+        
+        <Button x:Name="btModifyProjects" Click="btModifyProjects_Click" Grid.Row="0" HorizontalAlignment="Center" Grid.ColumnSpan="2">
             <TextBlock Foreground="Black">Modifier le projet</TextBlock>
         </Button>
+        
+        <ListView x:Name="listeTasks" SelectionChanged="listeTasks_SelectionChanged" Grid.ColumnSpan="2" Grid.Row="1" Padding="20" HorizontalAlignment="Stretch" Margin="0,0,0,0">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Task">
+                    <Grid Padding="30" Margin="10" HorizontalAlignment="Stretch" CornerRadius="15" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{Binding ProjectCode}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="0"/>
+                        <TextBlock Text="{Binding EmployeeCode}" FontSize="18" FontFamily="Arial Rounded" Grid.Column="1" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding HoursWorked}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="2" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Salary}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button x:Name="btAssignEmployeeToProject" Click="btAssignEmployeeToProject_Click" Grid.Row="2" HorizontalAlignment="Center" Grid.ColumnSpan="2">
+            <TextBlock Foreground="Black">Ajouter employé au projet</TextBlock>
+        </Button>
+
+        <GridView x:Name="listUnassignedEmployees" SelectionChanged="listUnassignedEmployees_SelectionChanged_1" Grid.ColumnSpan="2" Grid.Row="3" Padding="20" HorizontalAlignment="Stretch" Margin="0,0,0,0">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="local:Employee">
+                    <StackPanel Margin="35" Background="White" Width="220" CornerRadius="15">
+                        <Grid Margin="15">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image Grid.Row="0" Source="{Binding ProfilePicture}" Width="100" Height="100" Margin="0 0 0 10"/>
+
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <TextBlock Text="{Binding FirstName}" FontSize="18" FontFamily="Arial Rounded" Margin="3"/>
+                                <TextBlock Text="{Binding LastName}" FontSize="18" FontFamily="Arial Rounded"  Margin="3"/>
+                            </StackPanel>
+
+                            <TextBlock Grid.Row="2" Text="{Binding Status}" FontStyle="Italic" FontWeight="Light" />
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+
+
     </Grid>
 </Page>

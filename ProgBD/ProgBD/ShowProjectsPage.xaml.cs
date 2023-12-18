@@ -22,11 +22,18 @@ namespace ProgBD
         public ShowProjectsPage()
         {
             this.InitializeComponent();
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            shownProject = (Project) e.Parameter;
+            shownProject = (Project)e.Parameter;
+
+            TaskSingleton.Instance().UpdateLocalList();
+            listeTasks.ItemsSource = TaskSingleton.Instance().TasksFromProject(shownProject.Code);
+
+            listUnassignedEmployees.ItemsSource = EmployeeSingleton.Instance().List();
+
 
             project_code.Text = shownProject.Code;
             project_title.Text = shownProject.Title;
@@ -41,6 +48,26 @@ namespace ProgBD
         private void btModifyProjects_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(EditProjectsPage), shownProject);
+        }
+
+        private void listUnassignedEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void listUnassignedEmployees_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void listeTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btAssignEmployeeToProject_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
