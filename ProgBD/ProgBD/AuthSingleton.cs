@@ -14,6 +14,7 @@ namespace ProgBD
         MySqlConnection conn;
         ObservableCollection<Admin> list;
         bool isConnected;
+        Admin connectedAdmin;
         static AuthSingleton instance = null;
 
         public AuthSingleton()
@@ -37,6 +38,11 @@ namespace ProgBD
         public Admin Admin(int index)
         {
             return (Admin)list[index];
+        }
+
+        public Admin ConnectedAdmin()
+        {
+            return connectedAdmin;
         }
 
         public bool Create(Admin admin)
@@ -192,9 +198,10 @@ namespace ProgBD
             return isConnected;
         }
 
-        public void SetConnection(bool connection)
+        public void SetConnection(bool connection, Admin admin = null)
         {
             isConnected = connection;
+            connectedAdmin = admin;
         }
     }
 }

@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid>
-        <NavigationView x:Name="navView" SelectionChanged="navView_SelectionChanged"  IsSettingsVisible="False">
+        <NavigationView x:Name="navView" SelectionChanged="navView_SelectionChanged" IsSettingsVisible="False">
 
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Clients" x:Name="navClients" Icon="People"/>
@@ -17,7 +17,7 @@
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem Content="Compte" x:Name="navLogout" Icon="Account"/>
+                <NavigationViewItem Content="Compte" x:Name="navAuth" Icon="Account"/>
             </NavigationView.FooterMenuItems>
 
             <Frame x:Name="mainFrame"/>

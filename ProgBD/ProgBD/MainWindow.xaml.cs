@@ -41,6 +41,30 @@ namespace ProgBD
                 case "navEmployees":
                     mainFrame.Navigate(typeof(ViewEmployeesPage));
                     break;
+
+
+                case "navAuth":
+                    if (AuthSingleton.Instance().List().Count < 1)
+                    {
+                        Dialog.CreateAdminDialog();
+                        break;
+                    }
+
+                    if (AuthSingleton.Instance().IsConnected())
+                    {
+                        Dialog.ShowAdminDialog();
+                        mainFrame.Navigate(typeof(ViewProjectsPage));
+                        break;
+                    }
+                    else
+                    {
+                        Dialog.LoginDialog();
+                    }
+
+                    break;
+
+
+
                 default:
                     break;
 

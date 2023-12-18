@@ -139,8 +139,8 @@ namespace ProgBD
             }
             else
             {
-                dialogTitle = Dialog.DefaultErrorTitle();
-                dialogContent = Dialog.DefaultErrorContent();
+                dialogTitle = Dialog.DefaultErrorTitle;
+                dialogContent = Dialog.DefaultErrorContent;
             }
             await Dialog.VoidDialog(dialogTitle, dialogContent);
 
