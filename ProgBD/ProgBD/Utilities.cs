@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -59,5 +60,19 @@ namespace ProgBD
 
             return regex.IsMatch(phoneNumber);
         }
+
+        public static string HashSHA256(string input)
+        {
+            var sha256 = SHA256.Create();
+            byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
+            StringBuilder output = new StringBuilder();
+
+            foreach (byte b in bytes)
+            {
+                output.Append(b.ToString("x2"));
+            }
+            return output.ToString();
+        }
+
     }
 }
