@@ -41,7 +41,7 @@ namespace ProgBD
             input_client_phoneNumber.Text = shownClient.PhoneNumber;
         }
 
-        private void btConfirmEditClient_Click(object sender, RoutedEventArgs e)
+        private async void btConfirmEditClient_Click(object sender, RoutedEventArgs e)
         {
             Client client = new Client();
             bool verification_client = true;
@@ -91,6 +91,27 @@ namespace ProgBD
             }
 
             if (!verification_client) return;
+
+            bool actionSucceeded = ClientSingleton.Instance().Edit(shownClient.Id, client);
+
+
+            /*   --- FEEDBACK ---   */
+            string dialogTitle;
+            string dialogContent;
+            if (actionSucceeded)
+            {
+                dialogTitle = "Client modifié";
+                dialogContent = $"Le client {client.FullName} a bien été modifié";
+            }
+            else
+            {
+                dialogTitle = Dialog.DefaultErrorTitle();
+                dialogContent = Dialog.DefaultErrorContent();
+            }
+            await Dialog.VoidDialog(dialogTitle, dialogContent);
+
+            if (!actionSucceeded) return;
+            Frame.Navigate(typeof(ViewClientsPage));
         }
     }
 }

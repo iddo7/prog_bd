@@ -23,7 +23,7 @@
             <TextBlock x:Name="employee_code" Margin="0,0,0,60">as</TextBlock>
             <TextBlock x:Name="employee_email" Margin="0,0,0,60">as</TextBlock>
             <TextBlock x:Name="employee_hiringDate" Margin="0,0,0,60">as</TextBlock>
-            <Image x:Name="employee_profilePicture" Margin="0,0,0,60"></Image>
+            <Image x:Name="employee_profilePicture" Margin="0,0,0,60" Height="200" Width="200"></Image>
 
         </StackPanel>
 

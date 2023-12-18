@@ -152,13 +152,12 @@ namespace ProgBD
                 if (value != "Journalier" && value != "Permanent") throw new ArgumentException("Invalid status");
                 status = value;
 
-/*                TimeSpan difference = DateTime.Today - hiringDate;
-                if (difference.TotalDays < (365 * 3))
+                TimeSpan difference = DateTime.Today - hiringDate;
+                if (value == "Permanent" && difference.TotalDays < (365 * 3))
                 {
                     throw new ArgumentException("Invalid status");
                 }
 
-                if ()*/
             }
         }
 

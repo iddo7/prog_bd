@@ -12,6 +12,8 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI.Xaml.Media.Imaging;
+using MySqlX.XDevAPI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -38,15 +40,18 @@ namespace ProgBD
             input_employee_email.Text = shownEmployee.Email;
             input_employee_firstName.Text = shownEmployee.FirstName;
             input_employee_hourlyRate.Text = shownEmployee.HourlyRate.ToString("0.00");
-            input_employee_hiringDate.DataContext = shownEmployee.HiringDate;
-            input_employee_birthday.DataContext = shownEmployee.Birthday;
-            /*            
-            input_employee_profilePicture.BaseUri = shownEmployee.ProfilePicture; ERREUR IMAGE
-            */
+            input_employee_hiringDate.SelectedDate = shownEmployee.HiringDate;
+            input_employee_birthday.SelectedDate = shownEmployee.Birthday;
+            input_employee_profilePicture.Text = shownEmployee.ProfilePicture.ToString();
+            input_employee_status.Text = shownEmployee.Status;
+
+
+
+
 
         }
 
-        private void btConfirmEditEmployee_Click(object sender, RoutedEventArgs e)
+        private async void btConfirmEditEmployee_Click(object sender, RoutedEventArgs e)
         {
 
             Employee employee = new Employee();
@@ -98,7 +103,7 @@ namespace ProgBD
                 verification_employee = false;
             }
 
-/*            try
+            try
             {
                 employee.ProfilePicture = new Uri(input_employee_profilePicture.Text);
                 Utilities.SetVisibility(alert_employee_profilePicture, false);
@@ -108,7 +113,7 @@ namespace ProgBD
             {
                 Utilities.SetVisibility(alert_employee_profilePicture, true); ;
                 verification_employee = false;
-            }*/
+            }
 
             try
             {
@@ -145,7 +150,43 @@ namespace ProgBD
                 verification_employee = false;
             }
 
+            try
+            {
+                employee.Status = input_employee_status.Text;
+                Utilities.SetVisibility(input_employee_status, false);
+
+            }
+            catch (Exception ex)
+            {
+                Utilities.SetVisibility(alert_employee_status, true); ;
+                verification_employee = false;
+            }
+
+
+
             if (!verification_employee) return;
+
+            bool actionSucceeded = EmployeeSingleton.Instance().Edit(shownEmployee.Code, employee);
+
+
+            /*   --- FEEDBACK ---   */
+            string dialogTitle;
+            string dialogContent;
+            if (actionSucceeded)
+            {
+                dialogTitle = "Employée modifié";
+                dialogContent = $"Le client {employee.FirstName} {employee.LastName} a bien été modifié";
+            }
+            else
+            {
+                dialogTitle = Dialog.DefaultErrorTitle();
+                dialogContent = Dialog.DefaultErrorContent();
+            }
+            await Dialog.VoidDialog(dialogTitle, dialogContent);
+
+            if (!actionSucceeded) return;
+            Frame.Navigate(typeof(ViewEmployeesPage));
         }
     }
+    
 }

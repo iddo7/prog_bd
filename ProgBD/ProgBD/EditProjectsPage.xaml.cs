@@ -36,13 +36,14 @@ namespace ProgBD
             input_project_title.Text = shownProject.Title;
             input_project_description.Text = shownProject.Description;
             input_project_budget.Text = shownProject.Budget.ToString("0.00");
-            input_project_startDate.DataContext = shownProject.StartDate;
+            input_project_startDate.SelectedDate = shownProject.StartDate;
             input_project_numberOfEmployees.Text = shownProject.NumberOfEmployees.ToString("0");
+            input_project_status.Text = shownProject.Status;
 
 
         }
 
-        private void btConfirmEditProject_Click(object sender, RoutedEventArgs e)
+        private async void btConfirmEditProject_Click(object sender, RoutedEventArgs e)
         {
             Project project = new Project();
             bool verification_project = true;
@@ -102,8 +103,42 @@ namespace ProgBD
                 verification_project = false;
             }
 
+            try
+            {
+                project.Status = input_project_status.Text;
+                Utilities.SetVisibility(alert_project_status, false);
+            }
+            catch (Exception ex)
+            {
+                Utilities.SetVisibility(alert_project_status, true);
+                verification_project = false;
+            }
+
 
             if (!verification_project) return;
+
+            bool actionSucceeded = ProjectSingleton.Instance().Edit(shownProject.Code, project);
+
+
+            /*   --- FEEDBACK ---   */
+            string dialogTitle;
+            string dialogContent;
+            if (actionSucceeded)
+            {
+                dialogTitle = "Projet modifié";
+                dialogContent = $"Le projet {project.Title} a bien été modifié";
+            }
+            else
+            {
+                dialogTitle = Dialog.DefaultErrorTitle();
+                dialogContent = Dialog.DefaultErrorContent();
+            }
+            await Dialog.VoidDialog(dialogTitle, dialogContent);
+
+            if (!actionSucceeded) return;
+            Frame.Navigate(typeof(ViewEmployeesPage));
+
+
         }
     }
 }
