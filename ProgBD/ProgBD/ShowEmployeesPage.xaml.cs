@@ -27,6 +27,11 @@ namespace ProgBD
 
         private void btModifyEmployee_Click(object sender, RoutedEventArgs e)
         {
+            if (!AuthSingleton.Instance().IsConnected())
+            {
+                Dialog.NotLoggedDialog();
+                return;
+            }
             Frame.Navigate(typeof(EditEmployeesPage), shownEmployee);
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)

@@ -27,6 +27,11 @@ namespace ProgBD
 
         private void btModifyClient_Click(object sender, RoutedEventArgs e)
         {
+            if (!AuthSingleton.Instance().IsConnected())
+            {
+                Dialog.NotLoggedDialog();
+                return;
+            }
             Frame.Navigate(typeof(EditClientsPage), shownClient);
         }
 
