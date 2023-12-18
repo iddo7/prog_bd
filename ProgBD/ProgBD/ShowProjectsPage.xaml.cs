@@ -40,6 +40,11 @@ namespace ProgBD
 
         private void btModifyProjects_Click(object sender, RoutedEventArgs e)
         {
+            if (!AuthSingleton.Instance().IsConnected())
+            {
+                Dialog.NotLoggedDialog();
+                return;
+            }
             Frame.Navigate(typeof(EditProjectsPage), shownProject);
         }
     }

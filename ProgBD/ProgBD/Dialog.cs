@@ -21,6 +21,7 @@ namespace ProgBD
         public static string DefaultAdminTitle => "Administration";
 
         public static string DefaultLoginTitle => "Authentification";
+        public static string DefaultNotLoggedTitle => "Connectez vous pour acceder a cette page.";
         public static string DefaultLoginPrimaryButtonText => "Se connecter";
         public static string DefaultCreateAdminTitle => "Creation d'un administrateur";
         public static string DefaultCreatePrimaryButtonText => "Creer";
@@ -75,6 +76,13 @@ namespace ProgBD
             };
 
             await dialog.ShowAsync();
+        }
+
+
+        /*   --- LOGIN Dialog ---   */
+        public static async void NotLoggedDialog()
+        {
+            await VoidDialog(DefaultLoginTitle, DefaultNotLoggedTitle);
         }
 
 
