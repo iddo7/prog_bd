@@ -17,7 +17,7 @@
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem Content="Connecté" x:Name="navLogout" Icon="Switch"/>
+                <NavigationViewItem Content="Compte" x:Name="navLogout" Icon="Account"/>
             </NavigationView.FooterMenuItems>
 
             <Frame x:Name="mainFrame"/>
