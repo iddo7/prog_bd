@@ -40,7 +40,7 @@ namespace ProgBD
 
         private void btModifyProjects_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(EditProjectsPage));
+            Frame.Navigate(typeof(EditProjectsPage), shownProject);
         }
     }
 }

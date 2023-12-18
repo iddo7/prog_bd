@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace ProgBD
 
         private void btModifyEmployee_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(EditEmployeesPage));
+            Frame.Navigate(typeof(EditEmployeesPage), shownEmployee);
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -42,6 +43,7 @@ namespace ProgBD
             employee_address.Text = shownEmployee.Address;
             employee_hourlyRate.Text = shownEmployee.HourlyRate.ToString() + "$";
             employee_status.Text = shownEmployee.Status;
+            employee_profilePicture.Source = new BitmapImage(new Uri(shownEmployee.ProfilePicture.ToString(), UriKind.RelativeOrAbsolute));
         }
     }
 }
