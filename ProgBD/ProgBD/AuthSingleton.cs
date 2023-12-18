@@ -49,7 +49,7 @@ namespace ProgBD
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("_username", admin.Username);
-                cmd.Parameters.AddWithValue("_password", admin.Password);
+                cmd.Parameters.AddWithValue("_password", Utilities.HashSHA256(admin.Password));
 
                 conn.Open();
                 cmd.Prepare();
@@ -77,7 +77,7 @@ namespace ProgBD
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("_adminId", adminId);
                 cmd.Parameters.AddWithValue("_newUsername", updatedAdmin.Username);
-                cmd.Parameters.AddWithValue("_newPassword", updatedAdmin.Password);
+                cmd.Parameters.AddWithValue("_newPassword", Utilities.HashSHA256(updatedAdmin.Password));
 
 
                 conn.Open();
