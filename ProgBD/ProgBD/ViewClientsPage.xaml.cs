@@ -25,6 +25,11 @@ namespace ProgBD
 
         private void btCreateClient_Click(object sender, RoutedEventArgs e)
         {
+            if (!AuthSingleton.Instance().IsConnected())
+            {
+                Dialog.NotLoggedDialog();
+                return;
+            }
             Frame.Navigate(typeof(CreateClientsPage), ClientSingleton.Instance()); 
         }
 
