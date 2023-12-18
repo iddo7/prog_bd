@@ -25,7 +25,7 @@
             <TextBox x:Name="input_employee_address" Header="Adresse"></TextBox>
             <TextBlock x:Name="alert_employee_address" Foreground="Red" Visibility="Collapsed">Veuillez saisir une adresse valide</TextBlock>
 
-            <TextBox x:Name="input_employee_profilePicture" Height="200" Width="200"></TextBox>
+            <TextBox x:Name="input_employee_profilePicture"></TextBox>
             <TextBlock x:Name="alert_employee_profilePicture" Foreground="Red" Visibility="Collapsed">Veuillez saisir une photo de profil valide</TextBlock>
 
             <TextBox x:Name="input_employee_email" Header="E-mail"></TextBox>
