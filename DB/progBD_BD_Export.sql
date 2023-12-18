@@ -42,6 +42,7 @@ drop procedure if exists p_insert_admin;
 drop procedure if exists p_update_admin;
 drop procedure if exists p_delete_admin;
 drop procedure if exists p_select_admins;
+drop procedure if exists p_select_unassigned_employees;
 
 
 drop trigger if exists before_insert_clients;
@@ -591,12 +592,13 @@ CREATE PROCEDURE p_update_project(
     IN _budget DOUBLE,
     IN _numberOfEmployees INT,
     IN _totalSalaries DOUBLE,
-    IN _clientId INT
+    IN _clientId INT,
+    IN _status VARCHAR(20)
 )
 BEGIN
     UPDATE projects
     SET title = _title, startDate = _startDate, description = _description, budget = _budget,
-        numberOfEmployees = _numberOfEmployees, totalSalaries = _totalSalaries, clientId = _clientId
+        numberOfEmployees = _numberOfEmployees, totalSalaries = _totalSalaries, clientId = _clientId, status = _status
     WHERE code = _projectCode;
 END //
 DELIMITER ;
