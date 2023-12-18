@@ -52,6 +52,11 @@ namespace ProgBD
 
         private void btCreateProject_Click(object sender, RoutedEventArgs e)
         {
+            if (!AuthSingleton.Instance().IsConnected())
+            {
+                Dialog.NotLoggedDialog();
+                return;
+            }
             Frame.Navigate(typeof(CreateProjectsPage));
         }
 

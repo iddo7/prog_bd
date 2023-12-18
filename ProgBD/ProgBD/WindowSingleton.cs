@@ -13,6 +13,7 @@ namespace ProgBD
         NavigationView navigationView;
         MainWindow mainWindow;
         StackPanel dialogPanel;
+        Frame frame;
 
         public static WindowSingleton Instance()
         {
@@ -36,6 +37,12 @@ namespace ProgBD
         {
             get { return dialogPanel; }
             set { dialogPanel = value; }
+        }
+
+        public Frame Frame
+        {
+            get { return frame; }
+            set { frame = value; }
         }
     }
 }
