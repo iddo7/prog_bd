@@ -18,16 +18,30 @@ namespace ProgBD
 {
     public sealed partial class CreateProjectsPage : Page
     {
+        private Client selectedClient; // Déclaration de la variable au niveau de la classe
+
+
         public CreateProjectsPage()
         {
             this.InitializeComponent();
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter is Client client)
+            {
+                selectedClient = client; // Affectation du client sélectionné à la variable de la classe
+            }
+        }
+
 
         private async void btAjouterProject_Click(object sender, RoutedEventArgs e)
         {
             Project project = new Project();
             bool verification_project = true;
 
+            /*            
+            */
             try
             {
                 project.Title = input_project_title.Text;
@@ -83,8 +97,13 @@ namespace ProgBD
                 verification_project = false;
             }
 
+            if (selectedClient == null) return;
+
+            project.Client = selectedClient;
 
             if (!verification_project) return;
+
+
 
             bool actionSucceeded = ProjectSingleton.Instance().Create(project);
 
@@ -106,5 +125,7 @@ namespace ProgBD
             if (!actionSucceeded) return;
             Frame.Navigate(typeof(ViewProjectsPage));
         }
+
+
     }
 }
