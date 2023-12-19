@@ -5,7 +5,6 @@
 */
 
 /*   --- DROPPING ---   */
-/*   --- DROPPING ---   */
 drop view if exists v_clients_with_projects cascade;
 drop view if exists v_clients_without_projects cascade;
 drop view if exists v_employees_with_projects cascade;
