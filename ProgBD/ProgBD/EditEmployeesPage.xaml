@@ -25,7 +25,7 @@
             <TextBox x:Name="input_employee_address" Header="Adresse"></TextBox>
             <TextBlock x:Name="alert_employee_address" Foreground="Red" Visibility="Collapsed">Veuillez saisir une adresse valide</TextBlock>
 
-            <TextBox x:Name="input_employee_profilePicture"></TextBox>
+            <TextBox x:Name="input_employee_profilePicture" Header="lien photo de profil"></TextBox>
             <TextBlock x:Name="alert_employee_profilePicture" Foreground="Red" Visibility="Collapsed">Veuillez saisir une photo de profil valide</TextBlock>
 
             <TextBox x:Name="input_employee_email" Header="E-mail"></TextBox>
@@ -46,8 +46,12 @@
             <DatePicker x:Name="input_employee_birthday" Header="Date de naissance"></DatePicker>
             <TextBlock x:Name="alert_employee_birthday" Foreground="Red" Visibility="Collapsed">Veuillez saisir une date de naissance valide</TextBlock>
 
-            <TextBox x:Name="input_employee_status" Header="Taux horaire"></TextBox>
+            <ComboBox x:Name="input_employee_status" Header="Statut">
+                <x:String>Journalier</x:String>
+                <x:String>Permanent</x:String>
+            </ComboBox>
             <TextBlock x:Name="alert_employee_status" Foreground="Red" Visibility="Collapsed">Veuillez saisir un statut valide</TextBlock>
+
 
 
             <!-- Ajouter des contrôles pour la photo de profil, si nécessaire -->

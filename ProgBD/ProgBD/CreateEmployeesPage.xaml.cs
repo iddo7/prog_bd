@@ -78,7 +78,7 @@ namespace ProgBD
 
             try
             {
-                employee.ProfilePicture = new Uri(input_employee_profilePicture.Source.ToString());
+                employee.ProfilePicture = new Uri(input_employee_profilePicture.Text);
                 Utilities.SetVisibility(alert_employee_profilePicture, false);
 
             }
