@@ -66,6 +66,11 @@ namespace ProgBD
 
         private async void btAssignEmployeeToProject_Click(object sender, RoutedEventArgs e)
         {
+            if (!AuthSingleton.Instance().IsConnected())
+            {
+                Dialog.NotLoggedDialog();
+                return;
+            }
             Employee selectedEmployee = (Employee)listUnassignedEmployees.SelectedItem;
 
             if (selectedEmployee == null) return;

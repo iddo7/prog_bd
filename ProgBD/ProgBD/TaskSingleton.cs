@@ -89,7 +89,6 @@ namespace ProgBD
                 cmd.Parameters.AddWithValue("_projectCode", projectCode);
                 cmd.Parameters.AddWithValue("_employeeCode", employeeCode);
                 cmd.Parameters.AddWithValue("_hoursWorked", updatedTask.HoursWorked);
-                cmd.Parameters.AddWithValue("_salary", updatedTask.Salary);
 
 
                 conn.Open();
