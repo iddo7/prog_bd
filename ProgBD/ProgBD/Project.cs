@@ -117,7 +117,17 @@ namespace ProgBD
                 status = value;
             }
         }
-        internal Client Client { get => client; set => client = value; }
+        internal Client Client 
+        { 
+            
+            get => client; 
+            set 
+            {
+                if (value == null) throw new ArgumentException("Invalid client");
+
+                client = value;
+            } 
+        }
 
         public override string ToString()
         {
