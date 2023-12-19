@@ -53,6 +53,11 @@ namespace ProgBD
 
         private void listeTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (!AuthSingleton.Instance().IsConnected())
+            {
+                Dialog.NotLoggedDialog();
+                return;
+            }
             Task task = listeTasks.SelectedItem as Task;
             if (task == null) return;
 
