@@ -131,8 +131,6 @@ CREATE TABLE admin (
 
 /*   --- INSERTING VALUES ---   */
 
-INSERT INTO admin (username, password) VALUES ('admin', 'hashed_password_here');
-
 
 
 INSERT INTO clients (id, fullName, address, phoneNumber, email)
