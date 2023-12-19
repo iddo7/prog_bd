@@ -55,17 +55,13 @@ namespace ProgBD
                     if (AuthSingleton.Instance().IsConnected())
                     {
                         Dialog.ShowAdminDialog();
-                        mainFrame.Navigate(typeof(ViewProjectsPage));
                         break;
                     }
                     else
                     {
                         Dialog.LoginDialog();
                     }
-
                     break;
-
-
 
                 default:
                     break;
