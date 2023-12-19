@@ -53,7 +53,8 @@ namespace ProgBD
 
         private void listeTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Task task = listeTasks.SelectedItem as Task;
+            Dialog.EditTaskDialog(task.HoursWorked);
         }
 
         private async void btAssignEmployeeToProject_Click(object sender, RoutedEventArgs e)

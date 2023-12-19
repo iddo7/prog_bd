@@ -100,5 +100,21 @@ namespace ProgBD
 
             await dialog.ShowAsync();
         }
+
+        public static async void EditTaskDialog(double hoursWorked)
+        {
+            EditTaskDialog dialog = new EditTaskDialog(hoursWorked)
+            {
+                XamlRoot = WindowSingleton.Instance().DialogPanel.XamlRoot,
+                Title = "Modification tâche",
+                PrimaryButtonText = "Sauvegarder",
+                CloseButtonText = DefaultCancelButtonText,
+                DefaultButton = ContentDialogButton.Primary
+            };
+
+            await dialog.ShowAsync();
+        }
+
+
     }
 }
