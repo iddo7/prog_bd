@@ -69,6 +69,12 @@ namespace ProgBD
                 await Dialog.VoidDialog("Creation tache", "Ce projet est terminé, vous ne pouvez pas y ajouter des taches.");
                 return;
             }
+            int numberOfTasks = TaskSingleton.Instance().TasksFromProject(shownProject.Code).Count;
+            if (numberOfTasks >= shownProject.NumberOfEmployees)
+            {
+                await Dialog.VoidDialog("Creation tache", "Ce projet a deja atteint son nombre d'employes.");
+                return;
+            }
 
             Task task = new(shownProject.Code, selectedEmployee.Code);
 
