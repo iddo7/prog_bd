@@ -199,15 +199,14 @@ END;
 
 
 /* - Returns current salary for an employee for it's assigned project based on hoursWorked & hourlyRate - */
-CREATE FUNCTION f_calculate_salary_for_project (_employeeCode VARCHAR(20), _projectCode VARCHAR(20))
+CREATE FUNCTION f_calculate_salary_for_project (_employeeCode VARCHAR(20), _hoursWorked DOUBLE)
     RETURNS DOUBLE
 BEGIN
     DECLARE salary DOUBLE;
 
-    SELECT hoursWorked * hourlyRate INTO salary
-    FROM projects_employees pe
-             INNER JOIN employees e ON pe.employeeCode = e.code
-    WHERE pe.employeeCode = _employeeCode AND pe.projectCode = _projectCode;
+    SELECT _hoursWorked * hourlyRate INTO salary
+    FROM employees
+    WHERE code = _employeeCode;
 
     RETURN salary;
 END;
@@ -682,7 +681,7 @@ CREATE PROCEDURE p_update_employee_project(
 BEGIN
     UPDATE projects_employees
     SET hoursWorked = _hoursWorked,
-    salary = f_calculate_salary_for_project(_employeeCode, _projectCode)
+    salary = f_calculate_salary_for_project(_employeeCode, _hoursWorked)
     WHERE projectCode = _projectCode AND employeeCode = _employeeCode;
     CALL p_update_totalSalaries(_projectCode);
 END //
