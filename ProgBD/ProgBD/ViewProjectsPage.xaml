@@ -18,9 +18,7 @@
         <TextBlock Text="Projets" Margin="35"  FontSize="40" FontFamily="Terminal" HorizontalAlignment="Left" Grid.Row="0"/>
 
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="35" Grid.Row="0">
-            <Button x:Name="btCreateProject" Click="btCreateProject_Click" HorizontalAlignment="Right" FontSize="20" Background="LightGray" Margin="35" Grid.Row="0">
-              <TextBlock Foreground="Black">Ajouter</TextBlock>
-            </Button>
+
             <Button x:Name="btExportEmployees" Click="btExportEmployees_Click" HorizontalAlignment="Right" FontSize="20" Background="LightGray">
                 <TextBlock Foreground="Black">Export</TextBlock>
             </Button>

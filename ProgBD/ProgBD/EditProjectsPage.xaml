@@ -40,8 +40,12 @@
             <TextBox x:Name="input_project_numberOfEmployees" Header="Nombre d'employés"></TextBox>
             <TextBlock x:Name="alert_project_numberOfEmployees" Foreground="Red" Visibility="Collapsed">Veuillez saisir un nombre d'employés valide</TextBlock>
 
-            <TextBox x:Name="input_project_status" Header="Statut du projet"></TextBox>
+            <ComboBox x:Name="input_project_status" Header="Statut">
+                <x:String>En cours</x:String>
+                <x:String>Terminé</x:String>
+            </ComboBox>
             <TextBlock x:Name="alert_project_status" Foreground="Red" Visibility="Collapsed">Veuillez saisir un statut</TextBlock>
+
 
             <ComboBox x:Name="list_project_client" SelectionChanged="list_project_client_SelectionChanged" Header="Client associé">
                 <ComboBox.ItemTemplate>

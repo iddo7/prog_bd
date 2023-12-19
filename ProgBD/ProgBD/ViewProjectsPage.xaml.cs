@@ -50,15 +50,7 @@ namespace ProgBD
             await Windows.Storage.FileIO.WriteLinesAsync(exportFile, list.ConvertAll(project => project.ToCSV()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
         }
 
-        private void btCreateProject_Click(object sender, RoutedEventArgs e)
-        {
-            if (!AuthSingleton.Instance().IsConnected())
-            {
-                Dialog.NotLoggedDialog();
-                return;
-            }
-            Frame.Navigate(typeof(CreateProjectsPage));
-        }
+
 
     }
 }

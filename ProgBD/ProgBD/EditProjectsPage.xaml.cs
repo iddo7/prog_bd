@@ -46,8 +46,16 @@ namespace ProgBD
             input_project_budget.Text = shownProject.Budget.ToString("0.00");
             input_project_startDate.SelectedDate = shownProject.StartDate;
             input_project_numberOfEmployees.Text = shownProject.NumberOfEmployees.ToString("0");
-            input_project_status.Text = shownProject.Status;
-          
+            int index;
+            if (shownProject.Status == "En cours")
+            {
+                index = 0;
+            }
+            else
+            {
+                index = 1;
+            }
+            input_project_status.SelectedIndex = index;
 
         }
 
@@ -113,7 +121,7 @@ namespace ProgBD
 
             try
             {
-                project.Status = input_project_status.Text;
+                project.Status = input_project_status.SelectedItem.ToString();
                 Utilities.SetVisibility(alert_project_status, false);
             }
             catch (Exception ex)
