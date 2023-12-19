@@ -5,6 +5,7 @@
 */
 
 /*   --- DROPPING ---   */
+/*   --- DROPPING ---   */
 drop view if exists v_clients_with_projects cascade;
 drop view if exists v_clients_without_projects cascade;
 drop view if exists v_employees_with_projects cascade;
@@ -20,6 +21,7 @@ drop function if exists f_is_assigned;
 drop function if exists f_number_of_projects;
 drop function if exists f_generate_employee_code;
 drop function if exists f_generate_project_code;
+drop function if exists f_calculate_total_salaries;
 drop procedure if exists p_assign_employee_to_project;
 drop procedure if exists p_delete_client;
 drop procedure if exists p_delete_employee;
@@ -42,6 +44,7 @@ drop procedure if exists p_insert_admin;
 drop procedure if exists p_update_admin;
 drop procedure if exists p_delete_admin;
 drop procedure if exists p_select_admins;
+drop procedure if exists p_update_totalSalaries;
 drop procedure if exists p_select_unassigned_employees;
 
 
@@ -213,6 +216,18 @@ BEGIN
 END;
 -- Ex: SELECT f_calculate_salary_for_project('E002', 'P001') AS salary
 
+/* - Returns totalSalaries for given project - */
+CREATE FUNCTION f_calculate_total_salaries(_projectCode VARCHAR(20))
+    RETURNS DOUBLE
+BEGIN
+    DECLARE totalSalaries DOUBLE;
+
+    SELECT SUM(salary) INTO totalSalaries
+    FROM projects_employees
+    WHERE projectCode = _projectCode;
+
+    RETURN totalSalaries;
+END;
 
 /* - Checks if an employee is assigned to a project - */
 CREATE FUNCTION f_is_assigned (_employeeCode VARCHAR(20))
@@ -641,18 +656,31 @@ DELIMITER ;
 
 
 
+/* Update Project totalSalaries */
+DELIMITER //
+CREATE PROCEDURE p_update_totalSalaries(
+    IN _projectCode VARCHAR(20)
+)
+BEGIN
+    UPDATE projects
+    SET totalSalaries = f_calculate_total_salaries(_projectCode)
+    WHERE code = _projectCode;
+END //
+DELIMITER ;
+
 /* Procedure to update data in the 'projects_employees' table (for employee-to-project association) */
 DELIMITER //
 CREATE PROCEDURE p_update_employee_project(
     IN _projectCode VARCHAR(20),
     IN _employeeCode VARCHAR(20),
-    IN _hoursWorked DOUBLE,
-    IN _salary DOUBLE
+    IN _hoursWorked DOUBLE
 )
 BEGIN
     UPDATE projects_employees
-    SET hoursWorked = _hoursWorked, salary = _salary
+    SET hoursWorked = _hoursWorked,
+    salary = f_calculate_salary_for_project(_employeeCode, _projectCode)
     WHERE projectCode = _projectCode AND employeeCode = _employeeCode;
+    CALL p_update_totalSalaries(_projectCode);
 END //
 DELIMITER ;
 
