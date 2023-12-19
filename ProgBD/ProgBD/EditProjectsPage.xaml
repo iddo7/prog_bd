@@ -43,15 +43,11 @@
             <TextBox x:Name="input_project_status" Header="Statut du projet"></TextBox>
             <TextBlock x:Name="alert_project_status" Foreground="Red" Visibility="Collapsed">Veuillez saisir un statut</TextBlock>
 
-            <ComboBox x:Name="input_project_client" Header="Client associé">
+            <ComboBox x:Name="list_project_client" SelectionChanged="list_project_client_SelectionChanged" Header="Client associé">
                 <ComboBox.ItemTemplate>
                     <DataTemplate x:DataType="local:Client">
-                        <Grid Padding="30" Margin="10" HorizontalAlignment="Stretch" CornerRadius="15" Background="White">
-                            <Grid.ColumnDefinitions>
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock Text="{Binding Code}" FontSize="18" FontFamily="Arial Rounded" Margin="3" Grid.Column="0"/>
-                            <TextBlock Text="{Binding Title}" FontSize="18" FontFamily="Arial Rounded" Grid.Column="1" VerticalAlignment="Center"/>
+                        <Grid>
+                            <TextBlock Text="{Binding FullName}" FontSize="18" FontFamily="Arial Rounded" />
                         </Grid>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>

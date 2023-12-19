@@ -43,12 +43,16 @@ namespace ProgBD
             input_employee_hiringDate.SelectedDate = shownEmployee.HiringDate;
             input_employee_birthday.SelectedDate = shownEmployee.Birthday;
             input_employee_profilePicture.Text = shownEmployee.ProfilePicture.ToString();
-            input_employee_status.Text = shownEmployee.Status;
-
-
-
-
-
+            int index;
+            if(shownEmployee.Status == "Journalier")
+            {
+                index = 0;
+            }
+            else
+            {
+                index = 1;
+            }
+            input_employee_status.SelectedIndex = index;
         }
 
         private async void btConfirmEditEmployee_Click(object sender, RoutedEventArgs e)
@@ -152,7 +156,7 @@ namespace ProgBD
 
             try
             {
-                employee.Status = input_employee_status.Text;
+                employee.Status = input_employee_status.SelectedItem.ToString();
                 Utilities.SetVisibility(input_employee_status, false);
 
             }

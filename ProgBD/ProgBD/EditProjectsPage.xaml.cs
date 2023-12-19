@@ -12,6 +12,8 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using System.Collections;
+using System.Collections.ObjectModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -24,14 +26,20 @@ namespace ProgBD
     public sealed partial class EditProjectsPage : Page
     {
         Project shownProject;
+        Client selectedClient;
+
         public EditProjectsPage()
         {
             this.InitializeComponent();
-        }
+            list_project_client.ItemsSource = ClientSingleton.Instance().List();
+
+/*            updateComboOptions(list_project_client, new ArrayList(ClientSingleton.Instance().List()));
+*/        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             shownProject = (Project)e.Parameter;
+
 
             input_project_title.Text = shownProject.Title;
             input_project_description.Text = shownProject.Description;
@@ -39,7 +47,7 @@ namespace ProgBD
             input_project_startDate.SelectedDate = shownProject.StartDate;
             input_project_numberOfEmployees.Text = shownProject.NumberOfEmployees.ToString("0");
             input_project_status.Text = shownProject.Status;
-
+          
 
         }
 
@@ -114,6 +122,19 @@ namespace ProgBD
                 verification_project = false;
             }
 
+            try
+            {
+                project.Client = selectedClient;
+                Utilities.SetVisibility(alert_project_client, false);
+            }
+            catch (Exception ex)
+            {
+                Utilities.SetVisibility(alert_project_client, true);
+                verification_project = false;
+            }
+
+
+
 
             if (!verification_project) return;
 
@@ -139,6 +160,20 @@ namespace ProgBD
             Frame.Navigate(typeof(ViewProjectsPage));
 
 
+        }
+
+        private void list_project_client_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedClient = (Client)list_project_client.SelectedItem;
+        }
+        private void updateComboOptions(ComboBox combo, ArrayList options)
+        {
+            combo.Items.Clear();
+            combo.Items.Add("Aucun filtre");
+            foreach (Client option in options)
+            {
+                combo.Items.Add(option.FullName);
+            }
         }
     }
 }
