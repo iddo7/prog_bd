@@ -22,24 +22,31 @@ namespace ProgBD
 {
     public sealed partial class EditTaskDialog : ContentDialog
     {
+        private string projectCode;
+        private string employeeCode;
+        private double hoursWorked;
+
         public EditTaskDialog()
         {
             this.InitializeComponent();
         }
 
-        public EditTaskDialog(double hoursWorked)
+        public EditTaskDialog(string projectCode, string employeeCode, double hoursWorked)
         {
             this.InitializeComponent();
+
+            this.projectCode = projectCode;
+            this.employeeCode = employeeCode;
+            this.hoursWorked = hoursWorked;
+
             input_hoursWorked.Text = hoursWorked.ToString();
         }
 
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            Task task = new();
+            Task task = new(projectCode, employeeCode);
             bool verificationTask = true;
-
-
 
             try
             {
@@ -50,10 +57,11 @@ namespace ProgBD
                 Utilities.SetVisibility(alert_hoursWorked, true);
                 verificationTask = false;
             }
+
             if (!verificationTask) return;
 
-/*            bool actionSucceeded = TaskSingleton.Instance().Edit(projectCode.Id, employe, client);
-*/
+            bool actionSucceeded = TaskSingleton.Instance().Edit(task.ProjectCode, task.EmployeeCode, task);
+
 
             /*   --- FEEDBACK ---   */
 

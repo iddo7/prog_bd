@@ -101,9 +101,9 @@ namespace ProgBD
             await dialog.ShowAsync();
         }
 
-        public static async void EditTaskDialog(double hoursWorked)
+        public static async void EditTaskDialog(string projectCode, string employeeCode, double hoursWorked)
         {
-            EditTaskDialog dialog = new EditTaskDialog(hoursWorked)
+            EditTaskDialog dialog = new EditTaskDialog(projectCode, employeeCode, hoursWorked)
             {
                 XamlRoot = WindowSingleton.Instance().DialogPanel.XamlRoot,
                 Title = "Modification tâche",

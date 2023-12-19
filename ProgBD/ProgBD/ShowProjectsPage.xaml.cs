@@ -54,7 +54,9 @@ namespace ProgBD
         private void listeTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Task task = listeTasks.SelectedItem as Task;
-            Dialog.EditTaskDialog(task.HoursWorked);
+            if (task == null) return;
+
+            Dialog.EditTaskDialog(task.ProjectCode, task.EmployeeCode, task.HoursWorked);
         }
 
         private async void btAssignEmployeeToProject_Click(object sender, RoutedEventArgs e)
@@ -74,7 +76,7 @@ namespace ProgBD
             UpdateLists();
         }
 
-        private void UpdateLists()
+        public void UpdateLists()
         {
             TaskSingleton.Instance().UpdateLocalList();
             listeTasks.ItemsSource = TaskSingleton.Instance().TasksFromProject(shownProject.Code);
