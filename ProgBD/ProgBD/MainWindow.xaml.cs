@@ -24,6 +24,8 @@ namespace ProgBD
             this.InitializeComponent();
             WindowSingleton.Instance().MainWindow = this;
             WindowSingleton.Instance().DialogPanel = dialogPanel;
+
+            mainFrame.Navigate(typeof(ViewProjectsPage));
         }
 
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -53,17 +55,13 @@ namespace ProgBD
                     if (AuthSingleton.Instance().IsConnected())
                     {
                         Dialog.ShowAdminDialog();
-                        mainFrame.Navigate(typeof(ViewProjectsPage));
                         break;
                     }
                     else
                     {
                         Dialog.LoginDialog();
                     }
-
                     break;
-
-
 
                 default:
                     break;
