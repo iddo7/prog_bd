@@ -29,7 +29,7 @@
 
             <StackPanel  Grid.Column="0" Orientation="Vertical" Margin="20 80 20 20">
                 <TextBox x:Name="input_client_phoneNumber" Header="Numéro de téléphone"></TextBox>
-                <TextBlock x:Name="alert_client_phoneNumber" Foreground="Red" Visibility="Collapsed">Veuillez indiquer un uméro de téléphone valide</TextBlock>
+                <TextBlock x:Name="alert_client_phoneNumber" Foreground="Red" Visibility="Collapsed">Veuillez indiquer un uméro de téléphone valide | Format:(999) 999-9999</TextBlock>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20 160 20 20">
