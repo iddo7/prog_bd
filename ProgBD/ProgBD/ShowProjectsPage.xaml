@@ -43,21 +43,7 @@
             <TextBlock x:Name="project_totalSalaries" Margin="0,10,0,0">as</TextBlock>
         </StackPanel>
         
-        <Button x:Name="btModifyProjects" Click="btModifyProjects_Click" Grid.Row="0" HorizontalAlignment="Left" Grid.Column="2" Grid.ColumnSpan="3" Margin="-260,0,0,0">
-            <TextBlock x:Name="project_code" Margin="0,0,0,0"></TextBlock>
-            <TextBlock x:Name="project_title" Margin="0,0,0,0">as</TextBlock>
-            <TextBlock x:Name="project_description" Margin="0,0,0,0">as</TextBlock>
-            <TextBlock x:Name="project_budget" Margin="0,0,0,0">as</TextBlock>
-        </StackPanel>
 
-        <!-- Informations sur l'emploi -->
-        <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
-            <TextBlock x:Name="project_startDate" Margin="0,0,0,0">as</TextBlock>
-            <TextBlock x:Name="project_client" Margin="0,0,0,0">as</TextBlock>
-            <TextBlock x:Name="project_status" Margin="0,0,0,0">as</TextBlock>
-            <TextBlock x:Name="project_totalSalaries" Margin="0,0,0,0">as</TextBlock>
-        </StackPanel>
-        
         <Button x:Name="btModifyProjects" Click="btModifyProjects_Click" Grid.Row="0" HorizontalAlignment="Center" Grid.Column="2" Grid.ColumnSpan="3" Margin="0,0,0,0">
             <TextBlock Foreground="Black">Modifier le projet</TextBlock>
         </Button>
