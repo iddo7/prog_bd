@@ -13,6 +13,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.WindowsAppSDK.Runtime.Packages;
+using MySqlX.XDevAPI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -49,7 +50,16 @@ namespace ProgBD
                 Utilities.SetVisibility(alert_hoursWorked, true);
                 verificationTask = false;
             }
-        }
+            if (!verificationTask) return;
+
+/*            bool actionSucceeded = TaskSingleton.Instance().Edit(projectCode.Id, employe, client);
+*/
+
+            /*   --- FEEDBACK ---   */
+
+        }       
+
+
 
     }
 }
